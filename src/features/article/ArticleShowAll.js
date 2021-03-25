@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllArticles, selectArticle } from './ArticleSlice';
-import { ArticleCard } from '../../components/ArticleCard/ArticleCard';
+import { fetchAllArticles, selectArticle } from 'features/article/ArticleSlice';
+import { ArticleCard } from 'components/ArticleCard/ArticleCard';
 
 export function ArticleShowAll(props) {
 

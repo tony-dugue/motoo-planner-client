@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleShowAll } from '../../features/article/ArticleShowAll';
+import { ArticleShowAll } from 'features/article/ArticleShowAll';
 
 export function ArticleScene() {
     return (

@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchArticle, selectArticle } from './ArticleSlice';
+import { fetchArticle, selectArticle } from 'features/article/ArticleSlice';
 import { Link } from 'react-router-dom';
 
-export function ArticleShow(props) {
+export function ArticleShow({ location }) {
 
     const dispatch = useDispatch()
     const { article, loading, error } = useSelector(selectArticle); // on récupère le state
 
     useEffect(() => {
         //récupération du pathname de l'url (ex /articles/xx)
-        const urlPath = props.location.pathname.replace('article', 'articles')
+        const urlPath = location.pathname.replace('article', 'articles')
         dispatch(fetchArticle(urlPath)) // requête à l'API pour récupérer un article
     }, [dispatch])
 
