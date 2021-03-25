@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import articleReducer from 'features/article/ArticleSlice'
+import articleReducer from 'features/article/ArticleSlice';
+import authReducer from 'features/auth/AuthSlice';
 
 export default configureStore({
   reducer: {
-    article: articleReducer
+    article: articleReducer,
+    auth: authReducer
   },
 });
 
