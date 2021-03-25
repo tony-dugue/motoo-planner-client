@@ -13,7 +13,11 @@ import {Navigation} from 'components/layouts/Navigation';
 
 import {ArticleShow} from 'features/article/ArticleShow';
 
+import useToken from 'services/authentification/useToken';
+
 function App() {
+
+    const { token, setToken } = useToken();
 
     return (
         <div className="app">
@@ -27,11 +31,11 @@ function App() {
                 <Route path="/article/:slug" component={ArticleShow}/>
 
                 <Route path="/login">
-                {sessionStorage.getItem('token') ? <Redirect push to="/dashboard" /> : <LoginScene /> }
+                {token ? <Redirect push to="/dashboard" /> : <LoginScene setToken={setToken} /> }
                 </Route>
 
                 <Route path="/dashboard">
-                    {sessionStorage.getItem('token') ? <DashboardScene /> : <LoginScene /> }
+                    {token ? <DashboardScene /> : <LoginScene setToken={setToken} /> }
                 </Route>
 
                 <Route path="/contact" component={ContactScene}/>
