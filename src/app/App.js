@@ -10,6 +10,8 @@ import { NotFoundScene } from '../scenes/NotFound/NotFoundScene';
 
 import { Navigation } from '../components/layouts/Navigation';
 
+import { Article } from '../features/article/Article';
+
 function App() {
   return (
     <div className="app">
@@ -21,6 +23,7 @@ function App() {
             <Route path="/articles" component={ArticleScene} />
             <Route path="/contact" component={ContactScene} />
             <Route path="/login" component={LoginScene} />
+            <Route path="/article/:slug" component={Article} />
             <Route component={NotFoundScene} />
         </Switch>
     </div>
