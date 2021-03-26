@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './LoginScene.scss';
 
 async function loginUser(credentials) {
-    return fetch('http://127.0.0.1:8000/api/login_check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
-    })
-        .then(response => response.json())
+
+    return axios.post('http://127.0.0.1:8000/api/login_check', credentials)
+        .then(res => res.data)
 }
 
 export function LoginScene({ setToken }) {

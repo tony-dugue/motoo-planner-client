@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { createSlice } from '@reduxjs/toolkit';
 
 // State global
@@ -44,9 +46,8 @@ export function fetchAllArticles() {
     return async dispatch => {
         dispatch(getLoading())
         //fetch(process.env.REACT_APP_API_URL + params)
-        fetch('http://127.0.0.1:8000/api/articles')
-            .then(response => response.json())
-            .then(data => dispatch(getAllArticlesSuccess(data["hydra:member"])))
+        axios.get('http://127.0.0.1:8000/api/articles')
+            .then(res => dispatch(getAllArticlesSuccess(res.data["hydra:member"])))
             .catch(error => dispatch(getFailure(error)))
     }
 }
@@ -55,9 +56,8 @@ export function fetchArticle(params) {
     return async dispatch => {
         dispatch(getLoading())
         //fetch(process.env.REACT_APP_API_URL + params)
-        fetch('http://127.0.0.1:8000/api' + params)
-            .then(response => response.json())
-            .then(data => dispatch(getArticleSuccess(data)))
+        axios.get('http://127.0.0.1:8000/api' + params)
+            .then(res => dispatch(getArticleSuccess(res.data)))
             .catch(error => dispatch(getFailure(error)))
     }
 }
