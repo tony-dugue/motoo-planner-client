@@ -6,6 +6,7 @@ import {LandingPageScene} from 'scenes/LandingPage/LandingPageScene';
 import {ContactScene} from 'scenes/Contact/ContactScene';
 import {ArticleScene} from 'scenes/Article/ArticleScene';
 import {LoginScene} from 'scenes/Login/LoginScene';
+import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
@@ -32,6 +33,10 @@ function App() {
 
                 <Route path="/login">
                 {token ? <Redirect push to="/dashboard" /> : <LoginScene setToken={setToken} /> }
+                </Route>
+
+                <Route path="/register">
+                    {token ? <Redirect push to="/dashboard" /> : <RegisterScene setToken={setToken} /> }
                 </Route>
 
                 <Route path="/dashboard">

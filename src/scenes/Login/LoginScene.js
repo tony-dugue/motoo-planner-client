@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 import axios from 'axios';
 import './LoginScene.scss';
 
@@ -37,6 +38,8 @@ export function LoginScene({ setToken }) {
                     <button type="submit">Se connecter</button>
                 </div>
             </form>
+
+            <p>Vous n'avez pas de compte? <Link to='/register'>S'enregistrer</Link></p>
 
         </div>
     );
