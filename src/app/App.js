@@ -18,6 +18,7 @@ import {ArticleShow} from 'features/article/ArticleShow';
 
 function App() {
 
+    const tokenStorage = sessionStorage.getItem('token');
     const { token } = useSelector(selectUser); // on récupère le state
 
     return (
@@ -31,16 +32,14 @@ function App() {
                 <Route path="/articles" component={ArticleScene}/>
                 <Route path="/article/:slug" component={ArticleShow}/>
 
-                <Route path="/login">
-                {token ? <Redirect push to="/dashboard" /> : <LoginScene /> }
-                </Route>
+                <Route path="/login" component={LoginScene}/>
 
                 <Route path="/register">
-                    {token ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
+                    { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
                 </Route>
 
                 <Route path="/dashboard">
-                    {token ? <DashboardScene /> : <LoginScene /> }
+                    { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
                 </Route>
 
                 <Route path="/presentation" component={PresentationScene}/>
@@ -53,5 +52,3 @@ function App() {
 }
 
 export default App;
-
-

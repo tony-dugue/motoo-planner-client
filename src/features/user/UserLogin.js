@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { userLogin } from 'features/user/userSlice';
 
 export function UserLogin() {
 
     const dispatch = useDispatch()
+    const history = useHistory();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,6 +14,7 @@ export function UserLogin() {
     const handleSubmit = async e => {
         e.preventDefault();
         dispatch(userLogin({ username, password })); // requête à l'API pour se connecter
+        history.push('/dashboard');
     }
 
     return (
