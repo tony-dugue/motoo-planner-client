@@ -10,6 +10,7 @@ import {ArticleScene} from 'scenes/Article/ArticleScene';
 import {LoginScene} from 'scenes/Login/LoginScene';
 import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
+import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
 import {Navigation} from 'components/layouts/Navigation';
@@ -41,6 +42,8 @@ function App() {
                 <Route path="/dashboard">
                     {token ? <DashboardScene /> : <LoginScene /> }
                 </Route>
+
+                <Route path="/presentation" component={PresentationScene}/>
 
                 <Route path="/contact" component={ContactScene}/>
                 <Route component={NotFoundScene}/>

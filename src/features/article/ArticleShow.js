@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchArticle, selectArticle } from 'features/article/ArticleSlice';
+import { findSingleArticle, selectArticle } from 'features/article/articleSlice';
 import { Link } from 'react-router-dom';
 
 export function ArticleShow({ location }) {
@@ -11,7 +11,7 @@ export function ArticleShow({ location }) {
     useEffect(() => {
         //récupération du pathname de l'url (ex /articles/xx)
         const urlPath = location.pathname.replace('article', 'articles')
-        dispatch(fetchArticle(urlPath)) // requête à l'API pour récupérer un article
+        dispatch(findSingleArticle(urlPath)) // requête à l'API pour récupérer un article
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>

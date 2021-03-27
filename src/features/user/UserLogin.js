@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, selectUser } from 'features/user/userSlice';
+import { useDispatch } from 'react-redux';
+import { userLogin } from 'features/user/userSlice';
 
 export function UserLogin() {
 
     const dispatch = useDispatch()
-    const { userAuth, token } = useSelector(selectUser); // on récupère le state
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async e => {
         e.preventDefault();
-        dispatch(loginUser({ username, password })); // requête à l'API pour se connecter
+        dispatch(userLogin({ username, password })); // requête à l'API pour se connecter
     }
-
-    console.log(userAuth, token)
 
     return (
         <div className="container">

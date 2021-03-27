@@ -7,7 +7,9 @@ import { createSlice } from '@reduxjs/toolkit'
 // équivaut à const [token, setToken] = useState(<<null>>)
 const initialState = {
     userAuth: {},
-    token: null
+    token: null,
+    loading: false,
+    error: false
 }
 
 export const userSlice = createSlice({
@@ -26,19 +28,26 @@ export const userSlice = createSlice({
             state.token = action.payload
         },
         setUserLogout: state => {
-            state.userAuth.username = null
-            state.userAuth.id = null
+            state.userAuth = {}
+            state.token = null
+        },
+        getLoading: state => {
+            state.loading = true
+        },
+        getFailure: state => {
+            state.loading = false
+            state.errors = true
         }
     }
 })
 
 // (3) on exporte les actions
-export const { setUserLogin, setUserToken } = userSlice.actions
+export const { setUserLogin, setUserToken, setUserLogout, getLoading, getFailure } = userSlice.actions
 
 export default userSlice.reducer
 
 // fonction 'thunk' permettant de faire une logique asynchrone).
-export function loginUser(credentials) {
+export function userLogin(credentials) {
 
     // decode le token en objet lisible (Working unicode text JWT parser function)
     // peut être remplacé par jwt-decode
@@ -54,12 +63,31 @@ export function loginUser(credentials) {
     };
 
     return async dispatch => {
+        dispatch(getLoading())
         return axios.post('http://127.0.0.1:8000/api/login_check', credentials)
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(parseJwt(res.data.token)))
                 sessionStorage.setItem('token', JSON.stringify(res.data.token));
             })
+            .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
+    }
+}
+
+export function userRegister(newUser) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const config = { headers: { "Content-Type": "application/json"} };
+        const body = JSON.stringify(newUser);
+        return axios.post('http://127.0.0.1:8000/api/users', body, config)
+            .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
+    }
+}
+
+export function userLogout() {
+    return async dispatch => {
+        dispatch(setUserLogout())
+        sessionStorage.removeItem('token');
     }
 }
 
