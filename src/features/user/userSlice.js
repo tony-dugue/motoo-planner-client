@@ -58,6 +58,7 @@ export function loginUser(credentials) {
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(parseJwt(res.data.token)))
+                sessionStorage.setItem('token', JSON.stringify(res.data.token));
             })
     }
 }
