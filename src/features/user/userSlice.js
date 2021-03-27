@@ -87,8 +87,9 @@ export function userRegister(newUser) {
 
 export function userLogout() {
     return async dispatch => {
-        await dispatch(setUserLogout())
+        dispatch(getLoading())
         sessionStorage.removeItem('token');
+        dispatch(setUserLogout())
     }
 }
 

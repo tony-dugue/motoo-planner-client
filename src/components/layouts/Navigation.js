@@ -11,7 +11,7 @@ export function Navigation() {
     const tokenStorage = sessionStorage.getItem('token');
     const { token } = useSelector(selectUser); // on récupère le state
 
-    const handleClick = () => {
+    const handleLogout = () => {
         if(token || tokenStorage) {
             dispatch(userLogout()) // on se déconnecte
             history.push('/');
@@ -25,13 +25,10 @@ export function Navigation() {
             <NavLink exact to='/' className="">Accueil</NavLink>
             <NavLink to='/articles' className="">Articles</NavLink>
 
-            { (token || tokenStorage)
-                ? <NavLink to='/dashboard' className="">Dashboard</NavLink>
-                : ''
-            }
+            { (token || tokenStorage) ? <NavLink to='/dashboard' className="">Dashboard</NavLink> : null }
 
             <NavLink to='/contact' className="">Nous contacter</NavLink>
-            <button onClick={handleClick} className="btn btn-info my-2 mx-2">
+            <button onClick={handleLogout} className="btn btn-info my-2 mx-2">
                 { (token || tokenStorage) ? 'Se déconnecter' : 'Se connecter'}
             </button>
         </div>
