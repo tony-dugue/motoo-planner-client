@@ -23,6 +23,7 @@ export const userSlice = createSlice({
 
         setUserLogin: (state, action) => {
             state.userAuth = action.payload
+            state.loading = false
         },
         setUserToken: (state, action) => {
             state.token = action.payload
@@ -86,7 +87,7 @@ export function userRegister(newUser) {
 
 export function userLogout() {
     return async dispatch => {
-        dispatch(setUserLogout())
+        await dispatch(setUserLogout())
         sessionStorage.removeItem('token');
     }
 }

@@ -24,7 +24,7 @@ function App() {
     return (
         <div className="app">
 
-            <Navigation/>
+            <Navigation />
 
             <Switch>
                 <Route exact path="/" component={LandingPageScene}/>

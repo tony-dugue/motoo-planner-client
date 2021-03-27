@@ -12,7 +12,7 @@ export function Navigation() {
     const { token } = useSelector(selectUser); // on récupère le state
 
     const handleClick = () => {
-        if(tokenStorage) {
+        if(token || tokenStorage) {
             dispatch(userLogout()) // on se déconnecte
             history.push('/');
         } else {
@@ -24,6 +24,12 @@ export function Navigation() {
         <div className="container">
             <NavLink exact to='/' className="">Accueil</NavLink>
             <NavLink to='/articles' className="">Articles</NavLink>
+
+            { (token || tokenStorage)
+                ? <NavLink to='/dashboard' className="">Dashboard</NavLink>
+                : ''
+            }
+
             <NavLink to='/contact' className="">Nous contacter</NavLink>
             <button onClick={handleClick} className="btn btn-info my-2 mx-2">
                 { (token || tokenStorage) ? 'Se déconnecter' : 'Se connecter'}
