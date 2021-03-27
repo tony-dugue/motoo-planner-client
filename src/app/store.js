@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import articleReducer from 'features/article/ArticleSlice';
+import userReducer from 'features/user/userSlice';
 
 export default configureStore({
   reducer: {
-    article: articleReducer
+    article: articleReducer,
+    user: userReducer
   },
 });
 

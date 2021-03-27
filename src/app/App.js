@@ -1,5 +1,7 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { selectUser } from 'features/user/userSlice';
 import './App.scss';
 
 import {LandingPageScene} from 'scenes/LandingPage/LandingPageScene';
@@ -11,14 +13,11 @@ import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
 import {Navigation} from 'components/layouts/Navigation';
-
 import {ArticleShow} from 'features/article/ArticleShow';
-
-import useToken from 'services/authentification/useToken';
 
 function App() {
 
-    const { token, setToken } = useToken();
+    const { token } = useSelector(selectUser); // on récupère le state
 
     return (
         <div className="app">
@@ -32,15 +31,15 @@ function App() {
                 <Route path="/article/:slug" component={ArticleShow}/>
 
                 <Route path="/login">
-                {token ? <Redirect push to="/dashboard" /> : <LoginScene setToken={setToken} /> }
+                {token ? <Redirect push to="/dashboard" /> : <LoginScene /> }
                 </Route>
 
                 <Route path="/register">
-                    {token ? <Redirect push to="/dashboard" /> : <RegisterScene setToken={setToken} /> }
+                    {token ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
                 </Route>
 
                 <Route path="/dashboard">
-                    {token ? <DashboardScene /> : <LoginScene setToken={setToken} /> }
+                    {token ? <DashboardScene /> : <LoginScene /> }
                 </Route>
 
                 <Route path="/contact" component={ContactScene}/>
