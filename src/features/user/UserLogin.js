@@ -22,11 +22,11 @@ export function UserLogin() {
             <form onSubmit={handleSubmit} className="form-wrapper">
                 <label>
                     <p>Votre email</p>
-                    <input type="text" onChange={e => setUsername(e.target.value)} />
+                    <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
                 </label>
                 <label>
                     <p>Votre mot de passe</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)} />
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
                 <div>
                     <button type="submit">Se connecter</button>
