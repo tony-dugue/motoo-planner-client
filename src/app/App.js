@@ -11,9 +11,11 @@ import {LoginScene} from 'scenes/Login/LoginScene';
 import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
+import {ProfilScene} from 'scenes/Profil/ProfilScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
-import {Navigation} from 'components/layouts/Navigation';
+import {NavigationPublic} from 'components/layouts/NavigationPublic';
+import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
 import {ArticleShow} from 'features/article/ArticleShow';
 
 function App() {
@@ -24,15 +26,17 @@ function App() {
     return (
         <div className="app">
 
-            <Navigation />
+            { (tokenStorage || token) ? <NavigationPrivate /> : <NavigationPublic /> }
 
             <Switch>
                 <Route exact path="/" component={LandingPageScene}/>
+                <Route path="/contact" component={ContactScene}/>
 
                 <Route path="/articles" component={ArticleScene}/>
                 <Route path="/article/:slug" component={ArticleShow}/>
 
                 <Route path="/login" component={LoginScene}/>
+                <Route path="/presentation" component={PresentationScene}/>
 
                 <Route path="/register">
                     { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
@@ -42,9 +46,10 @@ function App() {
                     { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
                 </Route>
 
-                <Route path="/presentation" component={PresentationScene}/>
+                <Route path="/profil">
+                    { (tokenStorage || token) ? <ProfilScene /> : <LoginScene /> }
+                </Route>
 
-                <Route path="/contact" component={ContactScene}/>
                 <Route component={NotFoundScene}/>
             </Switch>
         </div>

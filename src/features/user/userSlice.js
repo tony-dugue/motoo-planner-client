@@ -7,6 +7,7 @@ import { createSlice } from '@reduxjs/toolkit'
 // équivaut à const [token, setToken] = useState(<<null>>)
 const initialState = {
     userAuth: {},
+    userProfil: {},
     token: null,
     loading: false,
     error: false
@@ -23,6 +24,10 @@ export const userSlice = createSlice({
 
         setUserLogin: (state, action) => {
             state.userAuth = action.payload
+            state.loading = false
+        },
+        setUserProfil: (state, action) => {
+            state.userProfil = action.payload
             state.loading = false
         },
         setUserToken: (state, action) => {
@@ -43,7 +48,7 @@ export const userSlice = createSlice({
 })
 
 // (3) on exporte les actions
-export const { setUserLogin, setUserToken, setUserLogout, getLoading, getFailure } = userSlice.actions
+export const { setUserLogin, setUserToken, setUserProfil, setUserLogout, getLoading, getFailure } = userSlice.actions
 
 export default userSlice.reducer
 
@@ -69,7 +74,8 @@ export function userLogin(credentials) {
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(parseJwt(res.data.token)))
-                sessionStorage.setItem('token', JSON.stringify(res.data.token));
+                sessionStorage.setItem('token', res.data.token);
+                sessionStorage.setItem('id', parseJwt(res.data.token).id);
             })
             .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
     }
@@ -91,6 +97,33 @@ export function userLogout() {
         sessionStorage.removeItem('token');
         dispatch(setUserLogout())
     }
+}
+
+export function findUser(params, token) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const config = { headers: { "Authorization" : `Bearer ${token}` } };
+        axios.get(`http://127.0.0.1:8000/api/users/${params}`, config)
+            .then(res => dispatch(setUserProfil(res.data)))
+            .catch(error => dispatch(getFailure(error)))
+    }
+}
+
+export function modifyUser(newUserData, params, token) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const body = JSON.stringify(newUserData);
+        const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+        axios.put(`http://127.0.0.1:8000/api/users/${params}`, body, config)
+            //.then(res => dispatch(setUserProfil(res.data)))
+            //.then(res => console.log(res.data))
+            .then(res => console.log(res))
+            .catch(error => dispatch(getFailure(error)))
+    }
+}
+
+export function modifyUserPassword(userPassword, params, token) {
+
 }
 
 // (4) On renvoi la valeur réelle de l'état ('user' est le nom du slice !!)
