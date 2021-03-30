@@ -4,7 +4,9 @@ export function RoadbookResumeCard({roadbookItem}) {
 
     return (
         <div>
-            <p>{roadbookItem.title}</p>
+            <h5>{roadbookItem.title}</h5>
+            <p>{roadbookItem.pictureUrl}</p>
+            <p>{roadbookItem.description}</p>
         </div>
     );
 }

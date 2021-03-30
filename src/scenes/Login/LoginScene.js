@@ -11,7 +11,7 @@ export function LoginScene() {
 
             <UserLogin />
 
-            <p>Vous n'avez pas de compte? <Link to='/register'>S'enregistrer</Link></p>
+            <p>Vous n'avez pas encore de compte? <Link to='/register'>S'inscrire</Link></p>
 
         </div>
     );

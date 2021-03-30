@@ -12,7 +12,7 @@ export function ArticleShow({ location }) {
         //récupération du pathname de l'url (ex /articles/xx)
         const urlPath = location.pathname.replace('article', 'articles')
         dispatch(findSingleArticle(urlPath)) // requête à l'API pour récupérer un article
-    }, [dispatch])
+    }, [dispatch, location])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>

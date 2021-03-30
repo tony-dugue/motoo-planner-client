@@ -11,7 +11,7 @@ import {LoginScene} from 'scenes/Login/LoginScene';
 import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
-import {ProfilScene} from 'scenes/Profil/ProfilScene';
+import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
@@ -46,8 +46,8 @@ function App() {
                     { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
                 </Route>
 
-                <Route path="/profil">
-                    { (tokenStorage || token) ? <ProfilScene /> : <LoginScene /> }
+                <Route path="/profile">
+                    { (tokenStorage || token) ? <ProfileScene /> : <LoginScene /> }
                 </Route>
 
                 <Route component={NotFoundScene}/>

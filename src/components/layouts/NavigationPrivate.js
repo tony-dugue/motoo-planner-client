@@ -46,7 +46,7 @@ export function NavigationPrivate() {
                     </Link>
 
                     <ul className="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><Link className="dropdown-item" to='/profil'>Mon profil</Link></li>
+                        <li><Link className="dropdown-item" to='/profile'>Mon profil</Link></li>
                         <li><hr className="dropdown-divider"/></li>
                         <li onClick={handleLogout} className="dropdown-item">Se déconnecter</li>
                     </ul>
