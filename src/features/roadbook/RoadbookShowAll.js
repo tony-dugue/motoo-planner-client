@@ -17,26 +17,27 @@ export function RoadbookShowAll() {
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>
 
-    const roadbookItems = (userProfil.roadbooks)
-        ? userProfil.roadbooks.map(roadbook => <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />)
-        : null
+    const roadbookEnCoursItems = (userProfil.roadbooks)
+        ? userProfil.roadbooks.map(roadbook => {
+            if (roadbook.status === 2) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
+        }) : null
+
+    const roadbookFinishItems = (userProfil.roadbooks)
+        ? userProfil.roadbooks.map(roadbook => {
+            if (roadbook.status === 1) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
+        }) : null
 
     return (
         <div>
             <p>Bonjour {userProfil?.firstName + ' ' + userProfil?.lastName}</p>
 
             <h2>Mes roadbooks en cours</h2>
-            {/* if(roadbook.status === 1) .... */}
 
-            {roadbookItems}
+            {roadbookEnCoursItems}
 
             <h2>Mes roadbooks terminés</h2>
 
-            {/*userProfil.roadbooks?.map( roadbook => (
-                <p>{roadbook.title}</p>
-            ))*/}
-
-            {/* if(roadbook.status === 2) .... */}
+            {roadbookFinishItems}
 
         </div>
     );
