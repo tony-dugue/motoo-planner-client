@@ -9,10 +9,10 @@ export function UserProfil() {
     const dispatch = useDispatch()
     const { userProfil, loading, error } = useSelector(selectUser); // on récupère le state
 
-    const id = sessionStorage.getItem('id')
-    const token = sessionStorage.getItem('token')
-
     useEffect(() => {
+        const id = sessionStorage.getItem('id')
+        const token = sessionStorage.getItem('token')
+
         dispatch(findUser(id, token)) // requête à l'API pour récupérer un article
     }, [dispatch])
 

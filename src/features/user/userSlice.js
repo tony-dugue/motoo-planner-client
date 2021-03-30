@@ -24,7 +24,6 @@ export const userSlice = createSlice({
 
         setUserLogin: (state, action) => {
             state.userAuth = action.payload
-            state.loading = false
         },
         setUserProfil: (state, action) => {
             state.userProfil = action.payload
@@ -70,12 +69,22 @@ export function userLogin(credentials) {
 
     return async dispatch => {
         dispatch(getLoading())
-        return axios.post('http://127.0.0.1:8000/api/login_check', credentials)
+
+        // ON VERIFIE L'UTILISATEUR ET ON RECUPERE LE TOKEN DE L'UTILISATEUR
+        axios.post('http://127.0.0.1:8000/api/login_check', credentials)
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(parseJwt(res.data.token)))
                 sessionStorage.setItem('token', res.data.token);
                 sessionStorage.setItem('id', parseJwt(res.data.token).id);
+
+                const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
+
+                // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
+                axios.get(`http://127.0.0.1:8000/api/users/${parseJwt(res.data.token).id}`, config)
+                    .then(res => dispatch(setUserProfil(res.data)))
+                    .catch(error => dispatch(getFailure(error)))
+
             })
             .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
     }
@@ -108,7 +117,7 @@ export function findUser(params, token) {
             .catch(error => dispatch(getFailure(error)))
     }
 }
-
+/*
 export function modifyUser(newUserData, params, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -125,7 +134,7 @@ export function modifyUser(newUserData, params, token) {
 export function modifyUserPassword(userPassword, params, token) {
 
 }
-
+*/
 // (4) On renvoi la valeur réelle de l'état ('user' est le nom du slice !!)
 // on pourra récupéré le contenu du state dans le composant avec un useSelector()
 // cela équivaut à const [<<token>>, setToken] = useState(null)
