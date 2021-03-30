@@ -1,17 +1,22 @@
 import React from 'react';
 import {Link, NavLink, useHistory} from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { userLogout } from 'features/user/userSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { selectUser } from 'features/user/userSlice';
+import {toast} from "react-toastify";
 
 export function NavigationPrivate() {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const { userProfile } = useSelector(selectUser); // on récupère le state
+
     const handleLogout = () => {
         dispatch(userLogout()) // on se déconnecte
+        toast.info("A bientôt !")
         history.push('/');
     }
 
@@ -42,7 +47,7 @@ export function NavigationPrivate() {
 
                     <Link to='#' className="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle"/>
+                        <img src={userProfile.avatar} alt="mdo" width="32" height="32" className="rounded-circle"/>
                     </Link>
 
                     <ul className="dropdown-menu text-small" aria-labelledby="dropdownUser1">

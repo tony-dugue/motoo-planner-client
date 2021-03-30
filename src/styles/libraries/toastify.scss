@@ -1,0 +1,22 @@
+
+.Toastify__toast {
+  border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+  text-decoration: none;
+
+  &--info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+  &--success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  &--error {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+}
+

@@ -4,6 +4,8 @@ import { findUser, selectUser } from 'features/user/userSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserEditModal } from 'features/user/UserEditModal';
+import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
+import { UserDeleteModal } from 'features/user/UserDeleteModal';
 
 export function UserProfile() {
 
@@ -26,7 +28,7 @@ export function UserProfile() {
 
                 <h2>Voir les informations</h2>
 
-                <p>{userProfile.avatar}</p>
+                <img src={userProfile.avatar} alt="mdo" width="60" height="60" className="rounded-circle"/>
                 <p>{userProfile.firstName} {userProfile.lastName}</p>
                 <p>{userProfile.email}</p>
                 <p>**Inscrit depuis mars 2019**</p>
@@ -37,13 +39,18 @@ export function UserProfile() {
 
                 <UserEditModal />
 
-                <button className="btn btn-dark mx-2 px-3">
+                <button className="btn btn-dark mx-2 px-3" data-bs-toggle="modal" data-bs-target="#editPasswordProfile">
                     <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier le mot de passe
                 </button>
 
-                <button className="btn btn-danger mx-2 px-3">
+                <UserEditPasswordModal />
+
+                <button className="btn btn-danger mx-2 px-3" data-bs-toggle="modal" data-bs-target="#deleteProfile">
                     <span><FontAwesomeIcon icon={faPencilAlt} /></span>Supprimer le profil
                 </button>
+
+                <UserDeleteModal />
+
 
             </div>
         </React.Fragment>

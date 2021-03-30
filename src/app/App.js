@@ -1,6 +1,7 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
 import { selectUser } from 'features/user/userSlice';
 import './App.scss';
 
@@ -52,6 +53,7 @@ function App() {
 
                 <Route component={NotFoundScene}/>
             </Switch>
+            <ToastContainer />
         </div>
     );
 }

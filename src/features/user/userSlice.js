@@ -1,5 +1,6 @@
 import axios from "axios";
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 // un Slice dans Redux est un morceau d'état qui gère plusieurs variables et les rend globale.
 
@@ -74,22 +75,24 @@ export function userLogin(credentials) {
         dispatch(getLoading())
 
         // ON VERIFIE L'UTILISATEUR ET ON RECUPERE LE TOKEN DE L'UTILISATEUR
-        axios.post('http://127.0.0.1:8000/api/login_check', credentials)
+        await axios.post('http://127.0.0.1:8000/api/login_check', credentials)
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(parseJwt(res.data.token)))
                 sessionStorage.setItem('token', res.data.token);
                 sessionStorage.setItem('id', parseJwt(res.data.token).id);
-
                 const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
 
                 // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
                 axios.get(`http://127.0.0.1:8000/api/users/${parseJwt(res.data.token).id}`, config)
-                    .then(res => dispatch(setUserProfile(res.data)))
+                    .then(res => {
+                        dispatch(setUserProfile(res.data))
+                        toast.success('Bienvenue')
+                    })
                     .catch(error => dispatch(getFailure(error)))
 
             })
-            .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
+            .catch(error => console.log(error))
     }
 }
 
@@ -99,7 +102,7 @@ export function userRegister(newUser) {
         const config = { headers: { "Content-Type": "application/json"} };
         const body = JSON.stringify(newUser);
         return axios.post('http://127.0.0.1:8000/api/users', body, config)
-            .catch(error => dispatch(getFailure(error)))  // TODO afficher un message d'erreur en alert
+            .catch(error => console.log(error))
     }
 }
 
@@ -107,6 +110,7 @@ export function userLogout() {
     return async dispatch => {
         dispatch(getLoading())
         sessionStorage.removeItem('token');
+        sessionStorage.removeItem('id');
         dispatch(setUserLogout())
     }
 }
@@ -117,7 +121,7 @@ export function findUser(params, token) {
         const config = { headers: { "Authorization" : `Bearer ${token}` } };
         axios.get(`http://127.0.0.1:8000/api/users/${params}`, config)
             .then(res => dispatch(setUserProfile(res.data)))
-            .catch(error => dispatch(getFailure(error)))
+            .catch(error => console.log(error))
     }
 }
 
@@ -128,12 +132,23 @@ export function userEdit(userData, userId, token) {
         const body = JSON.stringify(userData);
 
         await axios.put(`http://127.0.0.1:8000/api/users/${userId}`, body, config)
-            .catch(error => dispatch(getFailure(error)))
+            .catch(error => toast.warning("Une erreur s'est produite !"))
         // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
         await axios.get(`http://127.0.0.1:8000/api/users/${userId}`, config)
             .then(res => dispatch(setUserProfile(res.data)))
-            .catch(error => dispatch(getFailure(error)))
+            .catch(error => console.log(error))
+    }
+}
 
+export function userDelete(userId, token) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+        await axios.delete(`http://127.0.0.1:8000/api/users/${userId}`, config)
+            .then(res => toast.info('Votre compte a bien été supprimé'))
+            .catch(error => console.log(error))
+        sessionStorage.removeItem('token');
+        dispatch(setUserLogout())
     }
 }
 
