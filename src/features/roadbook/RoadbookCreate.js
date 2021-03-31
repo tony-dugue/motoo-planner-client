@@ -28,11 +28,20 @@ export function RoadbookCreate() {
 
   return (
       <div className="container">
+
+          <h2>Créer un nouveau roadbook</h2>
+
           <form onSubmit={handleSubmit} className="form-wrapper">
 
               <label>
                   <p>Nom du roadbook</p>
                   <input type="text" name="title" value={title} onChange={handleChange}
+                         placeholder="Le nom du roadbook" required />
+              </label>
+
+              <label>
+                  <p>Date de départ</p>
+                  <input type="date" name="tripStart" value={tripStart} onChange={handleChange}
                          placeholder="Le nom du roadbook" required />
               </label>
 
@@ -43,15 +52,9 @@ export function RoadbookCreate() {
               </label>
 
               <label>
-                  <p>Image de couverture (url)</p>
+                  <p>Ajouter une image d'illustration</p>
                   <input type="text" name="pictureUrl" value={pictureUrl} onChange={handleChange}
                          placeholder="Url de l'image de couverture" />
-              </label>
-
-              <label>
-                  <p>Début de la balade</p>
-                  <input type="date" name="tripStart" value={tripStart} onChange={handleChange}
-                         placeholder="Le nom du roadbook" required />
               </label>
 
               {/* user automatique .... */}

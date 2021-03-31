@@ -19,6 +19,10 @@ export const roadbookSlice = createSlice({
             state.roadbook = action.payload
             state.loading = false
         },
+        removeRoadbook: (state) => {
+            state.roadbook = {}
+            state.loading = false
+        },
         getLoading: state => {
             state.loading = true
         },
@@ -32,7 +36,7 @@ export const roadbookSlice = createSlice({
     }
 })
 
-export const { addRoadbook, getSingleRoadbook, getLoading, getFailure, getSuccess } = roadbookSlice.actions
+export const { addRoadbook, getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuccess } = roadbookSlice.actions
 
 export default roadbookSlice.reducer
 
@@ -53,6 +57,19 @@ export function findSingleRoadbook(params, token) {
         axios.get('http://127.0.0.1:8000/api' + params, config)
             .then(res => dispatch(getSingleRoadbook(res.data)))
             .catch(error => dispatch(getFailure(error)))
+    }
+}
+
+export function roadbookDelete(roadbookId, token) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+        await axios.delete(`http://127.0.0.1:8000/api/roadbooks/${roadbookId}`, config)
+            .then(res => {
+                dispatch(removeRoadbook())
+                toast.info('Votre roadbook a bien été supprimé')
+            })
+            .catch(error => console.log(error))
     }
 }
 

@@ -13,7 +13,7 @@ export function DashboardScene() {
 
             <p>Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
 
-            <Link to='/roadbook/new' className="btn btn-primary mx-2 px-3">Créer un roadbook</Link>
+            <Link to='/roadbook/new' className="btn btn-primary mx-2 px-3">Créer un nouveau roadbook</Link>
 
             <RoadbookShowAll />
 

@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { findSingleRoadbook, selectRoadbook } from 'features/roadbook/roadbookSlice';
 import { Link, useLocation } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPencilAlt} from "@fortawesome/free-solid-svg-icons";
+import { RoadbookDeleteModal } from 'features/roadbook/RoadbookDeleteModal';
 
 export function RoadbookShow() {
 
@@ -29,9 +32,47 @@ export function RoadbookShow() {
     return (
         <React.Fragment>
             <div className="container">
+
+                <Link to='/dashboard' className="btn btn-secondary my-2 mx-2">Revenir au tableau de bord</Link>
+
                 <h2>{roadbook.title}</h2>
-                <img src={roadbook.picture} alt=""/>
-                <p>{roadbook.description}</p>
+
+                <p>Roadbook terminé ? </p>
+                {/* TODO : mettre un champ toggle */}
+
+
+                <button className="btn btn-danger mx-2 px-3" data-bs-toggle="modal" data-bs-target="#deleteRoadbook">
+                    <span><FontAwesomeIcon icon={faPencilAlt} /></span>Supprimer le roadbook
+                    {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
+                </button>
+
+                <RoadbookDeleteModal roadbookId={roadbook.id} />
+
+                {/* ========== carte + résumé distance et informations de la balade ============ */}
+
+                <div className="mapVisualization">
+                    {/* map */}
+                    <p>{roadbook.description}</p>
+                    {/* distance totale */}
+                    {/* adresse de départ */}
+                    {/* date de la balade */}
+                </div>
+
+                {/* ========== résumé de l'itinéraire ============ */}
+
+                <div className="itineraire">
+                    <h3>Itinéraire</h3>
+                    {/* étapes de la balade avec icones */}
+                </div>
+
+                {/* ========== informations pratiques (contact et todolist ============ */}
+
+                <div className="informations">
+                    <h3>Informations pratiques sur la balade</h3>
+                    {/* contact du road captain */}
+                    {/* todolist */}
+                </div>
+
             </div>
         </React.Fragment>
     );

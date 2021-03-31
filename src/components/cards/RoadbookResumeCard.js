@@ -10,7 +10,7 @@ export function RoadbookResumeCard({roadbookItem}) {
             <p>{roadbookItem.description}</p>
             <p>{roadbookItem.tripStart}</p>
 
-            <Link to={"/roadbook/" + roadbookItem.id}>Voir le roadbook</Link>
+            <Link to={"/roadbook/" + roadbookItem.id}>Modifier le roadbook</Link>
         </div>
     );
 }
