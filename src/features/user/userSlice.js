@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
+import jwt_decode from "jwt-decode";
 import { toast } from 'react-toastify';
 
 // un Slice dans Redux est un morceau d'état qui gère plusieurs variables et les rend globale.
@@ -58,19 +59,6 @@ export default userSlice.reducer
 // fonction 'thunk' permettant de faire une logique asynchrone).
 export function userLogin(credentials) {
 
-    // decode le token en objet lisible (Working unicode text JWT parser function)
-    // peut être remplacé par jwt-decode
-    function parseJwt (token) {
-        let base64Url = token.split('.')[1];
-        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        return JSON.parse(jsonPayload);
-        // le token sera décodé et converti comme ceci :
-        // {iat: 1616802554, exp: 1616806154, roles: Array(1), username: "Bridgette_Gleason@yahoo.com", id: 2}
-    };
-
     return async dispatch => {
         dispatch(getLoading())
 
@@ -78,13 +66,13 @@ export function userLogin(credentials) {
         await axios.post('http://127.0.0.1:8000/api/login_check', credentials)
             .then(res => {
                 dispatch(setUserToken(res.data.token))
-                dispatch(setUserLogin(parseJwt(res.data.token)))
+                dispatch(setUserLogin(jwt_decode(res.data.token)))
                 sessionStorage.setItem('token', res.data.token);
-                sessionStorage.setItem('id', parseJwt(res.data.token).id);
+                sessionStorage.setItem('id', jwt_decode(res.data.token).id);
                 const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
 
                 // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
-                axios.get(`http://127.0.0.1:8000/api/users/${parseJwt(res.data.token).id}`, config)
+                axios.get(`http://127.0.0.1:8000/api/users/${jwt_decode(res.data.token).id}`, config)
                     .then(res => {
                         dispatch(setUserProfile(res.data))
                         toast.success('Bienvenue')
