@@ -7,6 +7,9 @@ import { UserEditModal } from 'features/user/UserEditModal';
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
 
+import moment from 'moment';
+import localization from 'moment/locale/fr';
+
 export function UserProfile() {
 
     const dispatch = useDispatch()
@@ -31,7 +34,7 @@ export function UserProfile() {
                 <img src={userProfile.avatar} alt="mdo" width="60" height="60" className="rounded-circle"/>
                 <p>{userProfile.firstName} {userProfile.lastName}</p>
                 <p>{userProfile.email}</p>
-                <p>**Inscrit depuis mars 2019**</p>
+                <p>Inscrit {moment(userProfile.createdAt).locale('fr', localization).fromNow()}</p>
 
                 <button className="btn btn-primary mx-2 px-3" data-bs-toggle="modal" data-bs-target="#editInfoProfile">
                     <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier les informations

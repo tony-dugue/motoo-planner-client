@@ -5,7 +5,7 @@ import { selectUser } from 'features/user/userSlice';
 
 export const VerifyAuth = ({ children }) => {
 
-    const tokenStorage = sessionStorage.getItem('token');
+    const tokenStorage = localStorage.getItem('token');
     const { token } = useSelector(selectUser); // on récupère le state
 
     return (tokenStorage || token) ? children : <Redirect to={"/login"} />;

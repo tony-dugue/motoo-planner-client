@@ -11,7 +11,7 @@ export function RoadbookShowAll() {
     useEffect(() => {
         const id = sessionStorage.getItem('id')
         const token = sessionStorage.getItem('token')
-        dispatch(findUser(id, token)) // requête à l'API pour récupérer un user
+        //dispatch(findUser(id, token)) // requête à l'API pour récupérer un user
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>

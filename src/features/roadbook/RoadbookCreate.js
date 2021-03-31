@@ -29,8 +29,6 @@ export function RoadbookCreate() {
   return (
       <div className="container">
 
-          <h2>Créer un nouveau roadbook</h2>
-
           <form onSubmit={handleSubmit} className="form-wrapper">
 
               <label>
