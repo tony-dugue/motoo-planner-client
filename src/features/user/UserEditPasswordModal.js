@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
 import { userEdit } from 'features/user/userSlice';
+import {toast} from "react-toastify";
 
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
 // mot de passe: minimum de 8 caractères, contient au moins 1 un chiffre, 1 lettre minuscule, 1 lettre majuscule
-//               et seulement des lettres et des chiffres
+// et seulement des lettres et des chiffres
 
 export function UserEditPasswordModal() {
 
@@ -22,10 +23,11 @@ export function UserEditPasswordModal() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        //if(!passwordValidator.test(password)) {
-            //console.log("Le mot de passe ne respecte pas les règles")  // TODO ajouter un affichage en alerte !!
-        if(password !== passwordConfirm) {
-            console.log("Les mots de passe ne sont pas identique !!")  // TODO ajouter un affichage en alerte !!
+        if(!passwordValidator.test(password)) {
+            toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
+                " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
+        } else if(password !== passwordConfirm) {
+            toast.warning("Les mots de passe ne sont pas identique !")
         } else {
             const id = sessionStorage.getItem('id')
             const token = sessionStorage.getItem('token')

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { findSingleArticle, selectArticle } from 'features/article/articleSlice';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-export function ArticleShow({ location }) {
+export function ArticleShow() {
 
     const dispatch = useDispatch()
+    const location = useLocation()
+
     const { article, loading, error } = useSelector(selectArticle); // on récupère le state
 
     useEffect(() => {

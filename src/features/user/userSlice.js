@@ -137,6 +137,8 @@ export function userEdit(userData, userId, token) {
         await axios.get(`http://127.0.0.1:8000/api/users/${userId}`, config)
             .then(res => dispatch(setUserProfile(res.data)))
             .catch(error => console.log(error))
+        // ON GENERE UN NOUVEAU TOKEN
+
     }
 }
 

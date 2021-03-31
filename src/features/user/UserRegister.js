@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import {useDispatch} from "react-redux";
+import { toast } from 'react-toastify';
 import { userRegister } from 'features/user/userSlice';
 
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -23,17 +24,18 @@ export function UserRegister() {
     const handleSubmit = async e => {
         e.preventDefault();
         if(!emailValidator.test(email)) {
-            console.log("Le email n'est pas au bon format")
+            toast.warning("Une erreur s'est produite !")
         } else if(password !== passwordConfirm) {
-            console.log("Les mots de passe ne sont pas identique !!")  // TODO ajouter un affichage en alerte !!
+            toast.warning("Les mots de passe ne sont pas identique !")
         } else if (!passwordValidator.test(password)) {
-            console.log("Le mot de passe ne respecte pas les règles")  // TODO ajouter un affichage en alerte !!
+            toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
+                " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
         } else {
             const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`
             const newUser = { firstName, lastName, email, password, avatar };
             dispatch(userRegister(newUser)); // requête à l'API pour se connecter
+            toast.success("Votre compte a été crée")
             history.push('/presentation');
-            // TODO ajouter un affichage en alerte de réussite !!
         }
     }
 

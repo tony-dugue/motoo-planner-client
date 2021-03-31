@@ -17,21 +17,23 @@ export function RoadbookShowAll() {
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>
 
-    const roadbookEnCoursItems = (userProfile.roadbooks)
-        ? userProfile.roadbooks.map(roadbook => {
-            if (roadbook.status === 2) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
-            else return null
-        }) : null
+    // TODO : affiner le chargement et l'actualisation des roadbooks
+    // TODO : voir pour ajouter une logique si le token est périmé (chargement en cours à l'infini)
 
-    const roadbookFinishItems = (userProfile.roadbooks)
+    const roadbookEnCoursItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {
             if (roadbook.status === 1) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
             else return null
         }) : null
 
+    const roadbookFinishItems = (userProfile.roadbooks)
+        ? userProfile.roadbooks.map(roadbook => {
+            if (roadbook.status === 2) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
+            else return null
+        }) : null
+
     return (
         <div>
-            <p>Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
 
             <h2>Mes roadbooks en cours</h2>
 
