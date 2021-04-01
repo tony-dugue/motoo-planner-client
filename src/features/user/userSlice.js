@@ -63,7 +63,7 @@ export function userLogin(credentials) {
         dispatch(getLoading())
 
         // ON VERIFIE L'UTILISATEUR ET ON RECUPERE LE TOKEN DE L'UTILISATEUR
-        await axios.post('http://127.0.0.1:8000/api/login_check', credentials)
+        await axios.post(process.env.REACT_APP_API_URL + '/login_check', credentials)
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(jwt_decode(res.data.token)))
@@ -72,7 +72,7 @@ export function userLogin(credentials) {
                 const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
 
                 // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
-                axios.get(`http://127.0.0.1:8000/api/users/${jwt_decode(res.data.token).id}`, config)
+                axios.get(process.env.REACT_APP_API_URL + `/users/${jwt_decode(res.data.token).id}`, config)
                     .then(res => {
                         dispatch(setUserProfile(res.data))
                         toast.success('Bienvenue')
@@ -89,7 +89,7 @@ export function userRegister(newUser) {
         dispatch(getLoading())
         const config = { headers: { "Content-Type": "application/json"} };
         const body = JSON.stringify(newUser);
-        return axios.post('http://127.0.0.1:8000/api/users', body, config)
+        return axios.post(process.env.REACT_APP_API_URL + '/users', body, config)
             .catch(error => console.log(error))
     }
 }
@@ -107,7 +107,7 @@ export function findUser(params, token) {
     return async dispatch => {
         dispatch(getLoading())
         const config = { headers: { "Authorization" : `Bearer ${token}` } };
-        axios.get(`http://127.0.0.1:8000/api/users/${params}`, config)
+        axios.get(process.env.REACT_APP_API_URL + `/users/${params}`, config)
             .then(res => dispatch(setUserProfile(res.data)))
             .catch(error => console.log(error))
     }
@@ -119,7 +119,7 @@ export function userEdit(userData, userId, token) {
         const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
         const body = JSON.stringify(userData);
 
-        await axios.put(`http://127.0.0.1:8000/api/users/${userId}`, body, config)
+        await axios.put(process.env.REACT_APP_API_URL + `/users/${userId}`, body, config)
             .catch(error => toast.warning("Une erreur s'est produite !"))
         // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
         await axios.get(`http://127.0.0.1:8000/api/users/${userId}`, config)
@@ -134,7 +134,7 @@ export function userDelete(userId, token) {
     return async dispatch => {
         dispatch(getLoading())
         const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
-        await axios.delete(`http://127.0.0.1:8000/api/users/${userId}`, config)
+        await axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}`, config)
             .then(res => toast.info('Votre compte a bien été supprimé'))
             .catch(error => console.log(error))
         sessionStorage.removeItem('token');

@@ -45,7 +45,7 @@ export function roadbookCreate(newRoadbook, token) {
         dispatch(getLoading())
         const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
         const body = JSON.stringify(newRoadbook);
-        return axios.post('http://127.0.0.1:8000/api/roadbooks', body, config)
+        return axios.post(process.env.REACT_APP_API_URL + '/roadbooks', body, config)
             .catch(error => console.log(error))
     }
 }
@@ -54,7 +54,7 @@ export function findSingleRoadbook(params, token) {
     return async dispatch => {
         dispatch(getLoading())
         const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
-        axios.get('http://127.0.0.1:8000/api' + params, config)
+        axios.get(process.env.REACT_APP_API_URL + params, config)
             .then(res => dispatch(getSingleRoadbook(res.data)))
             .catch(error => dispatch(getFailure(error)))
     }
@@ -64,7 +64,7 @@ export function roadbookDelete(roadbookId, token) {
     return async dispatch => {
         dispatch(getLoading())
         const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
-        await axios.delete(`http://127.0.0.1:8000/api/roadbooks/${roadbookId}`, config)
+        await axios.delete(process.env.REACT_APP_API_URL + `/roadbooks/${roadbookId}`, config)
             .then(res => {
                 dispatch(removeRoadbook())
                 toast.info('Votre roadbook a bien été supprimé')

@@ -14,9 +14,11 @@ export function RoadbookShow() {
     const { roadbook, loading, error } = useSelector(selectRoadbook); // on récupère le state
 
     useEffect(() => {
+
         //récupération du pathname de l'url (ex /roadbooks/xx)
         const urlPath = location.pathname.replace('roadbook', 'roadbooks')
         const token = sessionStorage.getItem('token')
+
         dispatch(findSingleRoadbook(urlPath, token)) // requête à l'API pour récupérer un roadbook
     }, [dispatch, location])
 

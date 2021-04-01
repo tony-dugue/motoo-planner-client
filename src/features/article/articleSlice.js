@@ -44,8 +44,7 @@ export default articleSlice.reducer;
 export function findAllArticles() {
     return async dispatch => {
         dispatch(getLoading())
-        //fetch(process.env.REACT_APP_API_URL + params)
-        axios.get('http://127.0.0.1:8000/api/articles')
+        axios.get(process.env.REACT_APP_API_URL + '/articles')
             .then(res => dispatch(getAllArticles(res.data["hydra:member"])))
             .catch(error => dispatch(getFailure(error)))
     }
@@ -54,8 +53,7 @@ export function findAllArticles() {
 export function findSingleArticle(params) {
     return async dispatch => {
         dispatch(getLoading())
-        //fetch(process.env.REACT_APP_API_URL + params)
-        axios.get('http://127.0.0.1:8000/api' + params)
+        axios.get(process.env.REACT_APP_API_URL + params)
             .then(res => dispatch(getSingleArticle(res.data)))
             .catch(error => dispatch(getFailure(error)))
     }

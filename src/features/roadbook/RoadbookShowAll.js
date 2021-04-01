@@ -9,15 +9,19 @@ export function RoadbookShowAll() {
     const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
 
     useEffect(() => {
+
         const id = sessionStorage.getItem('id')
         const token = sessionStorage.getItem('token')
-        //dispatch(findUser(id, token)) // requête à l'API pour récupérer un user
-    }, [dispatch])
+
+        if(!userProfile.id) {
+            // si state vide (lors rafraichissement du navigateur par ex), on récupère à nouveau les données
+            dispatch(findUser(id, token))
+        }
+    }, [dispatch, userProfile])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>
 
-    // TODO : affiner le chargement et l'actualisation des roadbooks
     // TODO : voir pour ajouter une logique si le token est périmé (chargement en cours à l'infini)
 
     const roadbookEnCoursItems = (userProfile.roadbooks)
