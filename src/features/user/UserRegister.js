@@ -29,7 +29,7 @@ export function UserRegister() {
             toast.warning("Les mots de passe ne sont pas identique !")
         } else if (!passwordValidator.test(password)) {
             toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
-                " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
+                " moins 1 chiffre, 1 lettre majuscule et 1 lettre minuscule")
         } else {
             const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`
             const newUser = { firstName, lastName, email, password, avatar };
@@ -40,38 +40,48 @@ export function UserRegister() {
     }
 
     return (
-        <div className="container">
+        <div className="content__form">
             <form onSubmit={handleSubmit} className="form-wrapper">
-                <label>
-                    <p>Votre prénom</p>
-                    <input type="text" name="firstName" value={firstName} onChange={handleChange}
-                           placeholder="Votre prénom" required />
-                </label>
 
-                <label>
-                    <p>Votre nom</p>
-                    <input type="text" name="lastName" value={lastName} onChange={handleChange}
-                           placeholder="Votre nom" required />
-                </label>
-                <label>
-                    <p>Votre email</p>
-                    <input type="text" name="email" value={email} onChange={handleChange}
-                           placeholder="Votre email" required />
-                </label>
-                <label>
-                    <p>Votre mot de passe</p>
-                    <input type="password" name="password" value={password} onChange={handleChange}
-                           placeholder="Créer un mot de passe" minLength="8" required />
-                </label>
-                <label>
-                    <p>Répéter votre mot de passe</p>
-                    <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={handleChange}
-                           placeholder="Répéter le mot de passe" minLength="8" required />
-                </label>
-                <div>
-                    <button type="submit">S'inscrire</button>
+                <div className="form-wrapper__bloc">
+                    <label htmlFor="firstnameInput" className="form-label">Votre prénom</label>
+                    <input type="text" className="form-control" id="firstnameInput" name="firstName"
+                           value={firstName} onChange={handleChange} required />
                 </div>
+
+                <div className="form-wrapper__bloc">
+                    <label htmlFor="lastnameInput" className="form-label">Votre prénom</label>
+                    <input type="text" className="form-control" id="lastnameInput" name="lastName"
+                           value={lastName} onChange={handleChange} required />
+                </div>
+
+                <div className="form-wrapper__bloc">
+                    <label htmlFor="emailInput" className="form-label">Votre email</label>
+                    <input type="email" className="form-control" id="emailInput" name="email"
+                           value={email} onChange={handleChange} required />
+                </div>
+
+                <div className="form-wrapper__bloc">
+                    <label htmlFor="passwordInput" className="form-label">Votre mot de passe</label>
+                    <input type="password" className="form-control" id="passwordInput" name="password"
+                           value={password} onChange={handleChange} minLength="8" required />
+                </div>
+
+                <div className="form-wrapper__bloc">
+                    <label htmlFor="passwordVerifyInput" className="form-label">Répéter le mot de passe</label>
+                    <input type="password" className="form-control" id="passwordVerifyInput" name="passwordConfirm"
+                           value={passwordConfirm} onChange={handleChange} minLength="8" required />
+                </div>
+
+                <button type="submit" className="btn btn-motoo-outline">S'inscrire</button>
+
             </form>
+
+            <div id="passwordHelpBlock" className="form-text">
+                Le mot de passe doit contenir au moins 8 caractères, contenir au moins 1 majuscule, 1 minuscule et 1 chiffre.
+                Seulement des lettres et chiffres (pas de caractères spéciaux, espaces ou émoji)
+            </div>
+
         </div>
     );
 }

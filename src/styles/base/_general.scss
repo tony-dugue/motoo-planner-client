@@ -24,6 +24,7 @@ body {
   min-height: 100vh; // (1)
   display: flex; // (1)
   flex-direction: column; // (1)
+  justify-content: center;
 }
 
 .main {

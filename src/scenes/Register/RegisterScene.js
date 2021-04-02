@@ -5,13 +5,15 @@ import './RegisterScene.scss';
 
 export function RegisterScene() {
     return (
-        <div className="container">
+        <div className="content">
 
             <h2>Créer un compte</h2>
 
             <UserRegister />
 
-            <p>Vous avez déjà un compte? <Link to='/login'>Se connecter</Link></p>
+            <div className="content__info">
+                <p>Vous avez déjà un compte? <Link to='/login'><span>Se connecter</span></Link></p>
+            </div>
 
         </div>
     );
