@@ -20,6 +20,7 @@ import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
 import {ArticleShow} from 'features/article/ArticleShow';
 import {RoadbookShow} from 'features/roadbook/RoadbookShow';
+import {Footer} from 'components/layouts/Footer';
 
 function App() {
 
@@ -75,6 +76,8 @@ function App() {
                     <Route component={NotFoundScene}/>
 
                 </Switch>
+
+                <Footer />
 
             </div>
 

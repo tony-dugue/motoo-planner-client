@@ -3,6 +3,10 @@
   border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
   text-decoration: none;
 
+  @include down(768) {
+    border-radius: 0px;
+  }
+
   &--info {
     color: $color-white;
     background-color: #17a2b8;
