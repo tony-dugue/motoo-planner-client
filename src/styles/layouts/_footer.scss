@@ -1,12 +1,23 @@
 .footer {
   background-color: $color-light-grey;
   margin-top: spacing(5);
+  border-top: 1px solid #e0e0e0;
 
   &__wrapper {
     max-width: 1280px;
     margin: 0 auto;
     padding-top: spacing(5);
     padding-bottom: spacing(5);
+
+    @include down(1380) {
+      margin: 0 spacing(5);
+    }
+
+    @include down(768) {
+      padding-top: spacing(3);
+      padding-bottom: spacing(3);
+      text-align: center;
+    }
   }
 
   // menu de navigation
@@ -16,13 +27,26 @@
     justify-content: space-between;
     margin-bottom: spacing(5);
 
+    @include down(768) {
+      flex-direction: column;
+    }
+
     &__menu {
+
+      @include down(768) {
+        margin-bottom: spacing(3);
+      }
+
       &-heading {
         font-weight: 700;
       }
       &-item {
         margin-top: spacing(1);
         transition: 0.2s ease-in;
+
+        @include down(768) {
+          margin-bottom: 0;
+        }
 
         &:hover {
           color: $color-text-dark;
@@ -36,11 +60,14 @@
 
       &-item {
         margin-top: spacing(3);
-        margin-right: 2rem;
         font-size: 2rem;
         color: $color-text;
         cursor: pointer;
         transition: 0.3s ease-in;
+
+        &:first-child {
+          margin-right: 2rem;
+        }
 
         &.facebook:hover {
           color: $color-social-fcb;
@@ -62,6 +89,7 @@
 
     @include down(768) {
       width: 35vw;
+      margin: 10px auto;
     }
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {NavLink} from "react-router-dom";
+import moment from 'moment';
 
 export function Footer() {
     return (
@@ -47,7 +48,7 @@ export function Footer() {
                 </div>
 
                 <div className="footer-copyright">
-                    <p className="footer-copyright__content">Copyright © 2021 Motoo Planner. Tous droits réservés.</p>
+                    <p className="footer-copyright__content">© {moment().format('YYYY')} Motoo Planner. Tous droits réservés.</p>
                 </div>
 
             </div>
