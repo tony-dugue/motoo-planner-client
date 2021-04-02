@@ -16,9 +16,12 @@ $color-location: #C2D342;
 $color-black: #000;
 $color-white: #FFF;
 
-$color-text: #8E9196;
-$color-text-big: #8E9196;
+$color-text: #666666;
+$color-text-dark: #111111;
 $color-mark: #FFE1AD;
+
+// button colors
+$color-primary-hover: #f67d2b;
 
 /* icones réseaux sociaux */
 
@@ -43,7 +46,9 @@ sans-serif;
   Box-shadow
   ========================================================================== */
 
-$box-shadow-img: 0 5px 15px -8px rgba(0,0,0,0.24), 0 8px 10px -5px rgba(0,0,0,0.2);
+$box-shadow-img: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+$box-shadow-btn: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+$box-shadow-btn-hover: 0 6px 20px 0 rgba(93, 93, 93, 0.2);
 
 
 

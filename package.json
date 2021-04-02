@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "services": "^0.0.3"
   }
 }

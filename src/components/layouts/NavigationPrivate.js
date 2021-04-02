@@ -3,7 +3,7 @@ import {Link, NavLink, useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { userLogout } from 'features/user/userSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { selectUser } from 'features/user/userSlice';
 import {toast} from "react-toastify";
 
@@ -28,7 +28,7 @@ export function NavigationPrivate() {
                 <NavLink
                     exact to='/'
                     className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                    Logo
+                    <img src='/logo-light.png' alt="logo Motoo Planner"/>
                 </NavLink>
 
                 <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -56,6 +56,7 @@ export function NavigationPrivate() {
                         <li><hr className="dropdown-divider"/></li>
                         <li onClick={handleLogout} className="dropdown-item">Se déconnecter</li>
                     </ul>
+
                 </div>
 
             </nav>

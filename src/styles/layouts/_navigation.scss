@@ -1,0 +1,110 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $white;
+}
+
+.navigation {
+  display: flex;
+  //flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  //border-bottom: 1px solid #DEE2E6;
+  max-width: 1280px;
+  margin: 0 auto;
+  color: $color-text;
+
+  @include down(992) {
+    flex-direction: column;
+  }
+  @include down(768) {
+    padding: 1rem 0;
+  }
+
+  &__brand {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    @include down(992) {
+      margin-bottom: spacing(3);
+    }
+    @include down(768) {
+      width: 100%;
+    }
+
+    &-logo {
+      width: 280px;
+
+      @include down(768) {
+        margin-left: spacing(1);
+        width: 40vw;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+
+    &-items {
+      display: flex;
+    }
+
+    &-item {
+      margin: 0 spacing(2);
+      font-weight: 600;
+      padding-bottom: 0.4rem;
+      @extend %underlined;
+
+      &.active {
+        color: $color-text-dark;
+      }
+    }
+
+    &-auth {
+      margin-left: spacing(3);
+      margin-right: spacing(5);
+
+      @include down(768) {
+        display: none;
+      }
+
+      &--mobile {
+        display: none;
+
+        @include down(768) {
+          display: block;
+          margin-right: spacing(2);
+        }
+      }
+    }
+
+    &-socials {
+      display: flex;
+
+      @include down(768) {
+        display: none;
+      }
+    }
+
+    &-social {
+      margin-right: 2rem;
+      font-size: 1.6rem;
+      color: $color-text;
+      cursor: pointer;
+      transition: 0.3s ease-in;
+
+      &.facebook:hover {
+        color: $color-social-fcb;
+        transform: scale(1.2);
+      }
+      &.twitter:hover {
+        color: $color-social-twitter;
+        transform: scale(1.2);
+      }
+    }
+  }
+}

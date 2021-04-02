@@ -1,30 +1,50 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { Button } from 'components/buttons/Button';
 
 export function NavigationPublic() {
 
     return (
-        <div className="container">
+        <header className="header">
 
-            <nav className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <nav className="navigation">
 
-                <NavLink
-                    exact to='/'
-                    className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                    Logo
-                </NavLink>
+                <div className="navigation__brand">
 
-                <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <div className="navigation__brand-logo">
+                        <NavLink exact to='/'>
+                            <img src='/logo-light.png' alt="logo Motoo Planner"/>
+                        </NavLink>
+                    </div>
 
-                    <li><NavLink to='/' className="nav-link px-2 link-secondary">Accueil</NavLink></li>
-                    <li><NavLink to='/articles' className="nav-link px-2 link-dark">Articles</NavLink></li>
-                    <li><NavLink to='/contact' className="nav-link px-2 link-dark">Nous contacter</NavLink></li>
-                </ul>
-
-                <div className="col-md-3 text-end">
-                    <Link to='/login' className="btn btn-outline-info me-2">Se connecter</Link>
+                    <div className="navigation__link-auth--mobile">
+                        <Button link='/login' type='outline' title='Se connecter'/>
+                    </div>
                 </div>
+
+                <div className="navigation__link">
+
+                    <ul className="navigation__link-items">
+                        <li><NavLink to='/' className="navigation__link-item">Accueil</NavLink></li>
+                        <li><NavLink to='/articles' className="navigation__link-item">Articles</NavLink></li>
+                        <li><NavLink to='/contact' className="navigation__link-item">Nous contacter</NavLink></li>
+                    </ul>
+
+                    <div className="navigation__link-auth">
+                        <Button link='/login' type='outline' title='Se connecter'/>
+                    </div>
+
+                    <div className="navigation__link-socials">
+                        <FontAwesomeIcon className="navigation__link-social twitter" icon={faTwitter}/>
+                        <FontAwesomeIcon className="navigation__link-social facebook" icon={faFacebook}/>
+                    </div>
+
+                </div>
+
             </nav>
-        </div>
+        </header>
     );
 }

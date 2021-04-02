@@ -26,8 +26,7 @@ img {
 
 p, ul, ol, a {
   font-size: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 ul {
@@ -51,4 +50,16 @@ hr {
   overflow: visible;
   border: 0;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.main {
+  margin-top: 120px;
+
+  @include down(992) {
+    margin-top: 180px;
+  }
+
+  @include down(768) {
+    margin-top: 150px;
+  }
 }

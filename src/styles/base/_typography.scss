@@ -4,7 +4,7 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $f-opensans;
-  color: $color-primary;
+  color: $color-text-dark;
   line-height: 1.125;
   font-weight: 700;
   margin-top: 0;
@@ -17,3 +17,20 @@ h2, .h2 { font-size: 2.5rem; }
 h3, .h3 { font-size: 2rem; }
 h4, .h4 { font-size: 1.5rem; }
 h5, .h5 { font-size: 1.25rem; }
+
+/* ==========================================================================
+  Effet de soulignement
+  ========================================================================== */
+
+%underlined {
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  background-position: left 0 bottom 0;
+  transition: background-size 0.3s;
+  background-image: linear-gradient(transparent calc(100% - 2px), $color-text calc(100% - 2px), $color-text 100%);
+
+  &:hover,
+  &:active {
+    background-size: 100% 100%;
+  }
+}

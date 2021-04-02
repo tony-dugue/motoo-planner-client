@@ -33,46 +33,53 @@ function App() {
 
             { (tokenStorage || token) ? <NavigationPrivate /> : <NavigationPublic /> }
 
-            <Switch>
+            <div className="main">
 
-                {/* ======= ROUTES PUBLIQUES ========== */}
+                <Switch>
 
-                <Route exact path="/" component={LandingPageScene}/>
-                <Route path="/contact" component={ContactScene}/>
+                    {/* ======= ROUTES PUBLIQUES ========== */}
 
-                <Route path="/articles" component={ArticleScene}/>
-                <Route path="/article/:slug" component={ArticleShow}/>
+                    <Route exact path="/" component={LandingPageScene}/>
+                    <Route path="/contact" component={ContactScene}/>
 
-                <Route path="/login" component={LoginScene}/>
-                <Route path="/presentation" component={PresentationScene}/>
+                    <Route path="/articles" component={ArticleScene}/>
+                    <Route path="/article/:slug" component={ArticleShow}/>
 
-                {/* ======= ROUTES SECURISEES ========== */}
+                    <Route path="/login" component={LoginScene}/>
+                    <Route path="/presentation" component={PresentationScene}/>
 
-                <Route path="/register">
-                    { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
-                </Route>
+                    {/* ======= ROUTES SECURISEES ========== */}
 
-                <Route path="/dashboard">
-                    { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
-                </Route>
+                    <Route path="/register">
+                        { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
+                    </Route>
 
-                <Route path="/profile">
-                    { (tokenStorage || token) ? <ProfileScene /> : <LoginScene /> }
-                </Route>
+                    <Route path="/dashboard">
+                        { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
+                    </Route>
 
-                <Route path="/roadbook/new">
-                    { (tokenStorage || token) ? <RoadbookCreateScene /> : <LoginScene /> }
-                </Route>
+                    <Route path="/profile">
+                        { (tokenStorage || token) ? <ProfileScene /> : <LoginScene /> }
+                    </Route>
 
-                <Route path="/roadbook/:slug">
-                    { (tokenStorage || token) ? <RoadbookShow /> : <LoginScene /> }
-                </Route>
+                    <Route path="/roadbook/new">
+                        { (tokenStorage || token) ? <RoadbookCreateScene /> : <LoginScene /> }
+                    </Route>
 
-                {/* ======= PAGE 404 ========== */}
+                    <Route path="/roadbook/:slug">
+                        { (tokenStorage || token) ? <RoadbookShow /> : <LoginScene /> }
+                    </Route>
 
-                <Route component={NotFoundScene}/>
-            </Switch>
+                    {/* ======= PAGE 404 ========== */}
+
+                    <Route component={NotFoundScene}/>
+
+                </Switch>
+
+            </div>
+
             <ToastContainer />
+
         </div>
     );
 }

@@ -4,19 +4,19 @@
   text-decoration: none;
 
   &--info {
-    color: #fff;
+    color: $color-white;
     background-color: #17a2b8;
     border-color: #17a2b8;
   }
   &--success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+    color: $color-white;
+    background-color: #47d1af;
+    border-color: #47d1af;
   }
   &--error {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+    color: $color-white;
+    background-color: #ee5744;
+    border-color: #ee5744;
   }
 }
 
