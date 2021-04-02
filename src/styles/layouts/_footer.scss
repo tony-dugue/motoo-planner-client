@@ -1,0 +1,75 @@
+.footer {
+  background-color: $color-light-grey;
+  margin-top: spacing(5);
+
+  &__wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: spacing(5);
+    padding-bottom: spacing(5);
+  }
+
+  // menu de navigation
+
+  &-link {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: spacing(5);
+
+    &__menu {
+      &-heading {
+        font-weight: 700;
+      }
+      &-item {
+        margin-top: spacing(1);
+        transition: 0.2s ease-in;
+
+        &:hover {
+          color: $color-text-dark;
+        }
+      }
+    }
+
+    // Réseaux sociaux
+
+    &__social {
+
+      &-item {
+        margin-top: spacing(3);
+        margin-right: 2rem;
+        font-size: 2rem;
+        color: $color-text;
+        cursor: pointer;
+        transition: 0.3s ease-in;
+
+        &.facebook:hover {
+          color: $color-social-fcb;
+          transform: scale(1.2);
+        }
+        &.twitter:hover {
+          color: $color-social-twitter;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+
+  // logo
+
+  &-logo {
+    width: 250px;
+    margin-bottom: spacing(2);
+
+    @include down(768) {
+      width: 35vw;
+    }
+  }
+
+  // copyright
+
+  &-copyright {
+    &__content {
+      font-size: 14px;
+    }
+  }
+}

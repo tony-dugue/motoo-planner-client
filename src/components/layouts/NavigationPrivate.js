@@ -30,12 +30,16 @@ export function NavigationPrivate() {
                         </NavLink>
                     </div>
 
+                    {/* lien avatar en mode mobile */}
+
                     <Link to='#' className="navigation__link-auth--mobile dropdown-toggle" id="dropdownProfileMobile"
                           data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={userProfile.avatar} alt="avatar" className="navigation__avatar rounded-circle"/>
                     </Link>
 
-                    <ul className="dropdown-menu text-small" aria-labelledby="dropdownProfileMobile">
+                    {/* menu déroulant en mode mobile du bouton avatar */}
+
+                    <ul className="dropdown-menu" aria-labelledby="dropdownProfileMobile">
                         <li><Link className="dropdown-item" to='/profile'>Mon profil</Link></li>
 
                         <li><hr className="dropdown-divider"/></li>
@@ -53,12 +57,16 @@ export function NavigationPrivate() {
                         <li><NavLink to='/contact' className="navigation__link-item">Contact</NavLink></li>
                     </ul>
 
+                    {/* lien avatar en mode normale */}
+
                     <Link to='#' className="navigation__link-auth dropdown-toggle" id="dropdownProfile"
                           data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={userProfile.avatar} alt="avatar" className="navigation__avatar rounded-circle"/>
                     </Link>
 
-                    <ul className="dropdown-menu text-small" aria-labelledby="dropdownProfile">
+                    {/* menu déroulant en mode normale du bouton avatar */}
+
+                    <ul className="dropdown-menu" aria-labelledby="dropdownProfile">
                         <li><Link className="dropdown-item" to='/profile'>Mon profil</Link></li>
 
                         <li><hr className="dropdown-divider"/></li>

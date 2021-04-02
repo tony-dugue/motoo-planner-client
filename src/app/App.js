@@ -77,9 +77,9 @@ function App() {
 
                 </Switch>
 
-                <Footer />
-
             </div>
+
+            <Footer />
 
             <ToastContainer />
 

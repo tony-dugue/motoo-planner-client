@@ -127,4 +127,18 @@
       width: 30px;
     }
   }
+
+  .dropdown {
+    &-menu {
+      background-color: $color-secondary;
+      border-radius: 8px;
+    }
+    &-item {
+      color: $white;
+
+      &:hover {
+        background-color: $color-text;
+      }
+    }
+  }
 }

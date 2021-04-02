@@ -1,8 +1,7 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Button } from 'components/buttons/Button';
 
 export function NavigationPublic() {

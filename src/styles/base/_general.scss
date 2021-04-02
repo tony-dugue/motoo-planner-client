@@ -18,6 +18,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// (1) fixer le footer en bas de page
+
+.app {
+  min-height: 100vh; // (1)
+  display: flex; // (1)
+  flex-direction: column; // (1)
+}
+
+.main {
+  flex-grow: 1; // (1)
+}
+
 img {
   width: 100%;
   height: auto;
@@ -25,7 +37,7 @@ img {
 }
 
 p, ul, ol, a {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0;
 }
 
@@ -40,7 +52,7 @@ a {
   font-size: inherit;
 
   &:hover {
-    color:inherit;
+    color: inherit;
   }
 }
 
