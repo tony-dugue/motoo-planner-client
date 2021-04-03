@@ -4,9 +4,9 @@ import { ArticleShowAll } from 'features/article/ArticleShowAll';
 export function ArticleScene() {
     return (
 
-        <div className="container">
+        <div className="content">
 
-            <h2>Je suis la page article</h2>
+            <h2>Les derniers articles ...</h2>
 
             <ArticleShowAll />
 

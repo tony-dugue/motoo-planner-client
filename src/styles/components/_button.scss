@@ -1,16 +1,3 @@
-.btn-motoo-outline {
-  color: $color-primary;
-  border-color: $color-primary;
-  transition: 0.3s ease-in-out;
-  box-shadow: $box-shadow-btn;
-
-  &:hover {
-    color: $color-primary;
-    border-color: $color-primary;
-    transform: scale(1.1);
-    box-shadow: $box-shadow-btn-hover;
-  }
-}
 
 .btn-motoo {
   color: $color-white;
@@ -18,6 +5,34 @@
   border-color: $color-primary;
   transition: 0.3s ease-in-out;
   box-shadow: $box-shadow-btn;
+
+  &-outline {
+    color: $color-primary;
+    border-color: $color-primary;
+    transition: 0.3s ease-in-out;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-primary;
+      border-color: $color-primary;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+  }
+
+  &-dark {
+    color: $color-text;
+    border-color: $color-text;
+    transition: 0.3s ease-in-out;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-text;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+  }
 
   &:hover {
     color: $color-white;

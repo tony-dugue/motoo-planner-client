@@ -1,0 +1,46 @@
+.card {
+
+  &-article {
+    padding: 25px;
+
+    &__title {
+        margin-bottom: spacing(1);
+      font-size: 1.5rem;
+    }
+
+    &__img {
+      width: 80%;
+      max-height: 280px;
+      object-fit: cover;
+      margin: 10px auto;
+      box-shadow: $box-shadow-img;
+
+      @include down(992) {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &__date {
+      color: $color-text;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+
+    &__desc {
+      margin-top: spacing(3);
+      margin-bottom: spacing(3);
+    }
+
+    &__more {
+        margin-top: spacing(3);
+
+      @include up(992) {
+        text-align: right;
+        margin-top: spacing(6);
+      }
+    }
+  }
+}

@@ -77,10 +77,12 @@ export function userLogin(credentials) {
                         dispatch(setUserProfile(res.data))
                         toast.success('Bienvenue')
                     })
-                    .catch(error => dispatch(getFailure(error)))
+                    .catch(error => {dispatch(getFailure(error))} )
 
             })
-            .catch(error => console.log(error))
+            .catch( () => toast.warning("une erreur s'est produite ! Veuillez vérifier votre email et ressaisir votre mot de" +
+                    " passe")
+            )
     }
 }
 
@@ -90,7 +92,7 @@ export function userRegister(newUser) {
         const config = { headers: { "Content-Type": "application/json"} };
         const body = JSON.stringify(newUser);
         return axios.post(process.env.REACT_APP_API_URL + '/users', body, config)
-            .catch(error => console.log(error))
+            .catch( () => toast.warning("une erreur s'est produite !"))
     }
 }
 

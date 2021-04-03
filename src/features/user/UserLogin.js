@@ -8,12 +8,15 @@ export function UserLogin() {
     const dispatch = useDispatch()
     const history = useHistory();
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({username: "", password: ""});
+
+    const { username, password } = formData;
+
+    const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const handleSubmit = async e => {
         e.preventDefault();
-        dispatch(userLogin({ username, password })); // requête à l'API pour se connecter
+        dispatch(userLogin(formData)); // requête à l'API pour se connecter
         history.push('/dashboard');
     }
 
@@ -23,14 +26,14 @@ export function UserLogin() {
 
                 <div className="form-wrapper__bloc">
                     <label htmlFor="emailInput" className="form-label">Votre email</label>
-                    <input type="email" className="form-control" id="emailInput"
-                           value={username} onChange={e => setUsername(e.target.value)}/>
+                    <input type="email" className="form-control" id="emailInput" name="username"
+                           value={username} onChange={handleChange} required />
                 </div>
 
                 <div className="form-wrapper__bloc">
                     <label htmlFor="passwordInput" className="form-label">Votre mot de passe</label>
-                    <input type="password" className="form-control" id="passwordInput"
-                           value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" className="form-control" id="passwordInput" name="password"
+                           value={password} onChange={handleChange} required />
                 </div>
 
                 <button type="submit" className="btn btn-motoo-outline">Se connecter</button>
