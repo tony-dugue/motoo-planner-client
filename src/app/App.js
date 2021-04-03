@@ -55,7 +55,7 @@ function App() {
                         { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
                     </Route>
 
-                    <Route path="/dashboard">
+                    <Route exact path="/dashboard">
                         { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
                     </Route>
 
@@ -70,6 +70,8 @@ function App() {
                     <Route path="/roadbook/:slug">
                         { (tokenStorage || token) ? <RoadbookShow /> : <LoginScene /> }
                     </Route>
+
+                    {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
 
                     {/* ======= PAGE 404 ========== */}
 

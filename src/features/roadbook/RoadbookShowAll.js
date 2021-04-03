@@ -26,27 +26,47 @@ export function RoadbookShowAll() {
 
     const roadbookEnCoursItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {
-            if (roadbook.status === 1) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
+            if (roadbook.status === 1) return (
+                <div className="col-md-6 col-lg-4 col-xl-3">
+                    <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook}/>
+                </div>
+            )
             else return null
         }) : null
 
     const roadbookFinishItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {
-            if (roadbook.status === 2) return <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook} />
-            else return null
+            if (roadbook.status === 2) return (
+                <div className="col-md-6 col-lg-4 col-xl-3">
+                    <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook}/>
+                </div>
+            )
+             else return null
         }) : null
 
     return (
-        <div>
+        <>
+        <section className="roadbook-gallery">
 
-            <h2>Mes roadbooks en cours</h2>
+            <h2 class="roadbook-gallery__heading">Mes roadbooks en cours</h2>
 
-            {roadbookEnCoursItems}
+            <div className="container">
+                <div className="row">
+                    {roadbookEnCoursItems}
+                </div>
+            </div>
+        </section>
 
-            <h2>Mes roadbooks terminés</h2>
+        <section className="roadbook-gallery">
 
-            {roadbookFinishItems}
+            <h2 class="roadbook-gallery__heading">Mes roadbooks terminés</h2>
 
-        </div>
+            <div className="container">
+                <div className="row">
+                    {roadbookFinishItems}
+                </div>
+            </div>
+        </section>
+        </>
     );
 }

@@ -9,13 +9,16 @@ export function DashboardScene() {
     const { userProfile } = useSelector(selectUser); // on récupère le state
 
     return (
-        <div className="container">
+        <div className="content">
 
-            <p>Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
+            <div className="roadbooks">
 
-            <Link to='/roadbook/new' className="btn btn-primary mx-2 px-3">Créer un nouveau roadbook</Link>
+                <p className="roadbooks__welcome">Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
 
-            <RoadbookShowAll />
+                <Link to='/roadbook/new' className="roadbooks__create btn btn-motoo-outline">Créer un nouveau roadbook</Link>
+
+                <RoadbookShowAll />
+            </div>
 
         </div>
     );

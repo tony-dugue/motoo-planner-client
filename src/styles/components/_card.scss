@@ -4,7 +4,7 @@
     padding: 25px;
 
     &__title {
-        margin-bottom: spacing(1);
+      margin-bottom: spacing(1);
       font-size: 1.5rem;
     }
 
@@ -35,12 +35,48 @@
     }
 
     &__more {
-        margin-top: spacing(3);
+      margin-top: spacing(3);
 
       @include up(992) {
         text-align: right;
         margin-top: spacing(6);
       }
+    }
+  }
+
+  &-roadbook {
+
+    &__img {
+      width: 80%;
+      max-height: 280px;
+      object-fit: cover;
+      margin: 10px auto;
+      box-shadow: $box-shadow-img;
+
+      @include down(992) {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &__title {
+      margin: spacing(1) 0;
+    }
+
+    &__desc {
+      margin: spacing(2) 0;
+    }
+
+    &__date {
+      color: $color-primary;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+
+    &__more {
+      margin-bottom: spacing(3);
     }
   }
 }

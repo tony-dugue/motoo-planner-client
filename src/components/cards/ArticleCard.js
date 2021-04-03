@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './cards.scss';
 import placeholder from '../../images/placeholder.png';
 
 import moment from 'moment';
