@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import { roadbookCreate } from 'features/roadbook/roadbookSlice';
+import {roadbookCreate} from 'features/roadbook/roadbookSlice';
+import placeholder from "../../images/placeholder.png";
 
 export function RoadbookCreate() {
 
@@ -11,7 +12,7 @@ export function RoadbookCreate() {
 
     const [formData, setFormData] = useState({title: "", description: "", imageUrl: "", tripStart: ""});
 
-    const { title, description, pictureUrl, tripStart } = formData;
+    const {title, description, pictureUrl, tripStart} = formData;
 
     const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
@@ -20,47 +21,64 @@ export function RoadbookCreate() {
         const id = sessionStorage.getItem('id')
         const token = sessionStorage.getItem('token')
         const user = `api/users/${id}`
-        const newRoadbook = { title, description, pictureUrl, tripStart, user };
+        const newRoadbook = {title, description, pictureUrl, tripStart, user};
         dispatch(roadbookCreate(newRoadbook, token)); // requête à l'API pour créer un roadbook
         toast.success("Votre roadbook a bien été crée")
         history.push('/dashboard');
     }
 
-  return (
-      <div className="container">
+    return (
+        <div className="container">
 
-          <form onSubmit={handleSubmit} className="form-wrapper">
+            <form onSubmit={handleSubmit} className="roadbook-form form-wrapper">
 
-              <label>
-                  <p>Nom du roadbook</p>
-                  <input type="text" name="title" value={title} onChange={handleChange}
-                         placeholder="Le nom du roadbook" required />
-              </label>
+                <div className="row">
+                    <div className="col-md-6 roadbook-form__col">
 
-              <label>
-                  <p>Date de départ</p>
-                  <input type="date" name="tripStart" value={tripStart} onChange={handleChange}
-                         placeholder="Le nom du roadbook" required />
-              </label>
+                            <div className="form-wrapper__bloc">
+                                <label htmlFor="titleInput" className="form-label">Nom du roadbook</label>
+                                <input type="text" name="title" className="form-control" id="titleInput"
+                                       value={title} onChange={handleChange} required />
+                            </div>
 
-              <label>
-                  <p>Description</p>
-                  <input type="text" name="description" value={description} onChange={handleChange}
-                         placeholder="Description" required />
-              </label>
+                            <div className="form-wrapper__bloc">
+                                <label htmlFor="dateInput" className="form-label">Date de départ</label>
+                                <input type="date" name="tripStart" className="form-control" id="dateInput"
+                                       value={tripStart} onChange={handleChange} required />
+                            </div>
 
-              <label>
-                  <p>Ajouter une image d'illustration</p>
-                  <input type="text" name="pictureUrl" value={pictureUrl} onChange={handleChange}
-                         placeholder="Url de l'image de couverture" />
-              </label>
+                            <div className="form-wrapper__bloc">
+                                <label htmlFor="descInput" className="form-label">Description</label>
+                                <textarea className="form-control" name="description" id="descInput" rows="3"
+                                          onChange={handleChange} required>
+                                {description}
+                            </textarea>
 
-              {/* user automatique .... */}
+                        </div>
+                    </div>
 
-              <div>
-                  <button type="submit">Créer le roadbook</button>
-              </div>
-          </form>
-      </div>
-  );
+                    <div className="col-md-6 roadbook-form__col">
+
+                        <div className="form-wrapper__bloc">
+
+                            <label htmlFor="pictureInput" className="form-label">Ajouter une image d'illustration</label>
+
+                            <img src={placeholder} alt="placeholder" className="roadbook-form__img" />
+
+                            <input type="file" name="pictureUrl" className="form-control" id="pictureInput"
+                                   value={pictureUrl} onChange={handleChange} required />
+
+                        </div>
+
+                    </div>
+
+                    {/* TODO: ajout de l'user automatique .... */}
+
+                    <div className="roadbook-form__submit">
+                        <button type="submit" className="btn btn-motoo-outline">Créer le roadbook</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
 }

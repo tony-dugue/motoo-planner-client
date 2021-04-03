@@ -3,15 +3,18 @@ import {Link} from "react-router-dom";
 import {RoadbookCreate} from "../../features/roadbook/RoadbookCreate";
 
 export function RoadbookCreateScene() {
-  return (
-   <div className="container">
+    return (
+        <div className="content">
 
-        <h2>Créer un nouveau roadbook</h2>
+            <div className="roadbooks">
 
-        <RoadbookCreate />
+                <Link to='/dashboard' className="roadbooks__back btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
 
-       <Link to='/dashboard'>Revenir au tableau de bord</Link>
+                <h2>Créer un nouveau roadbook</h2>
 
-   </div>
-  );
+                <RoadbookCreate/>
+            </div>
+
+        </div>
+    );
 }

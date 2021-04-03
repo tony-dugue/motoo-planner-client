@@ -30,7 +30,7 @@ export function ArticleCard({articleItem}) {
                 </div>
                 <div className="col-sm-12 col-md-3">
                     <p className="card-article__more">
-                        <Link to={'/article/' + articleItem.id} className="btn btn-motoo-dark">Voir l'article</Link>
+                        <Link to={'/article/' + articleItem.id} className="btn btn-motoo-outline-dark">Voir l'article</Link>
                     </p>
                 </div>
             </div>

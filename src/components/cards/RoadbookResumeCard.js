@@ -17,7 +17,7 @@ export function RoadbookResumeCard({roadbookItem}) {
             <p className="card-roadbook__desc">{roadbookItem.description}</p>
 
             <p className="card-roadbook__more">
-                <Link to={"/roadbook/" + roadbookItem.id} className="btn btn-motoo-dark">Modifier le roadbook</Link>
+                <Link to={"/roadbook/" + roadbookItem.id} className="btn btn-motoo-outline-dark">Modifier le roadbook</Link>
             </p>
 
         </article>

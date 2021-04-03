@@ -20,7 +20,7 @@
     }
   }
 
-  &-dark {
+  &-outline-dark {
     color: $color-text;
     border-color: $color-text;
     transition: 0.3s ease-in-out;
@@ -30,6 +30,20 @@
     &:hover {
       color: $color-white;
       background-color: $color-text;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+  }
+
+  &-outline-blue {
+    color: $color-visite;
+    border-color: $color-visite;
+    transition: 0.3s ease-in-out;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-visite;
       transform: scale(1.1);
       box-shadow: $box-shadow-btn-hover;
     }
