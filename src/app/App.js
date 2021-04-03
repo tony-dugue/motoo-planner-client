@@ -19,7 +19,7 @@ import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
 import {ArticleShow} from 'features/article/ArticleShow';
-import {RoadbookShow} from 'features/roadbook/RoadbookShow';
+import {RoadbookShowScene} from 'scenes/Roadbook/RoadbookShowScene';
 import {Footer} from 'components/layouts/Footer';
 
 function App() {
@@ -68,7 +68,7 @@ function App() {
                     </Route>
 
                     <Route path="/roadbook/:slug">
-                        { (tokenStorage || token) ? <RoadbookShow /> : <LoginScene /> }
+                        { (tokenStorage || token) ? <RoadbookShowScene /> : <LoginScene /> }
                     </Route>
 
                     {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
