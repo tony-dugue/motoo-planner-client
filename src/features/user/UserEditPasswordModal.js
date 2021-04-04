@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { useDispatch } from "react-redux";
-import { userEdit } from 'features/user/userSlice';
+import {useDispatch} from "react-redux";
+import {userEdit} from 'features/user/userSlice';
 import {toast} from "react-toastify";
 
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -17,21 +17,21 @@ export function UserEditPasswordModal() {
         passwordConfirm: ''
     })
 
-    const { password, passwordConfirm } = formPwd;
+    const {password, passwordConfirm} = formPwd;
 
     const handleChange = e => setFormPwd({...formPwd, [e.target.name]: e.target.value});
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if(!passwordValidator.test(password)) {
+        if (!passwordValidator.test(password)) {
             toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
                 " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
-        } else if(password !== passwordConfirm) {
+        } else if (password !== passwordConfirm) {
             toast.warning("Les mots de passe ne sont pas identique !")
         } else {
             const id = sessionStorage.getItem('id')
             const token = sessionStorage.getItem('token')
-            const userData = { password };
+            const userData = {password};
             dispatch(userEdit(userData, id, token)); // requête pour modifier le profil du user
         }
     }
@@ -40,30 +40,43 @@ export function UserEditPasswordModal() {
         <div className="modal fade" id="editPasswordProfile" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
-                    <form className="form-wrapper">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modifier le mot de passe</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <label>
-                                <p>Votre mot de passe</p>
-                                <input type="password" name="password" value={password} onChange={handleChange}
-                                       placeholder="Créer un mot de passe" minLength="6" required />
-                            </label>
-                            <label>
-                                <p>Répéter votre mot de passe</p>
-                                <input type="password" name="passwordConfirm" value={passwordConfirm} onChange={handleChange}
-                                       placeholder="Répéter le mot de passe" minLength="6" required />
-                            </label>
+                    <div className="content__form">
+                        <form className="form-wrapper">
 
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
-                                    onClick={handleSubmit}>Confirmer</button>
-                        </div>
-                    </form>
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Modifier le mot de passe</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div className="modal-body">
+
+                                <div className="form-wrapper__bloc">
+                                    <label htmlFor="passwordInput" className="form-label">Votre nouveau mot de passe</label>
+                                    <input type="password" className="form-control" id="passwordInput" name="password"
+                                           value={password} onChange={handleChange} minLength="8" required />
+                                </div>
+
+                                <div className="form-wrapper__bloc">
+                                    <label htmlFor="passwordVerifyInput" className="form-label">Répéter le mot de passe</label>
+                                    <input type="password" className="form-control" id="passwordVerifyInput" name="passwordConfirm"
+                                           value={passwordConfirm} onChange={handleChange} minLength="8" required />
+                                </div>
+
+                                <div id="passwordHelpBlock" className="form-text">
+                                    Le mot de passe doit contenir au moins 8 caractères, contenir au moins 1 majuscule, 1 minuscule et 1 chiffre.
+                                    Seulement des lettres et chiffres (pas de caractères spéciaux, espaces ou émoji)
+                                </div>
+
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-motoo-outline-blue" data-bs-dismiss="modal">Annuler
+                                </button>
+                                <button type="button" className="btn btn-motoo-outline" data-bs-dismiss="modal"
+                                        onClick={handleSubmit}>Confirmer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

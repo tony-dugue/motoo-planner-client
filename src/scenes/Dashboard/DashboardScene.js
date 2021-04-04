@@ -13,11 +13,17 @@ export function DashboardScene() {
 
             <div className="roadbooks">
 
-                <p className="roadbooks__welcome">Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
+                <div className="container">
 
-                <Link to='/roadbook/new' className="roadbooks__create btn btn-motoo-outline">Créer un nouveau roadbook</Link>
+                    <p className="roadbooks__welcome">Bonjour {userProfile?.firstName + ' ' + userProfile?.lastName}</p>
 
-                <RoadbookShowAll />
+                    <Link to='/roadbook/new' className="roadbooks__create btn btn-motoo-outline">Créer un nouveau roadbook</Link>
+
+                    <RoadbookShowAll />
+
+                </div>
+
+
             </div>
 
         </div>

@@ -1,16 +1,23 @@
 import React from 'react';
 import { UserProfile } from 'features/user/UserProfile';
+import {Link} from "react-router-dom";
 
 export function ProfileScene() {
 
   return (
-   <div className="container">
+      <div className="content">
 
-        <h2>Mon profil</h2>
+          <div className="profile">
 
-       <UserProfile />
+              <Link to='/dashboard' className="profile__back btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
 
-   </div>
+              <h2>Mon profil</h2>
+
+              <UserProfile />
+
+          </div>
+
+      </div>
   );
 }
 

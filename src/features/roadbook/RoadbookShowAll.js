@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { findUser, selectUser } from 'features/user/userSlice';
-import {RoadbookResumeCard} from "../../components/cards/RoadbookResumeCard";
+import {RoadbookCard} from "../../components/cards/RoadbookCard";
 
 export function RoadbookShowAll() {
 
@@ -27,8 +27,8 @@ export function RoadbookShowAll() {
     const roadbookEnCoursItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {
             if (roadbook.status === 1) return (
-                <div className="col-md-6 col-lg-4 col-xl-3">
-                    <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook}/>
+                <div className="col-md-6 col-lg-4 col-xl-3" key={roadbook.id}>
+                    <RoadbookCard roadbookItem={roadbook}/>
                 </div>
             )
             else return null
@@ -37,8 +37,8 @@ export function RoadbookShowAll() {
     const roadbookFinishItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {
             if (roadbook.status === 2) return (
-                <div className="col-md-6 col-lg-4 col-xl-3">
-                    <RoadbookResumeCard key={roadbook.id} roadbookItem={roadbook}/>
+                <div className="col-md-6 col-lg-4 col-xl-3" key={roadbook.id}>
+                    <RoadbookCard roadbookItem={roadbook}/>
                 </div>
             )
              else return null
@@ -48,7 +48,7 @@ export function RoadbookShowAll() {
         <>
         <section className="roadbook-gallery">
 
-            <h2 class="roadbook-gallery__heading">Mes roadbooks en cours</h2>
+            <h2 className="roadbook-gallery__heading">Mes roadbooks en cours</h2>
 
             <div className="container">
                 <div className="row">
@@ -59,7 +59,7 @@ export function RoadbookShowAll() {
 
         <section className="roadbook-gallery">
 
-            <h2 class="roadbook-gallery__heading">Mes roadbooks terminés</h2>
+            <h2 className="roadbook-gallery__heading">Mes roadbooks terminés</h2>
 
             <div className="container">
                 <div className="row">

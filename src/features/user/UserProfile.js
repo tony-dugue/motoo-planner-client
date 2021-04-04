@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { findUser, selectUser } from 'features/user/userSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserEditModal } from 'features/user/UserEditModal';
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
@@ -26,36 +27,45 @@ export function UserProfile() {
     if (error) return <div className="container">Une erreur s'est produite ...</div>
 
     return (
-        <React.Fragment>
-            <div className="container">
+            <div className="content">
+                <div className="profile-content">
 
-                <h2>Voir les informations</h2>
+                    {
+                        userProfile.avatar
+                        ? <img src={userProfile.avatar} alt="avatar" className="profile-content__img rounded-circle"/>
+                        : null
+                    }
 
-                <img src={userProfile.avatar} alt="mdo" width="60" height="60" className="rounded-circle"/>
-                <p>{userProfile.firstName} {userProfile.lastName}</p>
-                <p>{userProfile.email}</p>
-                <p>Inscrit {moment(userProfile.createdAt).locale('fr', localization).fromNow()}</p>
+                    <p className="profile-content__name">
+                        Prénom et nom : <span>{userProfile.firstName} {userProfile.lastName}</span>
+                    </p>
 
-                <button className="btn btn-primary mx-2 px-3" data-bs-toggle="modal" data-bs-target="#editInfoProfile">
-                    <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier les informations
-                </button>
+                    <p className="profile-content__email">Email : <span>{userProfile.email}</span></p>
 
-                <UserEditModal />
+                    <p className="profile-content__date">Inscrit {moment(userProfile.createdAt).locale('fr', localization).fromNow()}</p>
 
-                <button className="btn btn-dark mx-2 px-3" data-bs-toggle="modal" data-bs-target="#editPasswordProfile">
-                    <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier le mot de passe
-                </button>
+                    <button className="btn btn-motoo-outline-dark" data-bs-toggle="modal" data-bs-target="#editInfoProfile">
+                        <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier les informations
+                    </button>
 
-                <UserEditPasswordModal />
+                    <UserEditModal />
 
-                <button className="btn btn-danger mx-2 px-3" data-bs-toggle="modal" data-bs-target="#deleteProfile">
-                    <span><FontAwesomeIcon icon={faPencilAlt} /></span>Supprimer le profil
-                </button>
+                    <button className="btn btn-motoo-outline-dark" data-bs-toggle="modal" data-bs-target="#editPasswordProfile">
+                        <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier le mot de passe
+                    </button>
 
-                <UserDeleteModal />
+                    <UserEditPasswordModal />
 
+                    <div className="profile-content__delete-btn">
 
+                    <button className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProfile">
+                        <span><FontAwesomeIcon icon={faTrashAlt} /></span>Supprimer le profil
+                    </button>
+
+                    <UserDeleteModal />
+
+                    </div>
+                </div>
             </div>
-        </React.Fragment>
     );
 }

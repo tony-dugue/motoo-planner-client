@@ -1,7 +1,6 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {UserLogin} from 'features/user/UserLogin';
-import './LoginScene.scss';
+import { Link } from "react-router-dom";
+import { UserLogin } from 'features/user/UserLogin';
 
 export function LoginScene() {
     return (
@@ -9,7 +8,7 @@ export function LoginScene() {
 
             <h2>Se connecter</h2>
 
-            <UserLogin/>
+            <UserLogin />
 
             <div className="content__info">
                 <p>Vous n'avez pas encore de compte? <Link to='/register'><span>S'inscrire</span></Link></p>

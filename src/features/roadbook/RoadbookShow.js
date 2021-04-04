@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {findSingleRoadbook, selectRoadbook} from 'features/roadbook/roadbookSlice';
 import {Link, useLocation} from 'react-router-dom';
+import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +13,6 @@ import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import {faUtensils} from "@fortawesome/free-solid-svg-icons";
 import {faLongArrowAltDown} from "@fortawesome/free-solid-svg-icons";
-import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 import map from '../../images/map.jpeg';
 
 export function RoadbookShow() {

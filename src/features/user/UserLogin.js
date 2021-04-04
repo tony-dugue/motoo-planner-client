@@ -40,11 +40,6 @@ export function UserLogin() {
 
             </form>
 
-            <div id="passwordHelpBlock" className="form-text">
-                Le mot de passe doit contenir au moins 8 caractères, contenir au moins 1 majuscule, 1 minuscule et 1 chiffre.
-                Seulement des lettres et chiffres (pas de caractères spéciaux, espaces ou émoji)
-            </div>
-
         </div>
     );
 }

@@ -1,0 +1,54 @@
+.profile {
+
+  &__welcome {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  &__back {
+    margin-bottom: spacing(5);
+  }
+
+  &-content {
+
+    &__img {
+      width: 60px;
+      height: 60px;
+    }
+
+    &__name {
+      margin: spacing(1) 0;
+
+      span {
+        color: $color-text-dark;
+        font-weight: 600;
+      }
+    }
+
+    &__email {
+
+      span {
+        color: $color-text-dark;
+        font-weight: 600;
+      }
+
+    }
+
+    &__date {
+      margin: spacing(1) 0;
+    }
+
+    .btn {
+      margin: spacing(1);
+
+      span {
+        margin-right: 10px;
+      }
+    }
+
+    &__delete-btn .btn {
+      border-radius: 40px;
+      margin-top: spacing(3);
+    }
+  }
+}

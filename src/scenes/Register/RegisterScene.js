@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { UserRegister } from 'features/user/UserRegister';
-import './RegisterScene.scss';
 
 export function RegisterScene() {
     return (

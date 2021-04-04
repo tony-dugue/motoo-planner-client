@@ -7,7 +7,7 @@ import placeholder from "../../images/placeholder.png";
 
 moment.locale('fr')
 
-export function RoadbookResumeCard({roadbookItem}) {
+export function RoadbookCard({roadbookItem}) {
 
     return (
         <article className="card-roadbook">

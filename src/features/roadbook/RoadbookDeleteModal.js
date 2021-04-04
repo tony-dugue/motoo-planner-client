@@ -23,11 +23,11 @@ export function RoadbookDeleteModal({ roadbookId }) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <p>Attention, toute suppression est définitive !!!</p>
+                        <p>Attention, votre roadbook sera supprimé définitivement !!</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal"
+                        <button type="button" className="btn btn-motoo-outline-blue" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal"
                                 onClick={handleSubmit}>Supprimer le roadbook</button>
                     </div>
                 </div>

@@ -14,7 +14,11 @@
   }
 
   &__form {
-    max-width: 500px;
+    width: 400px;
+
+    @include down(768) {
+      width: 300px;
+    }
   }
 
   &__info {
@@ -24,7 +28,7 @@
 
     span {
       display: inline-block;
-      color: $color-primary;
+      color: $color-visite;
     }
   }
 }
