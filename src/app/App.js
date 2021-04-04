@@ -18,7 +18,7 @@ import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
 
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
-import {ArticleShow} from 'features/article/ArticleShow';
+import {ArticleSingleScene} from 'scenes/Article/ArticleSingleScene';
 import {RoadbookShowScene} from 'scenes/Roadbook/RoadbookShowScene';
 import {Footer} from 'components/layouts/Footer';
 
@@ -44,7 +44,7 @@ function App() {
                     <Route path="/contact" component={ContactScene}/>
 
                     <Route path="/articles" component={ArticleScene}/>
-                    <Route path="/article/:slug" component={ArticleShow}/>
+                    <Route path="/article/:slug" component={ArticleSingleScene}/>
 
                     <Route path="/login" component={LoginScene}/>
                     <Route path="/presentation" component={PresentationScene}/>

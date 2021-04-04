@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { findSingleArticle, selectArticle } from 'features/article/articleSlice';
-import { Link, useLocation } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, useLocation} from 'react-router-dom';
+import {findSingleArticle, selectArticle} from 'features/article/articleSlice';
+import placeholder from "../../images/placeholder.png";
+
+import moment from 'moment';
+import localization from 'moment/locale/fr';
 
 export function ArticleShow() {
 
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const { article, loading, error } = useSelector(selectArticle); // on récupère le state
+    const {article, loading, error} = useSelector(selectArticle); // on récupère le state
 
     useEffect(() => {
         //récupération du pathname de l'url (ex /articles/xx)
@@ -26,15 +30,18 @@ export function ArticleShow() {
     )
 
     return (
-        <React.Fragment>
-            <div className="container">
-                <h2>{article.title}</h2>
-                <img src={article.picture} alt=""/>
-                <p>{article.createdAt}</p>
-                <p>{article.excerpt}</p>
-                <p>{article.content}</p>
-            </div>
-        </React.Fragment>
+        <div className="container">
+
+            <h2 className="article__title">{article.title}</h2>
+
+            <img src={placeholder} alt="placeholder" className="article__img"/>
+            {/*<img src={article.picture} alt=""/>*/}
+
+            <p className="article__date">Publié
+                le {moment(article.createdAt).locale('fr', localization).format("Do MMM" + " YY")}</p>
+
+            <p className="article__content">{article.content}</p>
+        </div>
     );
 }
 
