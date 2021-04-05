@@ -24,7 +24,7 @@ export function ArticleCard({articleItem}) {
 
                     <p className="card-article__date">
                         <span><FontAwesomeIcon icon={faCalendarAlt} /></span>
-                        Le {moment(articleItem.createdAt).locale('fr', localization).format("Do MMM" + " YY")}
+                        Le {moment(articleItem.createdAt).locale('fr', localization).format("Do MMM YY")}
                     </p>
 
                 </div>

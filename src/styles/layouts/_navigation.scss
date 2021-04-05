@@ -7,6 +7,7 @@
   &.active {
     background-color: $color-white;
     border-bottom: 1px solid #DEE2E6;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
   }
 }
 

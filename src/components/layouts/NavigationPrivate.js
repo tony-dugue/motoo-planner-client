@@ -13,14 +13,8 @@ export function NavigationPrivate() {
 
     const [navbar, setNavbar] = useState(false);
 
-    const changeBackground = () => {
-        if (window.scrollY >= 80) {
-            setNavbar(true);
-        } else {
-            setNavbar(false);
-        }
-    }
-
+    // ajout classe active sur la barre de navigation lors du scroll
+    const changeBackground = () => (window.scrollY >= 80) ? setNavbar(true) : setNavbar(false);
     window.addEventListener('scroll', changeBackground);
 
     const handleLogout = () => {

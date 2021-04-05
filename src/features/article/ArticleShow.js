@@ -38,7 +38,7 @@ export function ArticleShow() {
             {/*<img src={article.picture} alt=""/>*/}
 
             <p className="article__date">Publié
-                le {moment(article.createdAt).locale('fr', localization).format("Do MMM" + " YY")}</p>
+                le {moment(article.createdAt).locale('fr', localization).format("Do MMM YY")}</p>
 
             <p className="article__content">{article.content}</p>
         </div>
