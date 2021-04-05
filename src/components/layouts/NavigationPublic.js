@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -6,8 +6,20 @@ import { Button } from 'components/buttons/Button';
 
 export function NavigationPublic() {
 
+    const [navbar, setNavbar] = useState(false);
+
+    const changeBackground = () => {
+        if (window.scrollY >= 80) {
+            setNavbar(true);
+        } else {
+            setNavbar(false);
+        }
+    }
+
+    window.addEventListener('scroll', changeBackground);
+
     return (
-        <header className="header">
+        <header className={navbar ? 'header active' : 'header'}>
 
             <nav className="navigation">
 

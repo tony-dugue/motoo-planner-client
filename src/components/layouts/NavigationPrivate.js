@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link, NavLink, useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { userLogout, selectUser } from 'features/user/userSlice';
@@ -11,6 +11,18 @@ export function NavigationPrivate() {
 
     const { userProfile } = useSelector(selectUser); // on récupère le state
 
+    const [navbar, setNavbar] = useState(false);
+
+    const changeBackground = () => {
+        if (window.scrollY >= 80) {
+            setNavbar(true);
+        } else {
+            setNavbar(false);
+        }
+    }
+
+    window.addEventListener('scroll', changeBackground);
+
     const handleLogout = () => {
         dispatch(userLogout()) // on se déconnecte
         toast.info("A bientôt !")
@@ -18,7 +30,7 @@ export function NavigationPrivate() {
     }
 
     return (
-        <header className="header">
+        <header className={navbar ? 'header active' : 'header'}>
 
             <nav className="navigation">
 
