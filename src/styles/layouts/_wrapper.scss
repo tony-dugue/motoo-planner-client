@@ -10,7 +10,7 @@
 
   @include down(768) {
     margin-top: 0;
-    padding-top: 0;
+    padding: spacing(1);
   }
 
   &__form {

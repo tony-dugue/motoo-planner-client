@@ -1,3 +1,187 @@
 .roadbook-show {
   text-align: left;
+
+  &__title {
+
+    @include down(768) {
+      margin-top: spacing(5);
+      text-align: center;
+    }
+
+    span {
+      font-size: 1.5rem;
+      color: $color-text;
+
+      @include down(768) {
+        display: block;
+        margin-top: spacing(3);
+      }
+    }
+  }
+
+  &-gestion {
+    align-items: center;
+    background-color: $color-light-grey;
+    padding: spacing(3);
+    text-align: center;
+
+    &__check {
+      display: flex;
+      font-weight: 600;
+
+      @include down(768) {
+        margin-top: spacing(3);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .form-check {
+        margin-left: spacing(2);
+
+        @include down(768) {
+          margin-top: spacing(1);
+        }
+      }
+    }
+  }
+
+  &-map {
+    align-items: center;
+
+    &__visualization {
+      margin-bottom: spacing(3);
+
+      img {
+        margin-bottom: spacing(3);
+      }
+    }
+
+    &__resume {
+      font-weight: 600;
+
+      &-item {
+        margin-top: spacing(2);
+      }
+
+      span {
+        color: $color-primary-hover;
+        margin-right: spacing(1);
+        font-size: 1.2rem;
+      }
+
+      .address {
+        margin-left: spacing(4)
+      }
+    }
+  }
+
+  &-itineraire {
+
+    @include down(768) {
+      text-align: center;
+    }
+
+    &__heading {
+      margin-bottom: 0;
+
+      @include down(768) {
+        margin-top: spacing(5);
+      }
+    }
+
+    button {
+      margin: spacing(3) 0;
+    }
+
+    &__step {
+      text-align: left;
+
+      li {
+        display: flex;
+        margin-bottom: 6px;
+      }
+
+      span {
+        width: 50px;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .distance {
+        color: $color-primary;
+        font-size: 0.8rem;
+
+        .distance-icon {
+          color: #b1b1b1;
+        }
+      }
+
+      .restaurant-icon { color: $color-restaurant; }
+      .visite-icon { color: $color-visite; }
+      .location-icon { color: $color-location; }
+      .hotel-icon { color: $color-hotel; }
+    }
+  }
+
+  &-informations {
+    border-left: 1px dashed $color-text;
+    padding-left: spacing(5);
+
+    @include down(768) {
+      border-left: none;
+      padding-left: 0;
+      text-align: center;
+    }
+
+    &__heading {
+      margin-bottom: 0;
+
+      @include down(768) {
+        margin-top: spacing(5);
+        text-align: center;
+      }
+    }
+
+    button {
+      margin: spacing(3) 0;
+    }
+
+    &__item {
+      margin-bottom: spacing(1);
+      font-weight: 600;
+
+      @include down(768) {
+        text-align: left;
+      }
+
+      &-desc {
+        font-weight: 400;
+        margin-top: spacing(2);
+      }
+    }
+  }
+
+  &-checklist {
+    border-left: 1px dashed $color-text;
+    padding-left: spacing(5);
+
+    @include down(768) {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    &__heading {
+      margin-top: spacing(5);
+      margin-bottom: spacing(3);
+
+      @include down(768) {
+        text-align: center;
+      }
+    }
+
+    &__item {
+      margin-bottom: spacing(1);
+    }
+  }
 }

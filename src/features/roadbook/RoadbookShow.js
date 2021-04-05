@@ -12,7 +12,8 @@ import {faMotorcycle} from "@fortawesome/free-solid-svg-icons";
 import {faHome} from "@fortawesome/free-solid-svg-icons";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import {faUtensils} from "@fortawesome/free-solid-svg-icons";
-import {faLongArrowAltDown} from "@fortawesome/free-solid-svg-icons";
+import {faMonument} from "@fortawesome/free-solid-svg-icons";
+import {faBed} from "@fortawesome/free-solid-svg-icons";
 import map from '../../images/map.jpeg';
 
 export function RoadbookShow() {
@@ -45,102 +46,142 @@ export function RoadbookShow() {
             <div className="roadbook-show">
                 <div className="container">
 
+                    <h2 className="roadbook-show__title">Roadbook : <span>{roadbook.title}</span></h2>
 
-                    <h2 className="roadbook-show__title">Roadbook : {roadbook.title}</h2>
+                    <section>
+                        <div className="container">
+                            <div className="row roadbook-show-gestion">
 
-                    <button className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteRoadbook">
-                        <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
-                        {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
-                    </button>
+                                <div className="col-md-6">
 
-                    <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="roadbookCheck">Roadbook terminé ? </label>
-                        <input className="form-check-input" type="checkbox" id="roadbookCheck"/>
-                    </div>
+                                    <button className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteRoadbook">
+                                        <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
+                                        {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
+                                    </button>
 
-                    <RoadbookDeleteModal roadbookId={roadbook.id}/>
+                                    <RoadbookDeleteModal roadbookId={roadbook.id}/>
+
+                                </div>
+
+                                <div className="col-md-6 roadbook-show-gestion__check">
+                                    <p>Roadbook terminé ?</p>
+                                    <form>
+                                        <div className="form-check form-switch">
+                                            <input className="form-check-input" type="checkbox" id="roadbookCheck"/>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
 
                     {/* ========== carte + résumé distance et informations de la balade ============ */}
 
-                    <div className="row">
-                        <div className="col-sm-6">
-                            <div className="mapVisualization">
-                                {/* map */}
-                                <img src={map} alt="placeholder" className="card-article__img" />
-                                <p>{roadbook.description}</p>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="resume">
-                                <p><span><FontAwesomeIcon icon={faMotorcycle}/></span>Distance totale: 230 km</p>
-                                <p><span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>Départ de la balade:</p>
-                                <p>rue de la gare</p>
-                                <p>35000 - Rennes</p>
-                                <p><span><FontAwesomeIcon icon={faCalendarAlt}/></span>Le 21 aout 2020 à 09h00</p>
-                            </div>
-                        </div>
-                    </div>
+                    <section>
+                        <div className="container">
+                            <div className="row roadbook-show-map">
+                                <div className="col-md-8">
+                                    <div className="roadbook-show-map__visualization">
+                                        {/* map */}
+                                        <img src={map} alt="placeholder" className="card-article__img" />
+                                        <p>{roadbook.description}</p>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="roadbook-show-map__resume">
 
-                    <div className="row">
+                                        <p>
+                                            <span><FontAwesomeIcon icon={faMotorcycle}/></span>
+                                            Distance totale: 230 km
+                                        </p>
 
-                        {/* ========== résumé de l'itinéraire ============ */}
+                                        <p className="roadbook-show-map__resume-item">
+                                            <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
+                                            Départ de la balade:
+                                        </p>
 
-                        <div className="col-sm-6">
-                            <div className="itineraire">
-                                <h3>Itinéraire</h3>
+                                        <p className="address">rue de la gare</p>
+                                        <p className="address">35000 - Rennes</p>
 
-                                <div><FontAwesomeIcon icon={faHome}/>Lorem ipsum</div>
-                                <div><FontAwesomeIcon icon={faLongArrowAltDown}/>45 km</div>
-                                <div><FontAwesomeIcon icon={faMapMarkerAlt}/>Lorem ipsum</div>
-                                <div><FontAwesomeIcon icon={faLongArrowAltDown}/>70 km</div>
-                                <div><FontAwesomeIcon icon={faUtensils}/>Lorem ipsum</div>
-                                <div><FontAwesomeIcon icon={faLongArrowAltDown}/>110 km</div>
-                                <div><FontAwesomeIcon icon={faMapMarkerAlt}/>Lorem ipsum</div>
-                                <div><FontAwesomeIcon icon={faLongArrowAltDown}/>45 km</div>
-                                <div><FontAwesomeIcon icon={faHome}/>Lorem ipsum</div>
-
-
-
-
-
-
-
-
-                                {/* étapes de la balade avec icones */}
-                            </div>
-                        </div>
-
-                        {/* ========== informations pratiques (contact et todolist ============ */}
-
-                            <div className="col-sm-6">
-                                <div className="informations">
-                                    <h3>Informations pratiques sur la balade</h3>
-                                    <p>Nom du road Captain: </p>
-                                    <p>Téléphone: 06 56 87 65 56</p>
-                                    <p>description ....</p>
-
-                                    <p>CHECKLIST</p>
-
-                                    <p>- lorem fltotttglbr evszplvv</p>
-                                    <p>- lorem fltotttglbr evszplvv</p>
-                                    <p>- lorem fltotttglbr evszplvv</p>
-                                    {/* todolist */}
+                                        <p className="roadbook-show-map__resume-item">
+                                            <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
+                                            Le 21 aout 2020 à 09h00
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
+                    </section>
 
+                    <section>
+                        <div className="container">
+                            <div className="row">
 
+                                {/* ========== résumé de l'itinéraire ============ */}
 
+                                <div className="col-md-6">
+                                    <div className="roadbook-show-itineraire">
 
+                                        <h3 className="roadbook-show-itineraire__heading">Itinéraire</h3>
 
+                                        <button className="btn btn-motoo-outline">Modifier l'itinéraire</button>
 
+                                        <div>
+                                            <ul className="roadbook-show-itineraire__step">
+                                                <li><span><FontAwesomeIcon icon={faHome} /></span>Départ de la balade</li>
+                                                <li className="distance"><span className="distance-icon">|</span>45 km</li>
+                                                <li><span className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>pause étang du canard</li>
+                                                <li className="distance"><span className="distance-icon">|</span>70 km</li>
+                                                <li><span className="restaurant-icon"><FontAwesomeIcon icon={faUtensils} /></span>Pause repas au restaurant du cap</li>
+                                                <li className="distance"><span className="distance-icon">|</span>110 km</li>
+                                                <li><span className="visite-icon"><FontAwesomeIcon icon={faMonument} /></span>Visite pointe du grouin</li>
+                                                <li className="distance"><span className="distance-icon">|</span>45 km</li>
+                                                <li><span className="hotel-icon"><FontAwesomeIcon icon={faBed} /></span>Hotel de la gare</li>
+                                                <li className="distance"><span className="distance-icon">|</span>62 km</li>
+                                                <li><span><FontAwesomeIcon icon={faHome} /></span>Fin de la balade</li>
+                                            </ul>
 
+                                        </div>
 
+                                        {/* étapes de la balade avec icones */}
+                                    </div>
+                                </div>
 
-                    </div>
+                                {/* ========== informations pratiques (contact et todolist ============ */}
+
+                                <div className="col-md-6">
+
+                                    <div className="roadbook-show-informations">
+
+                                        <h3 className="roadbook-show-informations__heading">Informations pratiques</h3>
+
+                                        <button className="btn btn-motoo-outline">Modifier les informations</button>
+
+                                        <p  className="roadbook-show-informations__item">Responsable: Gérard Dupond</p>
+                                        <p  className="roadbook-show-informations__item">Téléphone: 06 56 87 65 56</p>
+                                        <p  className="roadbook-show-informations__item-desc">Un briefing sera effectué 15min avant le départ. </p>
+
+                                    </div>
+
+                                    <div className="roadbook-show-checklist">
+
+                                        <h3 className="roadbook-show-checklist__heading">CHECKLIST</h3>
+
+                                        <p className="roadbook-show-checklist__item">- prévoir une bouteille d'eau</p>
+                                        <p className="roadbook-show-checklist__item">- prévoir chèque pour le restaurant (carte bleu non accepté)</p>
+                                        <p className="roadbook-show-checklist__item">- penser avant départ au bon gonflage des pneus</p>
+                                        {/* todolist */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
-            );
-            }
+        </div>
+    );
+}
 
 

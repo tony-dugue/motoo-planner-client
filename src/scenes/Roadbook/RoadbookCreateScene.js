@@ -8,9 +8,13 @@ export function RoadbookCreateScene() {
 
             <div className="roadbooks">
 
-                <Link to='/dashboard' className="roadbooks__back btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
+                <div className="container">
 
-                <h2>Créer un nouveau roadbook</h2>
+                    <Link to='/dashboard' className="btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
+
+                    <h2 className="roadbooks__heading">Créer un nouveau roadbook</h2>
+
+                </div>
 
                 <RoadbookCreate/>
             </div>

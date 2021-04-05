@@ -8,9 +8,12 @@ export function RoadbookShowScene() {
 
             <div className="roadbooks">
 
-                <Link to='/dashboard' className="roadbooks__back btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
+                <div className="container">
+                    <Link to='/dashboard' className="btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
+                </div>
 
                 <RoadbookShow/>
+
             </div>
 
         </div>

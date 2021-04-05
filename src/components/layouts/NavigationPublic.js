@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Button } from 'components/buttons/Button';
 
 export function NavigationPublic() {
+
+    const location = useLocation()
 
     const [navbar, setNavbar] = useState(false);
 
@@ -26,7 +28,10 @@ export function NavigationPublic() {
                     </div>
 
                     <div className="navigation__link-auth--mobile">
-                        <Button link='/login' type='outline' title='Se connecter'/>
+                        { (location.pathname === '/login')
+                            ? <Button link='/register' type='outline' title="s'inscrire" />
+                            : <Button link='/login' type='outline' title="se connecter" />
+                        }
                     </div>
                 </div>
 
@@ -39,7 +44,10 @@ export function NavigationPublic() {
                     </ul>
 
                     <div className="navigation__link-auth">
-                        <Button link='/login' type='outline' title='Se connecter'/>
+                        { (location.pathname === '/login')
+                            ? <Button link='/register' type='outline' title="s'inscrire" />
+                            : <Button link='/login' type='outline' title="se connecter" />
+                        }
                     </div>
 
                     <div className="navigation__link-socials">

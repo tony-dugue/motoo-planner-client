@@ -76,7 +76,7 @@ export function LandingPageScene() {
 
                 <div className="container">
                     <div className="row">
-                        <h2 className="home__heading">Comment créer un roadbook ?</h2>
+                        <h2 className="home__heading">Etape de création</h2>
                     </div>
                 </div>
 

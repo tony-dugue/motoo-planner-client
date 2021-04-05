@@ -11,8 +11,8 @@
     margin-top: spacing(3);
   }
 
-  &__back {
-    margin-bottom: spacing(5);
+  &__heading {
+    margin-top: spacing(5);
   }
 }
 
@@ -25,5 +25,9 @@
     margin-bottom: spacing(3);
     font-size: 1.5rem;
     color: $color-visite;
+
+    @include down(768) {
+      text-align: center;
+    }
   }
 }

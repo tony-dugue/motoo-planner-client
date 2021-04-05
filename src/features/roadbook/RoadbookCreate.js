@@ -50,8 +50,7 @@ export function RoadbookCreate() {
                             <div className="form-wrapper__bloc">
                                 <label htmlFor="descInput" className="form-label">Description</label>
                                 <textarea className="form-control" name="description" id="descInput" rows="3"
-                                          onChange={handleChange} required>
-                                {description}
+                                          value={description} onChange={handleChange} required>
                             </textarea>
 
                         </div>
