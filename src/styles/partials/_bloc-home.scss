@@ -1,0 +1,88 @@
+.home {
+
+  &__heading {
+    font-size: 1.6rem;
+    @include down(1200) { font-size: 1.4rem; }
+    @include down(992) { font-size: 1.3rem; }
+    @include down(768) { font-size: 1.2rem; }
+  }
+
+  &-hero {
+    &__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &-title {
+        @include down(1200) { font-size: 2.2rem; }
+        @include down(992) { font-size: 2rem; }
+        @include down(768) { font-size: 1.7rem; }
+      }
+    }
+
+    &__img {
+      @include down(768) {
+        order: -1;
+        margin-bottom: spacing(3)
+      }
+    }
+  }
+
+  &-presentation {
+    width: 70%;
+    @include down(768) {
+      width: 100%;
+    }
+
+    &__text {
+      margin-bottom: spacing(2);
+
+      @include up(768) {
+        font-size: 1.2rem;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-share {
+    width: 60%;
+
+    @include down(768) {
+      width: 100%;
+    }
+
+    &__form {
+
+      &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include down(768) {
+          flex-direction: column;
+        }
+
+        input {
+          flex: 0.9;
+          margin-right: spacing(2);
+
+          @include down(992) {
+            flex: 1;
+          }
+
+          @include down(768) {
+            width: 100%;
+            margin-bottom: spacing(2);
+          }
+        }
+        button {
+          display: inline;
+        }
+      }
+    }
+  }
+}

@@ -35,6 +35,22 @@
     }
   }
 
+  &-blue {
+    color: $color-white;
+    border-color: $color-visite;
+    background-color: $color-visite;
+    transition: 0.3s ease-in-out;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-visite-hover;
+      border-color: $color-visite-hover;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+  }
+
   &-outline-blue {
     color: $color-visite;
     border-color: $color-visite;

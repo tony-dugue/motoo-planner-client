@@ -30,5 +30,24 @@
       display: inline-block;
       color: $color-visite;
     }
+
+    button {
+      margin-left: spacing(3);
+
+      @include down(768) {
+        display: block;
+        text-align: center;
+        margin: spacing(2) auto 0 auto;
+      }
+
+    }
+  }
+}
+
+section {
+  margin: spacing(5) 0;
+
+  @include down(768) {
+    margin: spacing(3) 0;
   }
 }

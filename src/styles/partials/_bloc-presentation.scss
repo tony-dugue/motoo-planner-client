@@ -1,0 +1,42 @@
+.presentation {
+
+  @include down(768) {
+    width: 100%;
+  }
+
+  &__heading {
+    font-size: 1.2rem;
+    color: $color-text;
+    @include down(992) { font-size: 1.1rem; }
+    @include down(768) {
+      font-size: 1rem;
+      margin-bottom: spacing(2);
+    }
+  }
+
+  &__row {
+    align-items: center;
+    margin: spacing(5);
+
+    @include down(768) {
+      margin: spacing(5) 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__img {
+    width: 80%;
+    max-height: 280px;
+    object-fit: cover;
+    margin: spacing(2) auto;
+    box-shadow: $box-shadow-img;
+
+    @include down(992) {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
