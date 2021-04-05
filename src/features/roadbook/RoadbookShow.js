@@ -125,7 +125,7 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show-itinerary__heading">Itinéraire</h3>
 
-                                        <Link to='/itinerary/1' className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
+                                        <Link to={"/itinerary/" + roadbook.id} className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
 
                                         <div>
                                             <ul className="roadbook-show-itinerary__step">
@@ -156,7 +156,7 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show-informations__heading">Informations pratiques</h3>
 
-                                        <Link to='/informations/1' className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les informations</Link>
+                                        <Link to={"/informations/" + roadbook.id} className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les informations</Link>
 
                                         <p  className="roadbook-show-informations__item">Responsable: Gérard Dupond</p>
                                         <p  className="roadbook-show-informations__item">Téléphone: 06 56 87 65 56</p>
