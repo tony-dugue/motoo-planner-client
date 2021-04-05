@@ -121,14 +121,14 @@ export function RoadbookShow() {
                                 {/* ========== résumé de l'itinéraire ============ */}
 
                                 <div className="col-md-6">
-                                    <div className="roadbook-show-itineraire">
+                                    <div className="roadbook-show-itinerary">
 
-                                        <h3 className="roadbook-show-itineraire__heading">Itinéraire</h3>
+                                        <h3 className="roadbook-show-itinerary__heading">Itinéraire</h3>
 
-                                        <button className="btn btn-motoo-outline">Modifier l'itinéraire</button>
+                                        <Link to='/itinerary/1' className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
 
                                         <div>
-                                            <ul className="roadbook-show-itineraire__step">
+                                            <ul className="roadbook-show-itinerary__step">
                                                 <li><span><FontAwesomeIcon icon={faHome} /></span>Départ de la balade</li>
                                                 <li className="distance"><span className="distance-icon">|</span>45 km</li>
                                                 <li><span className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>pause étang du canard</li>
@@ -156,7 +156,7 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show-informations__heading">Informations pratiques</h3>
 
-                                        <button className="btn btn-motoo-outline">Modifier les informations</button>
+                                        <Link to='/informations/1' className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les informations</Link>
 
                                         <p  className="roadbook-show-informations__item">Responsable: Gérard Dupond</p>
                                         <p  className="roadbook-show-informations__item">Téléphone: 06 56 87 65 56</p>

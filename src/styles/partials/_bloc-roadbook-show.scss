@@ -76,7 +76,7 @@
     }
   }
 
-  &-itineraire {
+  &-itinerary {
 
     @include down(768) {
       text-align: center;
@@ -90,7 +90,7 @@
       }
     }
 
-    button {
+    &__link {
       margin: spacing(3) 0;
     }
 
@@ -143,7 +143,7 @@
       }
     }
 
-    button {
+    &__link {
       margin: spacing(3) 0;
     }
 

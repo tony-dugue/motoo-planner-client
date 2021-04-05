@@ -12,6 +12,8 @@ import {LoginScene} from 'scenes/Login/LoginScene';
 import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {RoadbookCreateScene} from 'scenes/Roadbook/RoadbookCreateScene';
+import {ItineraryPlannerScene} from 'scenes/ItineraryPlanner/ItineraryPlannerScene';
+import {InformationsScene} from 'scenes/Informations/InformationsScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
@@ -70,6 +72,15 @@ function App() {
                     <Route path="/roadbook/:slug">
                         { (tokenStorage || token) ? <RoadbookShowScene /> : <LoginScene /> }
                     </Route>
+
+                    <Route path="/itinerary/:slug">
+                        { (tokenStorage || token) ? <ItineraryPlannerScene /> : <LoginScene /> }
+                    </Route>
+
+                    <Route path="/informations/:slug">
+                        { (tokenStorage || token) ? <InformationsScene /> : <LoginScene /> }
+                    </Route>
+
 
                     {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
 
