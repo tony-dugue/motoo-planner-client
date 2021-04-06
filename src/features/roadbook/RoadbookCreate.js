@@ -10,11 +10,22 @@ export function RoadbookCreate() {
     const dispatch = useDispatch()
     const history = useHistory();
 
-    const [formData, setFormData] = useState({title: "", description: "", imageUrl: "", tripStart: ""});
 
-    const {title, description, pictureUrl, tripStart} = formData;
+
+    const [formData, setFormData] = useState({title: "", description: "", tripStart: ""});
+    const [pictureUrl, setPictureUrl] = useState(null)
+
+    const {title, description, tripStart} = formData;
 
     const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
+
+    const handleFileInput = e => {
+        // handle validations
+        //const file = e.target.files[0];
+        //if (file.size > 1024) toast.warning('la taille du fichier ne doit pas dépasser 1MB')
+        //else
+            setPictureUrl(e.target.files[0])
+    }
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -22,6 +33,7 @@ export function RoadbookCreate() {
         const token = sessionStorage.getItem('token')
         const user = `api/users/${id}`
         const newRoadbook = {title, description, pictureUrl, tripStart, user};
+        console.log(newRoadbook)
         dispatch(roadbookCreate(newRoadbook, token)); // requête à l'API pour créer un roadbook
         toast.success("Votre roadbook a bien été crée")
         history.push('/dashboard');
@@ -59,14 +71,10 @@ export function RoadbookCreate() {
                     <div className="col-md-6 roadbook-form__col">
 
                         <div className="form-wrapper__bloc">
-
                             <label htmlFor="pictureInput" className="form-label">Ajouter une image d'illustration</label>
-
                             <img src={placeholder} alt="placeholder" className="roadbook-form__img" />
-
                             <input type="file" name="pictureUrl" className="form-control" id="pictureInput"
-                                   value={pictureUrl} onChange={handleChange} required />
-
+                                   onChange={handleFileInput} required />
                         </div>
 
                     </div>

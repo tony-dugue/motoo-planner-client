@@ -10,3 +10,12 @@
     width: 100%;
   }
 }
+
+.form-check-input {
+  border-color: $color-visite;
+
+  &:checked {
+    background-color: $color-visite;
+    border-color: $color-visite;
+  }
+}

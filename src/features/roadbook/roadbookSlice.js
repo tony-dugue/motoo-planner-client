@@ -12,9 +12,6 @@ export const roadbookSlice = createSlice({
     name: 'roadbook',
     initialState,
     reducers: {
-        addRoadbook: (state, action) => {
-            state.roadbook = action.payload
-        },
         getSingleRoadbook: (state, action) => {
             state.roadbook = action.payload
             state.loading = false
@@ -36,7 +33,7 @@ export const roadbookSlice = createSlice({
     }
 })
 
-export const { addRoadbook, getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuccess } = roadbookSlice.actions
+export const { getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuccess } = roadbookSlice.actions
 
 export default roadbookSlice.reducer
 
