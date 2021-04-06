@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, NavLink, useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { userLogout, selectUser } from 'features/user/userSlice';
@@ -22,6 +22,10 @@ export function NavigationPrivate() {
         toast.info("A bientôt !")
         history.push('/');
     }
+
+    useEffect(() => {
+        return changeBackground
+    }, [navbar])
 
     return (
         <header className={navbar ? 'header active' : 'header'}>

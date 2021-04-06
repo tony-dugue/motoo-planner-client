@@ -9,15 +9,10 @@ export function RoadbookShowAll() {
     const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
 
     useEffect(() => {
-
         const id = sessionStorage.getItem('id')
         const token = sessionStorage.getItem('token')
-
-        if(!userProfile.id) {
-            // si state vide (lors rafraichissement du navigateur par ex), on récupère à nouveau les données
-            dispatch(findUser(id, token))
-        }
-    }, [dispatch, userProfile])
+        dispatch(findUser(id, token))
+    }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>

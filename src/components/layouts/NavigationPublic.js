@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -13,6 +13,10 @@ export function NavigationPublic() {
     // ajout classe active sur la barre de navigation lors du scroll
     const changeBackground = () => (window.scrollY >= 80) ? setNavbar(true) : setNavbar(false);
     window.addEventListener('scroll', changeBackground);
+
+    useEffect(() => {
+        return changeBackground
+    }, [navbar])
 
     return (
         <header className={navbar ? 'header active' : 'header'}>

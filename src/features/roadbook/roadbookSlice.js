@@ -73,4 +73,21 @@ export function roadbookDelete(roadbookId, token) {
     }
 }
 
+export function roadbookChangeStatus(roadbookStatus, urlPath, token) {
+    return async dispatch => {
+        dispatch(getLoading())
+        const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+        const body = JSON.stringify(roadbookStatus);
+        await axios.put(process.env.REACT_APP_API_URL + urlPath, body, config)
+            .then(res => {
+                toast.info('Le status du roadbook a bien été modifié')
+            })
+            .catch(error => console.log(error))
+        // ON RECUPERE LES INFORMATIONS DU ROADBOOK
+        await axios.get(process.env.REACT_APP_API_URL + urlPath, config)
+            .then(res => dispatch(getSingleRoadbook(res.data)))
+            .catch(error => console.log(error))
+    }
+}
+
 export const selectRoadbook = state => state.roadbook

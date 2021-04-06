@@ -15,6 +15,7 @@ import {faUtensils} from "@fortawesome/free-solid-svg-icons";
 import {faMonument} from "@fortawesome/free-solid-svg-icons";
 import {faBed} from "@fortawesome/free-solid-svg-icons";
 import map from '../../images/map.jpeg';
+import {roadbookChangeStatus} from "./roadbookSlice";
 
 export function RoadbookShow() {
 
@@ -23,14 +24,13 @@ export function RoadbookShow() {
 
     const {roadbook, loading, error} = useSelector(selectRoadbook); // on récupère le state
 
+    //récupération du pathname de l'url (ex /roadbooks/xx) et du token
+    const urlPath = location.pathname.replace('roadbook', 'roadbooks')
+    const token = sessionStorage.getItem('token')
+
     useEffect(() => {
-
-        //récupération du pathname de l'url (ex /roadbooks/xx)
-        const urlPath = location.pathname.replace('roadbook', 'roadbooks')
-        const token = sessionStorage.getItem('token')
-
         dispatch(findSingleRoadbook(urlPath, token)) // requête à l'API pour récupérer un roadbook
-    }, [dispatch, location])
+    }, [dispatch, location, urlPath, token])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>
@@ -40,6 +40,11 @@ export function RoadbookShow() {
             <Link to='/dashboard' className="btn btn-secondary my-2 mx-2">Revenir au tableau de bord</Link>
         </div>
     )
+
+    const handleChangeStatus = () => {
+        const roadbookStatus = roadbook.status === 1 ? {'status': 2} : {'status': 1}
+        return dispatch(roadbookChangeStatus(roadbookStatus, urlPath, token))
+    }
 
     return (
         <div className="content">
@@ -67,7 +72,8 @@ export function RoadbookShow() {
                                     <p>Roadbook terminé ?</p>
                                     <form>
                                         <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" id="roadbookCheck"/>
+                                            <input className="form-check-input" type="checkbox" id="roadbookCheck" onClick={handleChangeStatus}
+                                                   defaultChecked={roadbook.status === 2 ? 'checked' : ''} />
                                         </div>
                                     </form>
                                 </div>
@@ -127,6 +133,8 @@ export function RoadbookShow() {
 
                                         <Link to={"/itinerary/" + roadbook.id} className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
 
+                                        {/* étapes de la balade avec icones */}
+
                                         <div>
                                             <ul className="roadbook-show-itinerary__step">
                                                 <li><span><FontAwesomeIcon icon={faHome} /></span>Départ de la balade</li>
@@ -143,8 +151,6 @@ export function RoadbookShow() {
                                             </ul>
 
                                         </div>
-
-                                        {/* étapes de la balade avec icones */}
                                     </div>
                                 </div>
 
