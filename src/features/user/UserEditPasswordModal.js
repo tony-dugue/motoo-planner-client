@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {userEdit} from 'features/user/userSlice';
+import { Storage } from 'services/storage/storage';
 import {toast} from "react-toastify";
 
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -29,8 +30,8 @@ export function UserEditPasswordModal() {
         } else if (password !== passwordConfirm) {
             toast.warning("Les mots de passe ne sont pas identique !")
         } else {
-            const id = sessionStorage.getItem('id')
-            const token = sessionStorage.getItem('token')
+            const id = Storage.get('id')
+            const token = Storage.get('token')
             const userData = {password};
             dispatch(userEdit(userData, id, token)); // requête pour modifier le profil du user
         }

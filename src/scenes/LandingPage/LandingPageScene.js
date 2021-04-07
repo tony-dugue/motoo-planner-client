@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import hero from "../../images/hero2.jpg";
+import hero from "../../assets/images/hero2.jpg";
 import {Presentation} from 'components/sections/Presentation';
 
 export function LandingPageScene() {

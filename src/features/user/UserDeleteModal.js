@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import { userDelete } from 'features/user/userSlice';
+import { Storage } from 'services/storage/storage';
 import {useHistory} from "react-router-dom";
 
 export function UserDeleteModal() {
@@ -10,8 +11,8 @@ export function UserDeleteModal() {
 
 
     const handleSubmit = async () => {
-        const id = sessionStorage.getItem('id')
-        const token = sessionStorage.getItem('token')
+        const id = Storage.get('id')
+        const token = Storage.get('token')
         dispatch(userDelete(id, token)); // requête pour modifier le profil du user
         history.push('/');
     }

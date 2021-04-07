@@ -17,6 +17,7 @@ import {InformationsScene} from 'scenes/Informations/InformationsScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
+import { Storage } from 'services/storage/storage';
 
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
@@ -26,15 +27,15 @@ import {Footer} from 'components/layouts/Footer';
 
 function App() {
 
-    const tokenStorage = sessionStorage.getItem('token'); // on récupère le token dans le storage
-    const { token } = useSelector(selectUser); // on récupère le token dans le store
+    const tokenStorage = Storage.get('token'); // on récupère le token dans le storage
+    const { tokenStore } = useSelector(selectUser); // on récupère le token dans le store
 
     return (
         <div className="app">
 
             {/* ======= navigation ========== */}
 
-            { (tokenStorage || token) ? <NavigationPrivate /> : <NavigationPublic /> }
+            { (tokenStorage || tokenStore) ? <NavigationPrivate /> : <NavigationPublic /> }
 
             <div className="main">
 
@@ -54,31 +55,31 @@ function App() {
                     {/* ======= ROUTES SECURISEES ========== */}
 
                     <Route path="/register">
-                        { (tokenStorage || token) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
+                        { (tokenStorage || tokenStore) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
                     </Route>
 
                     <Route exact path="/dashboard">
-                        { (tokenStorage || token) ? <DashboardScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <DashboardScene /> : <LoginScene /> }
                     </Route>
 
                     <Route path="/profile">
-                        { (tokenStorage || token) ? <ProfileScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <ProfileScene /> : <LoginScene /> }
                     </Route>
 
                     <Route path="/roadbook/new">
-                        { (tokenStorage || token) ? <RoadbookCreateScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <RoadbookCreateScene /> : <LoginScene /> }
                     </Route>
 
                     <Route path="/roadbook/:slug">
-                        { (tokenStorage || token) ? <RoadbookShowScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <RoadbookShowScene /> : <LoginScene /> }
                     </Route>
 
                     <Route path="/itinerary/:slug">
-                        { (tokenStorage || token) ? <ItineraryPlannerScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <ItineraryPlannerScene /> : <LoginScene /> }
                     </Route>
 
                     <Route path="/informations/:slug">
-                        { (tokenStorage || token) ? <InformationsScene /> : <LoginScene /> }
+                        { (tokenStorage || tokenStore) ? <InformationsScene /> : <LoginScene /> }
                     </Route>
 
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
 import { toast } from 'react-toastify';
+import { Storage } from 'services/storage/storage';
 
 // un Slice dans Redux est un morceau d'état qui gère plusieurs variables et les rend globale.
 
@@ -67,8 +68,8 @@ export function userLogin(credentials) {
             .then(res => {
                 dispatch(setUserToken(res.data.token))
                 dispatch(setUserLogin(jwt_decode(res.data.token)))
-                sessionStorage.setItem('token', res.data.token);
-                sessionStorage.setItem('id', jwt_decode(res.data.token).id);
+                Storage.set('token', res.data.token);
+                Storage.set('id', jwt_decode(res.data.token).id);
                 const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
 
                 // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
@@ -99,8 +100,8 @@ export function userRegister(newUser) {
 export function userLogout() {
     return async dispatch => {
         dispatch(getLoading())
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('id');
+        Storage.remove('token');
+        Storage.remove('id');
         dispatch(setUserLogout())
     }
 }
@@ -139,7 +140,7 @@ export function userDelete(userId, token) {
         await axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}`, config)
             .then(res => toast.info('Votre compte a bien été supprimé'))
             .catch(error => console.log(error))
-        sessionStorage.removeItem('token');
+        Storage.remove('token');
         dispatch(setUserLogout())
     }
 }

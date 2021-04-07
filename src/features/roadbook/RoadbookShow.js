@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {findSingleRoadbook, selectRoadbook} from 'features/roadbook/roadbookSlice';
 import {Link, useLocation} from 'react-router-dom';
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
+import { Storage } from 'services/storage/storage';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +27,7 @@ export function RoadbookShow() {
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
-    const token = sessionStorage.getItem('token')
+    const token = Storage.get('token')
 
     useEffect(() => {
         dispatch(findSingleRoadbook(urlPath, token)) // requête à l'API pour récupérer un roadbook

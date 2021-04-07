@@ -7,6 +7,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserEditModal } from 'features/user/UserEditModal';
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
+import { Storage } from 'services/storage/storage';
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
@@ -14,13 +15,14 @@ import localization from 'moment/locale/fr';
 export function UserProfile() {
 
     const dispatch = useDispatch()
-    const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
+    const { userProfile, loading, error } = useSelector(selectUser);
 
     useEffect(() => {
-        const id = sessionStorage.getItem('id')
-        const token = sessionStorage.getItem('token')
+        const id = Storage.get('id')
+        const token = Storage.get('token')
 
-        dispatch(findUser(id, token)) // requête à l'API pour récupérer un article
+        // récupération des infos de l'utilisateur depuis l'API
+        dispatch(findUser(id, token))
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>

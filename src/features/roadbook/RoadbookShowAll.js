@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { findUser, selectUser } from 'features/user/userSlice';
+import { Storage } from 'services/storage/storage';
 import {RoadbookCard} from "../../components/cards/RoadbookCard";
 
 export function RoadbookShowAll() {
@@ -9,8 +10,8 @@ export function RoadbookShowAll() {
     const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
 
     useEffect(() => {
-        const id = sessionStorage.getItem('id')
-        const token = sessionStorage.getItem('token')
+        const id = Storage.get('id')
+        const token = Storage.get('token')
         dispatch(findUser(id, token))
     }, [dispatch])
 

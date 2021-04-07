@@ -1,7 +1,8 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import { roadbookDelete } from 'features/roadbook/roadbookSlice';
 import {useHistory} from "react-router-dom";
+import { roadbookDelete } from 'features/roadbook/roadbookSlice';
+import { Storage } from 'services/storage/storage';
 
 export function RoadbookDeleteModal({ roadbookId }) {
 
@@ -9,7 +10,7 @@ export function RoadbookDeleteModal({ roadbookId }) {
     const history = useHistory();
 
     const handleSubmit = async () => {
-        const token = sessionStorage.getItem('token')
+        const token = Storage.get('token')
         dispatch(roadbookDelete(roadbookId, token)); // requête pour supprimer le roadbook
         history.push('/dashboard');
     }

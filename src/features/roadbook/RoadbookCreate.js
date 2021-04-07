@@ -1,40 +1,46 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
+import axios from "axios";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {roadbookCreate} from 'features/roadbook/roadbookSlice';
+import { Storage } from 'services/storage/storage';
+
 import placeholder from "../../images/placeholder.png";
+
 
 export function RoadbookCreate() {
 
     const dispatch = useDispatch()
     const history = useHistory();
 
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [tripStart, setTripStart] = useState("")
+    const [pictureUrlFile, setPictureUrlFile] = useState(null)
 
+    const id = Storage.get('id')
 
-    const [formData, setFormData] = useState({title: "", description: "", tripStart: ""});
-    const [pictureUrl, setPictureUrl] = useState(null)
+    let formData = new FormData();
+    formData.append('pictureUrlFile', pictureUrlFile);
+    formData.append('user', `api/users/${id}`);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('tripStart', tripStart);
 
-    const {title, description, tripStart} = formData;
-
-    const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const handleFileInput = e => {
         // handle validations
         //const file = e.target.files[0];
         //if (file.size > 1024) toast.warning('la taille du fichier ne doit pas dépasser 1MB')
         //else
-            setPictureUrl(e.target.files[0])
+        setPictureUrlFile(e.target.files[0])
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        const id = sessionStorage.getItem('id')
-        const token = sessionStorage.getItem('token')
-        const user = `api/users/${id}`
-        const newRoadbook = {title, description, pictureUrl, tripStart, user};
-        console.log(newRoadbook)
-        dispatch(roadbookCreate(newRoadbook, token)); // requête à l'API pour créer un roadbook
+        const token = Storage.get('token')
+        dispatch(roadbookCreate(formData, token)); // requête à l'API pour créer un roadbook
         toast.success("Votre roadbook a bien été crée")
         history.push('/dashboard');
     }
@@ -50,19 +56,19 @@ export function RoadbookCreate() {
                             <div className="form-wrapper__bloc">
                                 <label htmlFor="titleInput" className="form-label">Nom du roadbook</label>
                                 <input type="text" name="title" className="form-control" id="titleInput"
-                                       value={title} onChange={handleChange} required />
+                                       value={title} onChange={ e => setTitle(e.target.value)} required />
                             </div>
 
                             <div className="form-wrapper__bloc">
                                 <label htmlFor="dateInput" className="form-label">Date de départ</label>
                                 <input type="date" name="tripStart" className="form-control" id="dateInput"
-                                       value={tripStart} onChange={handleChange} required />
+                                       value={tripStart} onChange={e => setTripStart(e.target.value)} required />
                             </div>
 
                             <div className="form-wrapper__bloc">
                                 <label htmlFor="descInput" className="form-label">Description</label>
                                 <textarea className="form-control" name="description" id="descInput" rows="3"
-                                          value={description} onChange={handleChange} required>
+                                          value={description} onChange={e => setDescription(e.target.value)} required>
                             </textarea>
 
                         </div>
@@ -73,8 +79,8 @@ export function RoadbookCreate() {
                         <div className="form-wrapper__bloc">
                             <label htmlFor="pictureInput" className="form-label">Ajouter une image d'illustration</label>
                             <img src={placeholder} alt="placeholder" className="roadbook-form__img" />
-                            <input type="file" name="pictureUrl" className="form-control" id="pictureInput"
-                                   onChange={handleFileInput} required />
+                            <input type="file" name="pictureUrlFile" className="form-control" id="pictureInput"
+                                   onChange={handleFileInput} />
                         </div>
 
                     </div>

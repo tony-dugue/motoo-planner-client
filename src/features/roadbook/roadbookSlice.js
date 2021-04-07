@@ -37,12 +37,11 @@ export const { getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuc
 
 export default roadbookSlice.reducer
 
-export function roadbookCreate(newRoadbook, token) {
+export function roadbookCreate(formData, token) {
     return async dispatch => {
         dispatch(getLoading())
-        const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
-        const body = JSON.stringify(newRoadbook);
-        return axios.post(process.env.REACT_APP_API_URL + '/roadbooks', body, config)
+        const config = { headers: { 'content-type': 'multipart/form-data', "Authorization" : `Bearer ${token}` } };
+        return axios.post(process.env.REACT_APP_API_URL + '/roadbooks', formData, config)
             .catch(error => console.log(error))
     }
 }

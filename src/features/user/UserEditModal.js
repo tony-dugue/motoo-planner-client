@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {userEdit, selectUser} from 'features/user/userSlice';
 import {toast} from "react-toastify";
+import { Storage } from 'services/storage/storage';
 
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -27,8 +28,8 @@ export function UserEditModal() {
         if (!emailValidator.test(email)) {
             toast.warning("Votre email n'est pas au bon format")
         } else {
-            const id = sessionStorage.getItem('id')
-            const token = sessionStorage.getItem('token')
+            const id = Storage.get('id')
+            const token = Storage.get('token')
             const userData = {firstName, lastName, email, avatar};
             dispatch(userEdit(userData, id, token)); // requête pour modifier le profil du user
             // TODO : lors d'une modification des données, regénérer un password sinon le hash n'est plus lisible lors du login
