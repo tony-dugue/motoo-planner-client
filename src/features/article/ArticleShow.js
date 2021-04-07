@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {findSingleArticle, selectArticle} from 'features/article/articleSlice';
-import placeholder from "../../images/placeholder.png";
+import placeholder from "../../assets/images/placeholder.png";
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';

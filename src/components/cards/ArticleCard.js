@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import placeholder from '../../images/placeholder.png';
+import placeholder from '../../assets/images/placeholder.png';
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';

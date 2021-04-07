@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {findSingleRoadbook, selectRoadbook} from 'features/roadbook/roadbookSlice';
+import {selectChecklistTodo} from 'features/checklist/checklistSlice';
 import {Link, useLocation} from 'react-router-dom';
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 import { Storage } from 'services/storage/storage';
@@ -15,15 +16,18 @@ import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import {faUtensils} from "@fortawesome/free-solid-svg-icons";
 import {faMonument} from "@fortawesome/free-solid-svg-icons";
 import {faBed} from "@fortawesome/free-solid-svg-icons";
-import map from '../../images/map.jpeg';
+import map from '../../assets/images/map.jpeg';
 import {roadbookChangeStatus} from "./roadbookSlice";
+import {ChecklistAdd} from "../checklist/ChecklistAdd";
+import {ChecklistItem} from "../checklist/ChecklistItem";
 
 export function RoadbookShow() {
 
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const {roadbook, loading, error} = useSelector(selectRoadbook); // on récupère le state
+    const {roadbook, loading, error} = useSelector(selectRoadbook);
+    const checklistTodo = useSelector(selectChecklistTodo)
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
@@ -52,7 +56,7 @@ export function RoadbookShow() {
             <div className="roadbook-show">
                 <div className="container">
 
-                    <h2 className="roadbook-show__title">Roadbook : <span>{roadbook.title}</span></h2>
+                    <h2 className="roadbook-show__heading">Roadbook : <span>{roadbook.title}</span></h2>
 
                     <section>
                         <div className="container">
@@ -130,7 +134,7 @@ export function RoadbookShow() {
                                 <div className="col-md-6">
                                     <div className="roadbook-show-itinerary">
 
-                                        <h3 className="roadbook-show-itinerary__heading">Itinéraire</h3>
+                                        <h3 className="roadbook-show__heading-sub">Itinéraire</h3>
 
                                         <Link to={"/itinerary/" + roadbook.id} className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
 
@@ -161,7 +165,7 @@ export function RoadbookShow() {
 
                                     <div className="roadbook-show-informations">
 
-                                        <h3 className="roadbook-show-informations__heading">Informations pratiques</h3>
+                                        <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
 
                                         <Link to={"/informations/" + roadbook.id} className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les informations</Link>
 
@@ -173,12 +177,23 @@ export function RoadbookShow() {
 
                                     <div className="roadbook-show-checklist">
 
-                                        <h3 className="roadbook-show-checklist__heading">CHECKLIST</h3>
+                                        <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
 
-                                        <p className="roadbook-show-checklist__item">- prévoir une bouteille d'eau</p>
-                                        <p className="roadbook-show-checklist__item">- prévoir chèque pour le restaurant (carte bleu non accepté)</p>
-                                        <p className="roadbook-show-checklist__item">- penser avant départ au bon gonflage des pneus</p>
-                                        {/* todolist */}
+                                        <p className="roadbook-show-checklist__desc">Votre liste d'informations pratiques</p>
+
+                                        <div className="checklist__container">
+
+                                            <div className="checklist__todo-container">
+                                                {checklistTodo.map(item => (
+                                                    <ChecklistItem key={item.id} task={item.task} checked={item.checked} id={item.id} />
+                                                ))}
+                                            </div>
+
+                                            <ChecklistAdd />
+
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>

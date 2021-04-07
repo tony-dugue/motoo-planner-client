@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
-import placeholder from "../../images/placeholder.png";
+import placeholder from "../../assets/images/placeholder.png";
 
 moment.locale('fr')
 

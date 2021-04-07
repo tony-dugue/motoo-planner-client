@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 import {roadbookCreate} from 'features/roadbook/roadbookSlice';
 import { Storage } from 'services/storage/storage';
 
-import placeholder from "../../images/placeholder.png";
+import placeholder from "../../assets/images/placeholder.png";
 
 
 export function RoadbookCreate() {
