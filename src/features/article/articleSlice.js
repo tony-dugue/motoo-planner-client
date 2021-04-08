@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 // State global
@@ -34,30 +33,11 @@ export const articleSlice = createSlice({
     },
 });
 
-// export des actions au composant
-export const { getLoading, getSingleArticle, getAllArticles, getFailure} = articleSlice.actions;
+const { reducer, actions } = articleSlice;
 
-// export du REDUCER
-export default articleSlice.reducer;
+export const { getLoading, getSingleArticle, getAllArticles, getFailure} = actions;
 
-// fonction thunk (une fonction 'thunk' permet de faire une logique asynchrone).
-export function findAllArticles() {
-    return async dispatch => {
-        dispatch(getLoading())
-        axios.get(process.env.REACT_APP_API_URL + '/articles')
-            .then(res => dispatch(getAllArticles(res.data["hydra:member"])))
-            .catch(error => dispatch(getFailure(error)))
-    }
-}
-
-export function findSingleArticle(params) {
-    return async dispatch => {
-        dispatch(getLoading())
-        axios.get(process.env.REACT_APP_API_URL + params)
-            .then(res => dispatch(getSingleArticle(res.data)))
-            .catch(error => dispatch(getFailure(error)))
-    }
-}
+export default reducer;
 
 // SELECTOR (exporte le state pour être récupéré dans un composant avec le Hook useSelector() )
 export const selectArticle = state => state.article

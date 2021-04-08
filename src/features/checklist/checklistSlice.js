@@ -24,8 +24,11 @@ const checklistSlice = createSlice({
     }
 })
 
-export const { saveChecklist, deleteChecklist, setCheck } = checklistSlice.actions
+const { reducer, actions } = checklistSlice;
 
-export const selectChecklistTodo = state => state.checklist.checklistTodo
+export const { saveChecklist, deleteChecklist, setCheck } = actions;
 
-export default checklistSlice.reducer
+export const selectChecklistTodo = state => state.checklist.checklistTodo;
+
+export default reducer;
+
