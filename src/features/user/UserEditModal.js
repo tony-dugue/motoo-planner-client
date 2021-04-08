@@ -38,7 +38,6 @@ export function UserEditModal() {
                 dispatch(getFailure(error))
                 toast.warning("une erreur s'est produite !")
             }
-
             // TODO : lors d'une modification des données, regénérer un password sinon le hash n'est plus lisible lors du login
         }
     }

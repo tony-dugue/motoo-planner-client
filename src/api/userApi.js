@@ -29,7 +29,7 @@ export const userLogin = credentials => {
             if (res.status === 200) {
                 sessionStorage.setItem('id', jwt_decode(res.data.token).id);
                 sessionStorage.setItem("accessJWT", res.data.token)
-                localStorage.setItem("motooPlanner", JSON.stringify({refreshJWT: res.data.refresh_token}))
+                localStorage.setItem("motooSite", JSON.stringify({refreshJWT: res.data.refresh_token}))
             }
 
             resolve(res)
@@ -71,7 +71,6 @@ export const userEdit = (userData) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-
             await axios.put(userProfilUrl + `/${userId}`, body, config)
 
             const res = await axios.get(userProfilUrl + `/${userId}`, config)
@@ -96,7 +95,7 @@ export const userDelete = () => {
             const res = await axios.delete(userProfilUrl + `/${userId}`, config)
 
             sessionStorage.removeItem("accessJWT")
-            localStorage.removeItem("motooPlanner")
+            localStorage.removeItem("motooPlannerSite")
             sessionStorage.removeItem('id');
 
             resolve(res.data)
@@ -110,14 +109,14 @@ export const userDelete = () => {
 
 export const userLogout = () => {
     sessionStorage.removeItem("accessJWT")
-    localStorage.removeItem("motooPlanner")
+    localStorage.removeItem("motooPlannerSite")
     sessionStorage.removeItem('id');
 }
 
 export const fetchNewAccessJWT = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const { refreshJWT } = JSON.parse(localStorage.getItem("motooPlanner"));
+            const { refreshJWT } = JSON.parse(localStorage.getItem("motooPlannerSite"));
 
             if (!refreshJWT) reject("Token not found!");
 
@@ -130,7 +129,7 @@ export const fetchNewAccessJWT = () => {
             resolve(true);
         } catch (error) {
             if (error.message === "Request failed with status code 403") {
-                localStorage.removeItem("motooPlanner");
+                localStorage.removeItem("motooPlannerSite");
             }
             reject(false);
         }

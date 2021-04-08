@@ -16,7 +16,7 @@ import {toast} from "react-toastify";
 export function UserProfile() {
 
     const dispatch = useDispatch()
-    const { userProfile, loading, error } = useSelector(selectUser);
+    const { userProfile, loading } = useSelector(selectUser);
 
     useEffect(() => {
         async function fetchData() {
@@ -30,7 +30,6 @@ export function UserProfile() {
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
-    if (error) return <div className="container">Une erreur s'est produite ...</div>
 
     return (
             <div className="content">

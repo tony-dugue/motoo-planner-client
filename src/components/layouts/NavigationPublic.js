@@ -15,7 +15,7 @@ export function NavigationPublic() {
     window.addEventListener('scroll', changeBackground);
 
     useEffect(() => {
-        return changeBackground
+        changeBackground()
     }, [navbar])
 
     return (
