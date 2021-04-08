@@ -62,7 +62,6 @@ export const roadbookChangeStatus = (roadbookStatus, urlPath) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-
             await axios.put(rootUrl + urlPath, body, config)
 
             const res = await axios.get(roadbookUrl + urlPath, config)

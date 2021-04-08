@@ -53,9 +53,9 @@ export function RoadbookShow() {
         </div>
     )
 
-    const handleChangeStatus = () => {
+    const handleChangeStatus = async () => {
         const roadbookStatus = roadbook.status === 1 ? {'status': 2} : {'status': 1}
-        return dispatch(roadbookChangeStatus(roadbookStatus, urlPath))
+        await roadbookChangeStatus(roadbookStatus, urlPath)
     }
 
     return (
