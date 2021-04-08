@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
-import axios from "axios";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {roadbookCreate} from 'api/roadbookApi';
@@ -19,16 +18,6 @@ export function RoadbookCreate() {
     const [tripStart, setTripStart] = useState("")
     const [pictureUrlFile, setPictureUrlFile] = useState(null)
 
-    const id = sessionStorage.getItem('id');
-
-    let formData = new FormData();
-    formData.append('pictureUrlFile', pictureUrlFile);
-    formData.append('user', `api/users/${id}`);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('tripStart', tripStart);
-
-
     const handleFileInput = e => {
         // handle validations
         //const file = e.target.files[0];
@@ -39,11 +28,9 @@ export function RoadbookCreate() {
 
     const handleSubmit = e => {
         e.preventDefault();
-
         dispatch(getLoading())
-
         try {
-            const res = roadbookCreate(formData);
+            const res = roadbookCreate(pictureUrlFile, title, description, tripStart);
             if (res.status !== 200) dispatch(getFailure(res.message))
             toast.success("Votre roadbook a bien été crée")
             history.push('/dashboard');

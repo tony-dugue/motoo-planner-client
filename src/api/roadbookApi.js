@@ -3,9 +3,17 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const roadbookUrl = rootUrl + "/roadbooks";
 
-export const roadbookCreate = formData => {
+export const roadbookCreate = (pictureUrlFile, title, description, tripStart) => {
 
+    const id = sessionStorage.getItem('id');
     const token = sessionStorage.getItem('accessJWT');
+
+    let formData = new FormData();
+    formData.append('pictureUrlFile', pictureUrlFile);
+    formData.append('user', `api/users/${id}`);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('tripStart', tripStart);
 
     const config = { headers: { 'content-type': 'multipart/form-data', "Authorization" : `Bearer ${token}` } };
 
