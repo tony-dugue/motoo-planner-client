@@ -1,9 +1,11 @@
 import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import { selectUser } from 'features/user/userSlice';
 import './App.scss';
+
+import {PrivateRoute} from 'features/auth/PrivateRoute';
 
 import {LandingPageScene} from 'scenes/LandingPage/LandingPageScene';
 import {ContactScene} from 'scenes/Contact/ContactScene';
@@ -17,7 +19,6 @@ import {InformationsScene} from 'scenes/Informations/InformationsScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
-import { Storage } from 'services/storage/storage';
 
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
@@ -27,7 +28,7 @@ import {Footer} from 'components/layouts/Footer';
 
 function App() {
 
-    const tokenStorage = Storage.get('accessJWT'); // on récupère le token dans le storage
+    const tokenStorage = sessionStorage.getItem('accessJWT'); // on récupère le token dans le storage
     const { tokenStore } = useSelector(selectUser); // on récupère le token dans le store
 
     return (
@@ -52,36 +53,21 @@ function App() {
                     <Route path="/login" component={LoginScene}/>
                     <Route path="/presentation" component={PresentationScene}/>
 
+                    <Route path="/register" component={RegisterScene} />
+
                     {/* ======= ROUTES SECURISEES ========== */}
 
-                    <Route path="/register">
-                        { (tokenStorage || tokenStore) ? <Redirect push to="/dashboard" /> : <RegisterScene /> }
-                    </Route>
+                    <PrivateRoute path="/dashboard"><DashboardScene /></PrivateRoute>
 
-                    <Route exact path="/dashboard">
-                        { (tokenStorage || tokenStore) ? <DashboardScene /> : <LoginScene /> }
-                    </Route>
+                    <PrivateRoute path="/profile"><ProfileScene /></PrivateRoute>
 
-                    <Route path="/profile">
-                        { (tokenStorage || tokenStore) ? <ProfileScene /> : <LoginScene /> }
-                    </Route>
+                    <PrivateRoute path="/roadbook/new"><RoadbookCreateScene /></PrivateRoute>
 
-                    <Route path="/roadbook/new">
-                        { (tokenStorage || tokenStore) ? <RoadbookCreateScene /> : <LoginScene /> }
-                    </Route>
+                    <PrivateRoute path="/roadbook/:slug"><RoadbookShowScene /></PrivateRoute>
 
-                    <Route path="/roadbook/:slug">
-                        { (tokenStorage || tokenStore) ? <RoadbookShowScene /> : <LoginScene /> }
-                    </Route>
+                    <PrivateRoute path="/itinerary/:slug"><ItineraryPlannerScene /></PrivateRoute>
 
-                    <Route path="/itinerary/:slug">
-                        { (tokenStorage || tokenStore) ? <ItineraryPlannerScene /> : <LoginScene /> }
-                    </Route>
-
-                    <Route path="/informations/:slug">
-                        { (tokenStorage || tokenStore) ? <InformationsScene /> : <LoginScene /> }
-                    </Route>
-
+                    <PrivateRoute path="/informations/:slug"><InformationsScene /></PrivateRoute>
 
                     {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
 

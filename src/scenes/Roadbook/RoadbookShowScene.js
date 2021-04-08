@@ -4,17 +4,13 @@ import {RoadbookShow} from "../../features/roadbook/RoadbookShow";
 
 export function RoadbookShowScene() {
     return (
-        <div className="content">
+        <div className="roadbooks">
 
-            <div className="roadbooks">
-
-                <div className="container">
-                    <Link to='/dashboard' className="btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
-                </div>
-
-                <RoadbookShow />
-
+            <div className="container">
+                <Link to='/dashboard' className="btn btn-motoo-outline-blue">Revenir au tableau de bord</Link>
             </div>
+
+            <RoadbookShow/>
 
         </div>
     );

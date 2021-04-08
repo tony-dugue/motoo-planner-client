@@ -22,7 +22,7 @@ export function RoadbookShow() {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const {roadbook, loading, error} = useSelector(selectRoadbook);
+    const { roadbook, loading } = useSelector(selectRoadbook);
     const checklistTodo = useSelector(selectChecklistTodo)
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
@@ -33,6 +33,7 @@ export function RoadbookShow() {
             dispatch(getLoading())
             const result = await findSingleRoadbook(urlPath)
             dispatch(getSingleRoadbook(result))
+            dispatch(getFailure())
         }
         try {
             fetchData();
@@ -44,7 +45,6 @@ export function RoadbookShow() {
 
 
     if (loading) return <div className="container">Chargement en cours ...</div>
-    if (error) return <div className="container">Une erreur s'est produite ...</div>
 
     if (!roadbook.title) return (
         <div className="container">

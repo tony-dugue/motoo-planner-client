@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { selectUser, setUserProfile } from 'features/user/userSlice';
+import { selectUser, setUserProfile, getLoading, getFailure } from 'features/user/userSlice';
 import { findUser } from 'api/userApi';
 import {RoadbookCard} from "../../components/cards/RoadbookCard";
 import {toast} from "react-toastify";
@@ -8,12 +8,14 @@ import {toast} from "react-toastify";
 export function RoadbookShowAll() {
 
     const dispatch = useDispatch()
-    const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
+    const { userProfile, loading } = useSelector(selectUser); // on récupère le state
 
     useEffect(() => {
         async function fetchData() {
+            dispatch(getLoading())
             const user = await findUser()
             dispatch(setUserProfile(user))
+            dispatch(getFailure())
         }
 
         try {
@@ -24,7 +26,6 @@ export function RoadbookShowAll() {
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>
-    if (error) return <div className="container">Une erreur s'est produite ...</div>
 
     // TODO : voir pour ajouter une logique si le token est périmé (chargement en cours à l'infini)
 

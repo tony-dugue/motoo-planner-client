@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
-import jwt_decode from "jwt-decode";
-
-import { setUserLogin, setUserToken, getLoading, getFailure} from 'features/user/userSlice';
-import { userLogin, findUser } from 'api/userApi';
+import {selectAuth, authPending, authSuccess, authFail} from 'features/auth/authSlice';
+import { userLogin } from 'api/userApi';
+import {getUserProfile} from "../auth/userAction";
 
 
 export function UserLogin() {
@@ -13,9 +12,15 @@ export function UserLogin() {
     const dispatch = useDispatch()
     const history = useHistory();
 
+    const { isAuth } = useSelector(selectAuth);
+
     const [formData, setFormData] = useState({username: "", password: ""});
 
     const { username, password } = formData;
+
+    useEffect( () => {
+        sessionStorage.getItem("accessJWT") && history.push("/dashboard")
+    }, [history, isAuth])
 
     const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
@@ -24,22 +29,20 @@ export function UserLogin() {
 
         if (!username || !password) toast.warning('Veuillez remplir tout les champs!')
 
-        dispatch(getLoading())
+        dispatch(authPending())
         try {
             const isAuth = await userLogin(formData)
-            if (isAuth.status !== 200) dispatch(getFailure(isAuth.message))
 
-            dispatch(setUserToken(isAuth.data.token))
-            dispatch(setUserLogin(jwt_decode(isAuth.data.token)))
+            if (isAuth.status !== 200) dispatch(authFail(isAuth.message))
 
-            const user = await findUser()
-            if (user.status !== 200) dispatch(getFailure(user.message))
+            dispatch(authSuccess())
+            dispatch(getUserProfile())
 
             toast.success('Bienvenue')
             history.push('/dashboard');
 
         } catch (error) {
-            dispatch(getFailure(error))
+            dispatch(authFail(error.message))
             toast.warning("une erreur s'est produite ! Veuillez vérifier votre email et ressaisir votre mot de" +
                 " passe")
         }
