@@ -51,7 +51,6 @@ export function NavigationPrivate() {
 
                     <ul className="dropdown-menu" aria-labelledby="dropdownProfileMobile">
                         <li><Link className="dropdown-item" to='/profile'>Mon profil</Link></li>
-
                         <li><hr className="dropdown-divider"/></li>
                         <li onClick={handleLogout} className="dropdown-item">Se déconnecter</li>
                     </ul>
@@ -78,7 +77,10 @@ export function NavigationPrivate() {
 
                     <ul className="dropdown-menu" aria-labelledby="dropdownProfile">
                         <li><Link className="dropdown-item" to='/profile'>Mon profil</Link></li>
-
+                        {/*userProfile.roles.includes("ROLE_ADMIN")
+                            ? <li><a className="dropdown-item" href='http://localhost:8000/admin'>Administration</a></li>
+                            : null
+                        */}
                         <li><hr className="dropdown-divider"/></li>
                         <li onClick={handleLogout} className="dropdown-item">Se déconnecter</li>
                     </ul>

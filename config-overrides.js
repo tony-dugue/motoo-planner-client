@@ -7,6 +7,7 @@ module.exports = function override(config, env) {
     config["resolve"] = {
         alias: {
             app: path.resolve(__dirname, 'src/app/'),
+            api: path.resolve(__dirname, 'src/api/'),
             components: path.resolve(__dirname, 'src/components/'),
             features: path.resolve(__dirname, 'src/features/'),
             scenes: path.resolve(__dirname, 'src/scenes/'),

@@ -1,8 +1,9 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import { userDelete } from 'features/user/userSlice';
-import { Storage } from 'services/storage/storage';
 import {useHistory} from "react-router-dom";
+import { setUserLogout, getLoading, getFailure, getSuccess } from 'features/user/userSlice';
+import { userDelete } from 'api/userApi';
+import {toast} from "react-toastify";
 
 export function UserDeleteModal() {
 
@@ -11,10 +12,19 @@ export function UserDeleteModal() {
 
 
     const handleSubmit = async () => {
-        const id = Storage.get('id')
-        const token = Storage.get('token')
-        dispatch(userDelete(id, token)); // requête pour modifier le profil du user
-        history.push('/');
+
+        dispatch(getLoading())
+
+        try {
+            await userDelete()
+            dispatch(setUserLogout())
+            dispatch(getSuccess())
+            toast.success('Compte supprimé')
+            history.push('/');
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite !")
+        }
     }
 
     return (

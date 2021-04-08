@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { userLogin } from 'features/user/userSlice';
+import { toast } from 'react-toastify';
+import jwt_decode from "jwt-decode";
+
+import { setUserLogin, setUserToken, getLoading, getFailure} from 'features/user/userSlice';
+import { userLogin, findUser } from 'api/userApi';
+
 
 export function UserLogin() {
 
@@ -16,8 +21,29 @@ export function UserLogin() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        dispatch(userLogin(formData)); // requête à l'API pour se connecter
-        history.push('/dashboard');
+
+        if (!username || !password) toast.warning('Veuillez remplir tout les champs!')
+
+        dispatch(getLoading())
+
+        try {
+            const isAuth = await userLogin(formData)
+            if (isAuth.status !== 200) dispatch(getFailure(isAuth.message))
+
+            dispatch(setUserToken(isAuth.data.token))
+            dispatch(setUserLogin(jwt_decode(isAuth.data.token)))
+
+            const user = await findUser()
+            if (user.status !== 200) dispatch(getFailure(user.message))
+
+            toast.success('Bienvenue')
+            history.push('/dashboard');
+
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite ! Veuillez vérifier votre email et ressaisir votre mot de" +
+                " passe")
+        }
     }
 
     return (

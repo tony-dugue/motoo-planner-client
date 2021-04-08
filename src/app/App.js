@@ -27,7 +27,7 @@ import {Footer} from 'components/layouts/Footer';
 
 function App() {
 
-    const tokenStorage = Storage.get('token'); // on récupère le token dans le storage
+    const tokenStorage = Storage.get('accessJWT'); // on récupère le token dans le storage
     const { tokenStore } = useSelector(selectUser); // on récupère le token dans le store
 
     return (

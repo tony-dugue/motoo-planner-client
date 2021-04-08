@@ -15,7 +15,7 @@ const checklistSlice = createSlice({
             return {...state, checklistTodo: state.checklistTodo.filter((item) => action.payload !== item.id)}
         },
         setCheck: (state, action) => {
-            state.checklistTodo.map(item => {
+            state.checklistTodo.forEach(item => {
                 if (action.payload === item.id) {
                     (item.checked === true) ? item.checked = false : item.checked = true
                 }

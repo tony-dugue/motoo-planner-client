@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { findUser, selectUser } from 'features/user/userSlice';
+import { selectUser } from 'features/user/userSlice';
+import { findUser } from 'api/userApi';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserEditModal } from 'features/user/UserEditModal';
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
-import { Storage } from 'services/storage/storage';
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
+import {toast} from "react-toastify";
 
 export function UserProfile() {
 
@@ -18,11 +19,14 @@ export function UserProfile() {
     const { userProfile, loading, error } = useSelector(selectUser);
 
     useEffect(() => {
-        const id = Storage.get('id')
-        const token = Storage.get('token')
-
-        // récupération des infos de l'utilisateur depuis l'API
-        dispatch(findUser(id, token))
+        async function fetchData() {
+            await findUser()
+        }
+        try {
+            fetchData();
+        } catch (error) {
+            toast.warning("une erreur s'est produite !")
+        }
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>

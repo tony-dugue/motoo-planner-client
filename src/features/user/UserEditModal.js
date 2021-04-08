@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {userEdit, selectUser} from 'features/user/userSlice';
+import {selectUser, getLoading, getFailure, getSuccess} from 'features/user/userSlice';
+import {userEdit, findUser} from 'api/userApi';
 import {toast} from "react-toastify";
-import { Storage } from 'services/storage/storage';
 
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -10,7 +10,7 @@ export function UserEditModal() {
 
     const dispatch = useDispatch()
 
-    const {userProfile} = useSelector(selectUser); // on récupère le state
+    const {userProfile} = useSelector(selectUser);
 
     const [formData, setFormData] = useState({
         firstName: userProfile.firstName,
@@ -25,13 +25,20 @@ export function UserEditModal() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if (!emailValidator.test(email)) {
+
+        if (!emailValidator.test(email))
             toast.warning("Votre email n'est pas au bon format")
-        } else {
-            const id = Storage.get('id')
-            const token = Storage.get('token')
-            const userData = {firstName, lastName, email, avatar};
-            dispatch(userEdit(userData, id, token)); // requête pour modifier le profil du user
+        else {
+            dispatch(getLoading())
+            try {
+                const userData = {firstName, lastName, email, avatar};
+                await userEdit({userData});
+                dispatch(getSuccess())
+            } catch (error) {
+                dispatch(getFailure(error))
+                toast.warning("une erreur s'est produite !")
+            }
+
             // TODO : lors d'une modification des données, regénérer un password sinon le hash n'est plus lisible lors du login
         }
     }

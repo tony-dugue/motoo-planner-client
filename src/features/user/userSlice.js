@@ -1,8 +1,6 @@
 import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
-import jwt_decode from "jwt-decode";
 import { toast } from 'react-toastify';
-import { Storage } from 'services/storage/storage';
 
 // un Slice dans Redux est un morceau d'état qui gère plusieurs variables et les rend globale.
 
@@ -52,11 +50,21 @@ export const userSlice = createSlice({
     }
 })
 
-// (3) on exporte les actions
-export const { setUserLogin, setUserToken, setUserProfile, setUserLogout, getLoading, getFailure, getSuccess } = userSlice.actions
+const { reducer, actions } = userSlice;
 
-export default userSlice.reducer
+export const { setUserLogin, setUserToken, setUserProfile, setUserLogout, getLoading, getFailure, getSuccess } = actions
 
+export default reducer;
+
+export const selectUser = state => state.user;
+
+
+
+
+
+
+
+/*
 // fonction 'thunk' permettant de faire une logique asynchrone).
 export function userLogin(credentials) {
 
@@ -70,6 +78,7 @@ export function userLogin(credentials) {
                 dispatch(setUserLogin(jwt_decode(res.data.token)))
                 Storage.set('token', res.data.token);
                 Storage.set('id', jwt_decode(res.data.token).id);
+                Storage.set("motooSite", JSON.stringify({"refreshJWT": res.data.refresh_token}))
                 const config = { headers: { "Authorization" : `Bearer ${res.data.token}` } };
 
                 // ON RECUPERE LES INFORMATIONS DE L'UTILISATEUR
@@ -86,6 +95,8 @@ export function userLogin(credentials) {
             )
     }
 }
+*/
+
 
 export function userRegister(newUser) {
     return async dispatch => {
@@ -100,12 +111,13 @@ export function userRegister(newUser) {
 export function userLogout() {
     return async dispatch => {
         dispatch(getLoading())
-        Storage.remove('token');
-        Storage.remove('id');
+        sessionStorage.removeItem("accessJWT")
+        localStorage.removeItem("refreshJWT")
+        sessionStorage.removeItem('id');
         dispatch(setUserLogout())
     }
 }
-
+/*
 export function findUser(params, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -115,7 +127,7 @@ export function findUser(params, token) {
             .catch(error => console.log(error))
     }
 }
-
+*/
 export function userEdit(userData, userId, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -140,13 +152,12 @@ export function userDelete(userId, token) {
         await axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}`, config)
             .then(res => toast.info('Votre compte a bien été supprimé'))
             .catch(error => console.log(error))
-        Storage.remove('token');
+        sessionStorage.removeItem("accessJWT")
+        localStorage.removeItem("refreshJWT")
+        sessionStorage.removeItem('id');
         dispatch(setUserLogout())
     }
 }
 
-// (4) On renvoi la valeur réelle de l'état ('user' est le nom du slice !!)
-// on pourra récupéré le contenu du state dans le composant avec un useSelector()
-// cela équivaut à const [<<token>>, setToken] = useState(null)
-export const selectUser = state => state.user
+
 

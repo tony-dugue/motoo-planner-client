@@ -1,25 +1,21 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {Link, useLocation} from 'react-router-dom';
 import {findSingleRoadbook, selectRoadbook} from 'features/roadbook/roadbookSlice';
 import {selectChecklistTodo} from 'features/checklist/checklistSlice';
-import {Link, useLocation} from 'react-router-dom';
-import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
-import { Storage } from 'services/storage/storage';
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {faMapMarkedAlt} from "@fortawesome/free-solid-svg-icons";
-import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
-import {faMotorcycle} from "@fortawesome/free-solid-svg-icons";
-import {faHome} from "@fortawesome/free-solid-svg-icons";
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
-import {faUtensils} from "@fortawesome/free-solid-svg-icons";
-import {faMonument} from "@fortawesome/free-solid-svg-icons";
-import {faBed} from "@fortawesome/free-solid-svg-icons";
-import map from '../../assets/images/map.jpeg';
 import {roadbookChangeStatus} from "./roadbookSlice";
 import {ChecklistAdd} from "../checklist/ChecklistAdd";
 import {ChecklistItem} from "../checklist/ChecklistItem";
+import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
+import {Storage} from 'services/storage/storage';
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+    faPhoneAlt, faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle,
+    faMapMarkerAlt, faUtensils, faMonument, faBed, faHome, faEnvelope
+} from "@fortawesome/free-solid-svg-icons";
+
+import map from '../../assets/images/map.jpeg';
 
 export function RoadbookShow() {
 
@@ -31,7 +27,7 @@ export function RoadbookShow() {
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
-    const token = Storage.get('token')
+    const token = Storage.get('accessJWT')
 
     useEffect(() => {
         dispatch(findSingleRoadbook(urlPath, token)) // requête à l'API pour récupérer un roadbook
@@ -64,7 +60,8 @@ export function RoadbookShow() {
 
                                 <div className="col-md-6">
 
-                                    <button className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteRoadbook">
+                                    <button className="btn btn-outline-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteRoadbook">
                                         <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
                                         {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
                                     </button>
@@ -77,8 +74,9 @@ export function RoadbookShow() {
                                     <p>Roadbook terminé ?</p>
                                     <form>
                                         <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" id="roadbookCheck" onClick={handleChangeStatus}
-                                                   defaultChecked={roadbook.status === 2 ? 'checked' : ''} />
+                                            <input className="form-check-input" type="checkbox" id="roadbookCheck"
+                                                   onClick={handleChangeStatus}
+                                                   defaultChecked={roadbook.status === 2 ? 'checked' : ''}/>
                                         </div>
                                     </form>
                                 </div>
@@ -95,7 +93,7 @@ export function RoadbookShow() {
                                 <div className="col-md-8">
                                     <div className="roadbook-show-map__visualization">
                                         {/* map */}
-                                        <img src={map} alt="placeholder" className="card-article__img" />
+                                        <img src={map} alt="placeholder" className="card-article__img"/>
                                         <p>{roadbook.description}</p>
                                     </div>
                                 </div>
@@ -136,23 +134,33 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show__heading-sub">Itinéraire</h3>
 
-                                        <Link to={"/itinerary/" + roadbook.id} className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier l'itinéraire</Link>
+                                        <Link to={"/itinerary/" + roadbook.id}
+                                              className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier
+                                            l'itinéraire</Link>
 
                                         {/* étapes de la balade avec icones */}
 
                                         <div>
                                             <ul className="roadbook-show-itinerary__step">
-                                                <li><span><FontAwesomeIcon icon={faHome} /></span>Départ de la balade</li>
+                                                <li><span><FontAwesomeIcon icon={faHome}/></span>Départ de la balade</li>
                                                 <li className="distance"><span className="distance-icon">|</span>45 km</li>
-                                                <li><span className="location-icon"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>pause étang du canard</li>
+                                                <li><span className="location-icon"><FontAwesomeIcon
+                                                    icon={faMapMarkerAlt}/></span>pause étang du canard
+                                                </li>
                                                 <li className="distance"><span className="distance-icon">|</span>70 km</li>
-                                                <li><span className="restaurant-icon"><FontAwesomeIcon icon={faUtensils} /></span>Pause repas au restaurant du cap</li>
+                                                <li><span className="restaurant-icon"><FontAwesomeIcon icon={faUtensils}/></span>Pause
+                                                    repas au restaurant du cap
+                                                </li>
                                                 <li className="distance"><span className="distance-icon">|</span>110 km</li>
-                                                <li><span className="visite-icon"><FontAwesomeIcon icon={faMonument} /></span>Visite pointe du grouin</li>
+                                                <li><span className="visite-icon"><FontAwesomeIcon icon={faMonument}/></span>Visite
+                                                    pointe du grouin
+                                                </li>
                                                 <li className="distance"><span className="distance-icon">|</span>45 km</li>
-                                                <li><span className="hotel-icon"><FontAwesomeIcon icon={faBed} /></span>Hotel de la gare</li>
+                                                <li><span className="hotel-icon"><FontAwesomeIcon icon={faBed}/></span>Hotel de la
+                                                    gare
+                                                </li>
                                                 <li className="distance"><span className="distance-icon">|</span>62 km</li>
-                                                <li><span><FontAwesomeIcon icon={faHome} /></span>Fin de la balade</li>
+                                                <li><span><FontAwesomeIcon icon={faHome}/></span>Fin de la balade</li>
                                             </ul>
 
                                         </div>
@@ -167,11 +175,20 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
 
-                                        <Link to={"/informations/" + roadbook.id} className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les informations</Link>
+                                        <Link to={"/informations/" + roadbook.id}
+                                              className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les
+                                            informations</Link>
 
-                                        <p  className="roadbook-show-informations__item">Responsable: Gérard Dupond</p>
-                                        <p  className="roadbook-show-informations__item">Téléphone: 06 56 87 65 56</p>
-                                        <p  className="roadbook-show-informations__item-desc">Un briefing sera effectué 15min avant le départ. </p>
+                                        <p className="roadbook-show-informations__item">Contact: Gérard Dupond</p>
+
+                                        <p>
+                                            <FontAwesomeIcon icon={faPhoneAlt}/> 06 56 87 65 56</p>
+
+                                        <p>
+                                            <FontAwesomeIcon icon={faEnvelope}/> gerard.dupond@gmail.com</p>
+
+                                        <p className="roadbook-show-informations__item-desc">Un briefing sera effectué 15min avant
+                                            le départ. </p>
 
                                     </div>
 
@@ -179,17 +196,18 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
 
-                                        <p className="roadbook-show-checklist__desc">Votre liste d'informations pratiques</p>
+                                        <p className="roadbook-show-checklist__desc">Liste des choses importantes ...</p>
 
                                         <div className="checklist__container">
 
                                             <div className="checklist__todo-container">
                                                 {checklistTodo.map(item => (
-                                                    <ChecklistItem key={item.id} task={item.task} checked={item.checked} id={item.id} />
+                                                    <ChecklistItem key={item.id} task={item.task} checked={item.checked}
+                                                                   id={item.id}/>
                                                 ))}
                                             </div>
 
-                                            <ChecklistAdd />
+                                            <ChecklistAdd/>
 
                                         </div>
 

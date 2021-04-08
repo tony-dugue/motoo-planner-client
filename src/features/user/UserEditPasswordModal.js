@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {userEdit} from 'features/user/userSlice';
-import { Storage } from 'services/storage/storage';
+import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
+import { getLoading, getFailure, getSuccess} from 'features/user/userSlice';
 
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
@@ -24,16 +24,21 @@ export function UserEditPasswordModal() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if (!passwordValidator.test(password)) {
+
+        if (!passwordValidator.test(password))
             toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
                 " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
-        } else if (password !== passwordConfirm) {
+        else if (password !== passwordConfirm)
             toast.warning("Les mots de passe ne sont pas identique !")
-        } else {
-            const id = Storage.get('id')
-            const token = Storage.get('token')
-            const userData = {password};
-            dispatch(userEdit(userData, id, token)); // requête pour modifier le profil du user
+        else {
+            dispatch(getLoading())
+            try {
+                await userEdit({password});
+                dispatch(getSuccess())
+            } catch (error) {
+                dispatch(getFailure(error))
+                toast.warning("une erreur s'est produite !")
+            }
         }
     }
 

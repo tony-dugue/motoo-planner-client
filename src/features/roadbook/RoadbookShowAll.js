@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { findUser, selectUser } from 'features/user/userSlice';
-import { Storage } from 'services/storage/storage';
+import { selectUser, setUserProfile } from 'features/user/userSlice';
+import { findUser } from 'api/userApi';
 import {RoadbookCard} from "../../components/cards/RoadbookCard";
+import {toast} from "react-toastify";
 
 export function RoadbookShowAll() {
 
@@ -10,9 +11,16 @@ export function RoadbookShowAll() {
     const { userProfile, loading, error } = useSelector(selectUser); // on récupère le state
 
     useEffect(() => {
-        const id = Storage.get('id')
-        const token = Storage.get('token')
-        dispatch(findUser(id, token))
+        async function fetchData() {
+            const user = await findUser()
+            dispatch(setUserProfile(user))
+        }
+
+        try {
+            fetchData();
+        } catch (error) {
+            toast.warning("une erreur s'est produite !")
+        }
     }, [dispatch])
 
     if (loading) return <div className="container">Chargement en cours ...</div>

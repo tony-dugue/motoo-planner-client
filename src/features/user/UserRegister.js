@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { toast } from 'react-toastify';
-import { userRegister } from 'features/user/userSlice';
+
+import { getLoading, getFailure} from 'features/user/userSlice';
+import { userRegistration } from 'api/userApi';
 
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -23,19 +25,32 @@ export function UserRegister() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if(!emailValidator.test(email)) {
+
+        if (!emailValidator.test(email))
             toast.warning("Une erreur s'est produite !")
-        } else if(password !== passwordConfirm) {
+        else if (password !== passwordConfirm)
             toast.warning("Les mots de passe ne sont pas identique !")
-        } else if (!passwordValidator.test(password)) {
+        else if (!passwordValidator.test(password))
             toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
-                " moins 1 chiffre, 1 lettre majuscule et 1 lettre minuscule")
-        } else {
-            const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`
-            const newUser = { firstName, lastName, email, password, avatar };
-            dispatch(userRegister(newUser)); // requête à l'API pour se connecter
-            toast.success("Votre compte a été crée")
-            history.push('/presentation');
+            " moins 1 chiffre, 1 lettre majuscule et 1 lettre minuscule")
+        else {
+            dispatch(getLoading())
+
+            try {
+                const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`
+                const newUser = { firstName, lastName, email, password, avatar };
+
+                const registration = await userRegistration(newUser);
+
+                if (registration.status !== 200) dispatch(getFailure(registration.message))
+
+                toast.success("Votre compte a été crée")
+                history.push('/presentation');
+
+            } catch (error) {
+                dispatch(getFailure(error))
+                toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")
+            }
         }
     }
 

@@ -29,6 +29,10 @@ export function RoadbookCreate() {
     formData.append('tripStart', tripStart);
 
 
+    /**
+     * Récupération des données pour l'upload d'image
+     * @param e
+     */
     const handleFileInput = e => {
         // handle validations
         //const file = e.target.files[0];
@@ -37,10 +41,14 @@ export function RoadbookCreate() {
         setPictureUrlFile(e.target.files[0])
     }
 
+    /**
+     * Requête API pour création d'un roadbook
+     * @param e
+     */
     const handleSubmit = e => {
         e.preventDefault();
         const token = Storage.get('token')
-        dispatch(roadbookCreate(formData, token)); // requête à l'API pour créer un roadbook
+        dispatch(roadbookCreate(formData, token));
         toast.success("Votre roadbook a bien été crée")
         history.push('/dashboard');
     }
@@ -84,8 +92,6 @@ export function RoadbookCreate() {
                         </div>
 
                     </div>
-
-                    {/* TODO: ajout de l'user automatique .... */}
 
                     <div className="roadbook-form__submit">
                         <button type="submit" className="btn btn-motoo-outline">Créer le roadbook</button>
