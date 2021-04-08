@@ -25,7 +25,6 @@ export function UserLogin() {
         if (!username || !password) toast.warning('Veuillez remplir tout les champs!')
 
         dispatch(getLoading())
-
         try {
             const isAuth = await userLogin(formData)
             if (isAuth.status !== 200) dispatch(getFailure(isAuth.message))

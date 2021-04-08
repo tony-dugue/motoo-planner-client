@@ -1,11 +1,5 @@
-import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
-// un Slice dans Redux est un morceau d'état qui gère plusieurs variables et les rend globale.
-
-// (1) on crée ici un state initial
-// équivaut à const [token, setToken] = useState(<<null>>)
 const initialState = {
     userAuth: {},
     userProfile: {},
@@ -18,11 +12,6 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-
-        // (2) on crée ici 2 fonctions (2 actions avec un rôle de setters pour modifier la valeur du state)
-        // Le reducer met à jour les données dans le state (on gère ici toute l'activité du User)
-        // cela équivaut à const [token, <<setToken>>] = useState(null)
-
         setUserLogin: (state, action) => {
             state.userAuth = action.payload
         },
@@ -35,6 +24,7 @@ export const userSlice = createSlice({
         },
         setUserLogout: state => {
             state.userAuth = {}
+            state.userProfile = {}
             state.token = null
         },
         getLoading: state => {
@@ -95,8 +85,6 @@ export function userLogin(credentials) {
             )
     }
 }
-*/
-
 
 export function userRegister(newUser) {
     return async dispatch => {
@@ -117,7 +105,7 @@ export function userLogout() {
         dispatch(setUserLogout())
     }
 }
-/*
+
 export function findUser(params, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -127,7 +115,7 @@ export function findUser(params, token) {
             .catch(error => console.log(error))
     }
 }
-*/
+
 export function userEdit(userData, userId, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -159,5 +147,5 @@ export function userDelete(userId, token) {
     }
 }
 
-
+*/
 

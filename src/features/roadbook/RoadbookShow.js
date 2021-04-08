@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
-import {findSingleRoadbook, selectRoadbook} from 'features/roadbook/roadbookSlice';
+import {selectRoadbook, getSingleRoadbook, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
+import {findSingleRoadbook, roadbookChangeStatus} from 'api/roadbookApi';
 import {selectChecklistTodo} from 'features/checklist/checklistSlice';
-import {roadbookChangeStatus} from "./roadbookSlice";
 import {ChecklistAdd} from "../checklist/ChecklistAdd";
 import {ChecklistItem} from "../checklist/ChecklistItem";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
-import {Storage} from 'services/storage/storage';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import map from '../../assets/images/map.jpeg';
+import {toast} from "react-toastify";
 
 export function RoadbookShow() {
 
@@ -27,14 +27,25 @@ export function RoadbookShow() {
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
-    const token = Storage.get('accessJWT')
 
     useEffect(() => {
-        dispatch(findSingleRoadbook(urlPath, token)) // requête à l'API pour récupérer un roadbook
-    }, [dispatch, location, urlPath, token])
+        async function fetchData() {
+            dispatch(getLoading())
+            const result = await findSingleRoadbook(urlPath)
+            dispatch(getSingleRoadbook(result))
+        }
+        try {
+            fetchData();
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite !")
+        }
+    }, [dispatch, urlPath])
+
 
     if (loading) return <div className="container">Chargement en cours ...</div>
     if (error) return <div className="container">Une erreur s'est produite ...</div>
+
     if (!roadbook.title) return (
         <div className="container">
             <p>Ce roadbook n'existe pas ...</p>
@@ -44,7 +55,7 @@ export function RoadbookShow() {
 
     const handleChangeStatus = () => {
         const roadbookStatus = roadbook.status === 1 ? {'status': 2} : {'status': 1}
-        return dispatch(roadbookChangeStatus(roadbookStatus, urlPath, token))
+        return dispatch(roadbookChangeStatus(roadbookStatus, urlPath))
     }
 
     return (

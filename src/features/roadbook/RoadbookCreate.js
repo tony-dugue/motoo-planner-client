@@ -3,8 +3,8 @@ import {toast} from "react-toastify";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {roadbookCreate} from 'features/roadbook/roadbookSlice';
-import { Storage } from 'services/storage/storage';
+import {roadbookCreate} from 'api/roadbookApi';
+import {getLoading, getFailure} from 'features/roadbook/roadbookSlice';
 
 import placeholder from "../../assets/images/placeholder.png";
 
@@ -19,7 +19,7 @@ export function RoadbookCreate() {
     const [tripStart, setTripStart] = useState("")
     const [pictureUrlFile, setPictureUrlFile] = useState(null)
 
-    const id = Storage.get('id')
+    const id = sessionStorage.getItem('id');
 
     let formData = new FormData();
     formData.append('pictureUrlFile', pictureUrlFile);
@@ -29,10 +29,6 @@ export function RoadbookCreate() {
     formData.append('tripStart', tripStart);
 
 
-    /**
-     * Récupération des données pour l'upload d'image
-     * @param e
-     */
     const handleFileInput = e => {
         // handle validations
         //const file = e.target.files[0];
@@ -41,16 +37,20 @@ export function RoadbookCreate() {
         setPictureUrlFile(e.target.files[0])
     }
 
-    /**
-     * Requête API pour création d'un roadbook
-     * @param e
-     */
     const handleSubmit = e => {
         e.preventDefault();
-        const token = Storage.get('token')
-        dispatch(roadbookCreate(formData, token));
-        toast.success("Votre roadbook a bien été crée")
-        history.push('/dashboard');
+
+        dispatch(getLoading())
+
+        try {
+            const res = roadbookCreate(formData);
+            if (res.status !== 200) dispatch(getFailure(res.message))
+            toast.success("Votre roadbook a bien été crée")
+            history.push('/dashboard');
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")
+        }
     }
 
     return (

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link, NavLink, useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import { userLogout, selectUser } from 'features/user/userSlice';
+import { selectUser, setUserLogout } from 'features/user/userSlice';
+import { userLogout } from 'api/userApi';
 import {toast} from "react-toastify";
 
 export function NavigationPrivate() {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const history = useHistory();
 
     const { userProfile } = useSelector(selectUser); // on récupère le state
@@ -18,7 +19,8 @@ export function NavigationPrivate() {
     window.addEventListener('scroll', changeBackground);
 
     const handleLogout = () => {
-        dispatch(userLogout()) // on se déconnecte
+        userLogout()
+        dispatch(setUserLogout())
         toast.info("A bientôt !")
         history.push('/');
     }

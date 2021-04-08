@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {selectUser, getLoading, getFailure, getSuccess} from 'features/user/userSlice';
-import {userEdit, findUser} from 'api/userApi';
+import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
 
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

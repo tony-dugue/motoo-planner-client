@@ -1,6 +1,4 @@
-import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 const initialState = {
     roadbook: {},
@@ -33,10 +31,13 @@ export const roadbookSlice = createSlice({
     }
 })
 
-export const { getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuccess } = roadbookSlice.actions
+const { reducer, actions } = roadbookSlice;
 
-export default roadbookSlice.reducer
+export const { getSingleRoadbook, removeRoadbook, getLoading, getFailure, getSuccess } = actions
 
+export default reducer
+
+/*
 export function roadbookCreate(formData, token) {
     return async dispatch => {
         dispatch(getLoading())
@@ -85,5 +86,5 @@ export function roadbookChangeStatus(roadbookStatus, urlPath, token) {
             .catch(error => console.log(error))
     }
 }
-
+*/
 export const selectRoadbook = state => state.roadbook

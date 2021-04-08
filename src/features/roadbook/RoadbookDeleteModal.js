@@ -1,8 +1,9 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import { roadbookDelete } from 'features/roadbook/roadbookSlice';
-import { Storage } from 'services/storage/storage';
+import {toast} from "react-toastify";
+import {roadbookDelete} from 'api/roadbookApi';
+import {getLoading, getFailure, getSuccess} from 'features/roadbook/roadbookSlice';
 
 export function RoadbookDeleteModal({ roadbookId }) {
 
@@ -10,9 +11,18 @@ export function RoadbookDeleteModal({ roadbookId }) {
     const history = useHistory();
 
     const handleSubmit = async () => {
-        const token = Storage.get('token')
-        dispatch(roadbookDelete(roadbookId, token)); // requête pour supprimer le roadbook
-        history.push('/dashboard');
+
+        dispatch(getLoading())
+
+        try {
+            await roadbookDelete(roadbookId)
+            dispatch(getSuccess())
+            toast.success('Roadbook supprimé')
+            history.push('/dashboard');
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite !")
+        }
     }
 
     return (

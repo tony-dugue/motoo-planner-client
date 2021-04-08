@@ -14,7 +14,6 @@ export const userRegistration = data => {
         try {
             const res = await axios.post(userProfilUrl, body, config);
             resolve(res.data)
-            if (res.data.status === "success") resolve(res.data)
         } catch (err) {
             reject(err);
         }

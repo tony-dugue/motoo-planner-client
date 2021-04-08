@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
