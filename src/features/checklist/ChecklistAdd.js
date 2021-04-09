@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { saveChecklist } from 'features/checklist/checklistSlice';
+import { addChecklist } from 'features/checklist/checklistSlice';
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -9,7 +9,7 @@ export function ChecklistAdd() {
     const dispatch = useDispatch();
 
     const addTodo = () => {
-        dispatch(saveChecklist({ task: input, checked: false, id: Date.now()}))
+        dispatch(addChecklist({ task: input, checked: false, id: Date.now()}))
         setInput('')
     }
 

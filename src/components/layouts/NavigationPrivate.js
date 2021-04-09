@@ -83,6 +83,7 @@ export function NavigationPrivate() {
                             ? <li><a className="dropdown-item" href='http://localhost:8000/admin'>Administration</a></li>
                             : null
                         */}
+                        <li><a className="dropdown-item" href='http://localhost:8000/admin'>Administration</a></li>
                         <li><hr className="dropdown-divider"/></li>
                         <li onClick={handleLogout} className="dropdown-item">Se déconnecter</li>
                     </ul>

@@ -8,7 +8,7 @@ const checklistSlice = createSlice({
     name: 'checklist',
     initialState,
     reducers: {
-        saveChecklist: (state, action) => {
+        addChecklist: (state, action) => {
             state.checklistTodo.push(action.payload)
         },
         deleteChecklist: (state, action) => {
@@ -26,7 +26,7 @@ const checklistSlice = createSlice({
 
 const { reducer, actions } = checklistSlice;
 
-export const { saveChecklist, deleteChecklist, setCheck } = actions;
+export const { addChecklist, deleteChecklist, setCheck } = actions;
 
 export const selectChecklistTodo = state => state.checklist.checklistTodo;
 

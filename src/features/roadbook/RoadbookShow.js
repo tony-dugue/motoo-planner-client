@@ -3,15 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {selectRoadbook, getSingleRoadbook, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
 import {findSingleRoadbook, roadbookChangeStatus} from 'api/roadbookApi';
-import {selectChecklistTodo} from 'features/checklist/checklistSlice';
-import {ChecklistAdd} from "../checklist/ChecklistAdd";
-import {ChecklistItem} from "../checklist/ChecklistItem";
+import {ChecklistContainer} from "features/checklist/ChecklistContainer";
+import {InformationContainer} from "features/information/InformationContainer";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faPhoneAlt, faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle,
-    faMapMarkerAlt, faUtensils, faMonument, faBed, faHome, faEnvelope
+    faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle, faMapMarkerAlt, faUtensils, faMonument, faBed, faHome
 } from "@fortawesome/free-solid-svg-icons";
 
 import map from '../../assets/images/map.jpeg';
@@ -23,7 +21,6 @@ export function RoadbookShow() {
     const location = useLocation()
 
     const { roadbook, loading } = useSelector(selectRoadbook);
-    const checklistTodo = useSelector(selectChecklistTodo)
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
@@ -186,20 +183,9 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
 
-                                        <Link to={"/informations/" + roadbook.id}
-                                              className="roadbook-show-informations__link btn btn-motoo-outline">Modifier les
-                                            informations</Link>
+                                        <p className="roadbook-show-checklist__desc">Personnes à contacter et quelques informations pratiques</p>
 
-                                        <p className="roadbook-show-informations__item">Contact: Gérard Dupond</p>
-
-                                        <p>
-                                            <FontAwesomeIcon icon={faPhoneAlt}/> 06 56 87 65 56</p>
-
-                                        <p>
-                                            <FontAwesomeIcon icon={faEnvelope}/> gerard.dupond@gmail.com</p>
-
-                                        <p className="roadbook-show-informations__item-desc">Un briefing sera effectué 15min avant
-                                            le départ. </p>
+                                        <InformationContainer />
 
                                     </div>
 
@@ -207,21 +193,9 @@ export function RoadbookShow() {
 
                                         <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
 
-                                        <p className="roadbook-show-checklist__desc">Liste des choses importantes ...</p>
+                                        <p className="roadbook-show-checklist__desc">Liste des choses à ne pas oublier pour la balade</p>
 
-                                        <div className="checklist__container">
-
-                                            <div className="checklist__todo-container">
-                                                {checklistTodo.map(item => (
-                                                    <ChecklistItem key={item.id} task={item.task} checked={item.checked}
-                                                                   id={item.id}/>
-                                                ))}
-                                            </div>
-
-                                            <ChecklistAdd/>
-
-                                        </div>
-
+                                        <ChecklistContainer />
 
                                     </div>
                                 </div>

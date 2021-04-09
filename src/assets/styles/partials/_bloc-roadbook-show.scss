@@ -92,7 +92,7 @@
     }
 
     &__link {
-      margin: spacing(3) 0;
+      margin-bottom: spacing(3);
     }
 
     &__step {
@@ -133,24 +133,6 @@
       border-left: none;
       padding-left: 0;
       text-align: center;
-    }
-
-    &__link {
-      margin: spacing(3) 0;
-    }
-
-    &__item {
-      margin-bottom: spacing(1);
-      font-weight: 600;
-
-      @include down(768) {
-        text-align: left;
-      }
-
-      &-desc {
-        font-weight: 400;
-        margin-top: spacing(2);
-      }
     }
   }
 

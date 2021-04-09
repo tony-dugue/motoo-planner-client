@@ -15,7 +15,6 @@ import {RegisterScene} from 'scenes/Register/RegisterScene';
 import {DashboardScene} from 'scenes/Dashboard/DashboardScene';
 import {RoadbookCreateScene} from 'scenes/Roadbook/RoadbookCreateScene';
 import {ItineraryPlannerScene} from 'scenes/ItineraryPlanner/ItineraryPlannerScene';
-import {InformationsScene} from 'scenes/Informations/InformationsScene';
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
@@ -66,8 +65,6 @@ function App() {
                     <PrivateRoute path="/roadbook/:slug"><RoadbookShowScene /></PrivateRoute>
 
                     <PrivateRoute path="/itinerary/:slug"><ItineraryPlannerScene /></PrivateRoute>
-
-                    <PrivateRoute path="/informations/:slug"><InformationsScene /></PrivateRoute>
 
                     {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
 

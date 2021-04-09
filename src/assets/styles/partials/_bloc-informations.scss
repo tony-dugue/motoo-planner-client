@@ -1,4 +1,54 @@
-.informations {
-  text-align: left;
-  width: 100%;
+.information {
+
+  &__todo-container {
+
+  }
+
+  &__add {
+    margin-bottom: spacing(3);
+
+    &-btn {
+      font-size: 0.7rem;
+    }
+  }
+
+  &__item {
+    margin-bottom: spacing(3);
+    font-weight: 500;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    padding: spacing(1) spacing(2) spacing(2);
+
+    @include down(768) {
+      text-align: left;
+    }
+
+    &-name {
+      font-weight: 600;
+      margin-top: spacing(1);
+      color: $color-secondary;
+    }
+
+    &-desc {
+      font-weight: 400;
+      margin-top: spacing(2);
+    }
+
+    &-icon {
+      font-weight: 600;
+      margin-right: spacing(1);
+    }
+
+    &--delete {
+      color: #e2acac;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        font-size: 1rem;
+        color: #e36363;
+      }
+    }
+  }
 }

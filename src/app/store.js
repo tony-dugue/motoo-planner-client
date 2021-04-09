@@ -4,14 +4,16 @@ import userReducer from 'features/user/userSlice';
 import roadbookReducer from 'features/roadbook/roadbookSlice';
 import checklistReducer from 'features/checklist/checklistSlice';
 import authReducer from 'features/auth/authSlice';
+import informationReducer from 'features/information/informationSlice';
 
 export default configureStore({
   reducer: {
+    auth: authReducer,
     article: articleReducer,
     user: userReducer,
     roadbook: roadbookReducer,
     checklist: checklistReducer,
-    auth: authReducer
+    information: informationReducer
   }
 });
 
