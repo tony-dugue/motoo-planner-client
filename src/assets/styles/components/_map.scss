@@ -2,6 +2,7 @@
 .leaflet-container {
     width: 100%;
     height: 70vh;
+    box-shadow: $box-shadow-btn-hover;
 
     @include down(992) {
         height: 30vh;
