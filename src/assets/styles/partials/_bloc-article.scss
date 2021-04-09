@@ -1,5 +1,10 @@
 .article {
 
+  @include down(768) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   &__back {
     margin-bottom: spacing(5);
   }

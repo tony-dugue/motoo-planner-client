@@ -2,6 +2,10 @@
   text-align: left;
   width: 100%;
 
+  @include down(768) {
+    text-align: center;
+  }
+
   &__welcome {
     font-weight: 700;
     font-size: 1.4rem;

@@ -3,6 +3,7 @@
   top: 0;
   width: 100%;
   background-color: transparent;
+  z-index: 100;
 
   &.active {
     background-color: $color-white;
@@ -16,7 +17,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 0;
-  max-width: 1280px;
+  max-width: 1800px;
   margin: 0 auto;
   color: $color-text;
 
@@ -31,9 +32,11 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-left: 50px;
 
     @include down(992) {
       margin-bottom: spacing(3);
+      margin-left: 0;
     }
     @include down(768) {
       width: 100%;
@@ -53,6 +56,11 @@
   &__link {
     display: flex;
     align-items: center;
+    margin-right: 50px;
+
+    @include down(992) {
+      margin-right: 0;
+    }
 
     &-items {
       display: flex;

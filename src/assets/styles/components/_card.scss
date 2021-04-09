@@ -3,6 +3,11 @@
   &-article {
     padding: 25px;
 
+    @include down(768) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
     &__title {
       margin-bottom: spacing(1);
       font-size: 1.5rem;

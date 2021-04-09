@@ -1,10 +1,10 @@
 .roadbook-show {
   text-align: left;
+  margin-top: spacing(5);
 
   &__heading {
 
     @include down(768) {
-      margin-top: spacing(5);
       text-align: center;
     }
 
@@ -33,10 +33,17 @@
   }
 
   &-gestion {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: $color-light-grey;
     padding: spacing(3);
     text-align: center;
+
+    @include down(768) {
+      flex-direction: column;
+      justify-content: center;
+    }
 
     &__check {
       display: flex;
@@ -90,42 +97,8 @@
   }
 
   &-itinerary {
-
     @include down(768) {
       text-align: center;
-    }
-
-    &__link {
-      margin-bottom: spacing(3);
-    }
-
-    &__step {
-      text-align: left;
-
-      li {
-        display: flex;
-        margin-bottom: 6px;
-      }
-
-      span {
-        width: 50px;
-        display: inline-block;
-        text-align: center;
-      }
-
-      .distance {
-        color: $color-primary;
-        font-size: 0.8rem;
-
-        .distance-icon {
-          color: #b1b1b1;
-        }
-      }
-
-      .restaurant-icon { color: $color-restaurant; }
-      .visite-icon { color: $color-visite; }
-      .location-icon { color: $color-location; }
-      .hotel-icon { color: $color-hotel; }
     }
   }
 

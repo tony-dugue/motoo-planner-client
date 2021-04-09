@@ -12,19 +12,19 @@ export function Footer() {
                 <div className="footer-link">
 
                     <div className="footer-link__menu">
-                        <p className="footer-link__menu-heading">Menu 1</p>
+                        <p className="footer-link__menu-heading">Articles</p>
                         <ul>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Rubrique 1</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Rubrique 2</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Rubrique 3</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/1'>article 1</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/2'>article 2</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/3'>article 3</NavLink></li>
                         </ul>
                     </div>
 
                     <div className="footer-link__menu">
-                        <p className="footer-link__menu-heading">Menu 2</p>
+                        <p className="footer-link__menu-heading">L'application</p>
                         <ul>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Rubrique 1</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Rubrique 2</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/presentation'>Présentation</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/other'>FAQ</NavLink></li>
                         </ul>
                     </div>
 

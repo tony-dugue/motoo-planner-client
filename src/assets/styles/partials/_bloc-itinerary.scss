@@ -1,0 +1,59 @@
+.itinerary {
+  text-align: left;
+  width: 100%;
+
+  &__todo-container {
+    margin-top: spacing(5);
+  }
+
+  &__title {
+    margin-top: spacing(5);
+
+    span {
+      font-size: 1.5rem;
+      color: $color-text;
+
+      @include down(768) {
+        display: block;
+        margin-top: spacing(3);
+      }
+    }
+  }
+
+  @include down(768) {
+    text-align: center;
+  }
+
+  &__link {
+    margin-bottom: spacing(3);
+  }
+
+  &__step {
+    text-align: left;
+
+    li {
+      display: flex;
+      margin-bottom: 6px;
+    }
+
+    span {
+      width: 50px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .distance {
+      color: $color-primary;
+      font-size: 0.8rem;
+
+      .distance-icon {
+        color: #b1b1b1;
+      }
+    }
+
+    .restaurant-icon { color: $color-restaurant; }
+    .visite-icon { color: $color-visite; }
+    .location-icon { color: $color-location; }
+    .hotel-icon { color: $color-hotel; }
+  }
+}

@@ -19,6 +19,7 @@
 
 @import 'layouts/navigation';
 @import 'layouts/wrapper';
+@import 'layouts/itineraryPlannerInterface';
 @import 'layouts/footer';
 
 /* ==========================================================================
@@ -29,7 +30,7 @@
 @import 'partials/bloc-checklist';
 @import 'partials/bloc-home';
 @import 'partials/bloc-informations';
-@import 'partials/bloc-itinerary-planner';
+@import 'partials/bloc-itinerary';
 @import 'partials/bloc-presentation';
 @import 'partials/bloc-profile';
 @import 'partials/bloc-roadbook-form';
@@ -41,8 +42,9 @@
   ========================================================================== */
 
 @import 'components/button';
-@import 'components/form';
 @import 'components/card';
+@import 'components/form';
+@import 'components/map';
 @import 'components/modal';
 
 /* ==========================================================================

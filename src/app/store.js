@@ -5,6 +5,7 @@ import roadbookReducer from 'features/roadbook/roadbookSlice';
 import checklistReducer from 'features/checklist/checklistSlice';
 import authReducer from 'features/auth/authSlice';
 import informationReducer from 'features/information/informationSlice';
+import itineraryReducer from 'features/itinerary/itinerarySlice';
 
 export default configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export default configureStore({
     user: userReducer,
     roadbook: roadbookReducer,
     checklist: checklistReducer,
-    information: informationReducer
+    information: informationReducer,
+    itinerary: itineraryReducer
   }
 });
 

@@ -5,11 +5,12 @@ import {selectRoadbook, getSingleRoadbook, getLoading, getFailure} from 'feature
 import {findSingleRoadbook, roadbookChangeStatus} from 'api/roadbookApi';
 import {ChecklistContainer} from "features/checklist/ChecklistContainer";
 import {InformationContainer} from "features/information/InformationContainer";
+import {ItineraryContainer} from "features/itinerary/ItineraryContainer";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle, faMapMarkerAlt, faUtensils, faMonument, faBed, faHome
+    faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle
 } from "@fortawesome/free-solid-svg-icons";
 
 import map from '../../assets/images/map.jpeg';
@@ -20,7 +21,7 @@ export function RoadbookShow() {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const { roadbook, loading } = useSelector(selectRoadbook);
+    const {roadbook, loading} = useSelector(selectRoadbook);
 
     //récupération du pathname de l'url (ex /roadbooks/xx) et du token
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
@@ -32,6 +33,7 @@ export function RoadbookShow() {
             dispatch(getSingleRoadbook(result))
             dispatch(getFailure())
         }
+
         try {
             fetchData();
         } catch (error) {
@@ -56,158 +58,135 @@ export function RoadbookShow() {
     }
 
     return (
-        <div className="content">
-            <div className="roadbook-show">
-                <div className="container">
 
-                    <h2 className="roadbook-show__heading">Roadbook : <span>{roadbook.title}</span></h2>
+        <div className="roadbook-show">
+            <div className="container">
 
-                    <section>
-                        <div className="container">
-                            <div className="row roadbook-show-gestion">
+                <h2 className="roadbook-show__heading">Roadbook : <span>{roadbook.title}</span></h2>
 
-                                <div className="col-md-6">
+                <section>
+                    <div className="container">
+                        <div className="roadbook-show-gestion">
 
-                                    <button className="btn btn-outline-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteRoadbook">
-                                        <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
-                                        {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
-                                    </button>
+                            <div>
+                                <button className="btn btn-outline-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deleteRoadbook">
+                                    <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
+                                    {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
+                                </button>
 
-                                    <RoadbookDeleteModal roadbookId={roadbook.id}/>
-
-                                </div>
-
-                                <div className="col-md-6 roadbook-show-gestion__check">
-                                    <p>Roadbook terminé ?</p>
-                                    <form>
-                                        <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" id="roadbookCheck"
-                                                   onClick={handleChangeStatus}
-                                                   defaultChecked={roadbook.status === 2 ? 'checked' : ''}/>
-                                        </div>
-                                    </form>
-                                </div>
-
+                                <RoadbookDeleteModal roadbookId={roadbook.id}/>
                             </div>
+
+                            <div className="roadbook-show-gestion__check">
+                                <p>Roadbook terminé ?</p>
+                                <form>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input" type="checkbox" id="roadbookCheck"
+                                               onClick={handleChangeStatus}
+                                               defaultChecked={roadbook.status === 2 ? 'checked' : ''}/>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    {/* ========== carte + résumé distance et informations de la balade ============ */}
+                {/* ========== carte + résumé distance et informations de la balade ============ */}
 
-                    <section>
-                        <div className="container">
-                            <div className="row roadbook-show-map">
-                                <div className="col-md-8">
-                                    <div className="roadbook-show-map__visualization">
-                                        {/* map */}
-                                        <img src={map} alt="placeholder" className="card-article__img"/>
-                                        <p>{roadbook.description}</p>
-                                    </div>
+                <section>
+                    <div className="container">
+                        <div className="row roadbook-show-map">
+                            <div className="col-md-8">
+                                <div className="roadbook-show-map__visualization">
+                                    {/* map */}
+                                    <img src={map} alt="placeholder" className="card-article__img"/>
+                                    <p>{roadbook.description}</p>
                                 </div>
-                                <div className="col-md-4">
-                                    <div className="roadbook-show-map__resume">
+                            </div>
+                            <div className="col-md-4">
+                                <div className="roadbook-show-map__resume">
 
-                                        <p>
-                                            <span><FontAwesomeIcon icon={faMotorcycle}/></span>
-                                            Distance totale: 230 km
-                                        </p>
+                                    <p>
+                                        <span><FontAwesomeIcon icon={faMotorcycle}/></span>
+                                        Distance totale: 230 km
+                                    </p>
 
-                                        <p className="roadbook-show-map__resume-item">
-                                            <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
-                                            Départ de la balade:
-                                        </p>
+                                    <p className="roadbook-show-map__resume-item">
+                                        <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
+                                        Départ de la balade:
+                                    </p>
 
-                                        <p className="address">rue de la gare</p>
-                                        <p className="address">35000 - Rennes</p>
+                                    <p className="address">rue de la gare</p>
+                                    <p className="address">35000 - Rennes</p>
 
-                                        <p className="roadbook-show-map__resume-item">
-                                            <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
-                                            Le 21 aout 2020 à 09h00
-                                        </p>
-                                    </div>
+                                    <p className="roadbook-show-map__resume-item">
+                                        <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
+                                        Le 21 aout 2020 à 09h00
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    <section>
-                        <div className="container">
-                            <div className="row">
+                <section>
+                    <div className="container">
+                        <div className="row">
 
-                                {/* ========== résumé de l'itinéraire ============ */}
+                            {/* ========== résumé de l'itinéraire ============ */}
 
-                                <div className="col-md-6">
-                                    <div className="roadbook-show-itinerary">
+                            <div className="col-md-6">
+                                <div className="roadbook-show-itinerary">
 
-                                        <h3 className="roadbook-show__heading-sub">Itinéraire</h3>
+                                    <h3 className="roadbook-show__heading-sub">Itinéraire</h3>
 
-                                        <Link to={"/itinerary/" + roadbook.id}
-                                              className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier
-                                            l'itinéraire</Link>
+                                    <Link to={"/itinerary/" + roadbook.id}
+                                          className="roadbook-show-itinerary__link btn btn-motoo-outline">Modifier
+                                        l'itinéraire</Link>
 
-                                        {/* étapes de la balade avec icones */}
+                                    {/* étapes de la balade avec icones */}
 
-                                        <div>
-                                            <ul className="roadbook-show-itinerary__step">
-                                                <li><span><FontAwesomeIcon icon={faHome}/></span>Départ de la balade</li>
-                                                <li className="distance"><span className="distance-icon">|</span>45 km</li>
-                                                <li><span className="location-icon"><FontAwesomeIcon
-                                                    icon={faMapMarkerAlt}/></span>pause étang du canard
-                                                </li>
-                                                <li className="distance"><span className="distance-icon">|</span>70 km</li>
-                                                <li><span className="restaurant-icon"><FontAwesomeIcon icon={faUtensils}/></span>Pause
-                                                    repas au restaurant du cap
-                                                </li>
-                                                <li className="distance"><span className="distance-icon">|</span>110 km</li>
-                                                <li><span className="visite-icon"><FontAwesomeIcon icon={faMonument}/></span>Visite
-                                                    pointe du grouin
-                                                </li>
-                                                <li className="distance"><span className="distance-icon">|</span>45 km</li>
-                                                <li><span className="hotel-icon"><FontAwesomeIcon icon={faBed}/></span>Hotel de la
-                                                    gare
-                                                </li>
-                                                <li className="distance"><span className="distance-icon">|</span>62 km</li>
-                                                <li><span><FontAwesomeIcon icon={faHome}/></span>Fin de la balade</li>
-                                            </ul>
+                                    <ItineraryContainer/>
+                                </div>
+                            </div>
 
-                                        </div>
-                                    </div>
+                            <div className="col-md-6">
+
+                                {/* ========== informations pratiques ============ */}
+
+                                <div className="roadbook-show-informations">
+
+                                    <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
+
+                                    <p className="roadbook-show__heading-desc">Personnes à contacter et quelques informations
+                                        pratiques</p>
+
+                                    <InformationContainer/>
+
                                 </div>
 
-                                <div className="col-md-6">
+                                {/* ========== checklist ============ */}
 
-                                    {/* ========== informations pratiques ============ */}
+                                <div className="roadbook-show-checklist">
 
-                                    <div className="roadbook-show-informations">
+                                    <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
 
-                                        <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
+                                    <p className="roadbook-show__heading-desc">Liste des choses à ne pas oublier pour la
+                                        balade</p>
 
-                                        <p className="roadbook-show__heading-desc">Personnes à contacter et quelques informations pratiques</p>
+                                    <ChecklistContainer/>
 
-                                        <InformationContainer />
-
-                                    </div>
-
-                                    {/* ========== checklist ============ */}
-
-                                    <div className="roadbook-show-checklist">
-
-                                        <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
-
-                                        <p className="roadbook-show__heading-desc">Liste des choses à ne pas oublier pour la balade</p>
-
-                                        <ChecklistContainer />
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                </div>
             </div>
         </div>
+
     );
 }
 
