@@ -175,25 +175,27 @@ export function RoadbookShow() {
                                     </div>
                                 </div>
 
-                                {/* ========== informations pratiques (contact et todolist ============ */}
-
                                 <div className="col-md-6">
+
+                                    {/* ========== informations pratiques ============ */}
 
                                     <div className="roadbook-show-informations">
 
                                         <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
 
-                                        <p className="roadbook-show-checklist__desc">Personnes à contacter et quelques informations pratiques</p>
+                                        <p className="roadbook-show__heading-desc">Personnes à contacter et quelques informations pratiques</p>
 
                                         <InformationContainer />
 
                                     </div>
 
+                                    {/* ========== checklist ============ */}
+
                                     <div className="roadbook-show-checklist">
 
                                         <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
 
-                                        <p className="roadbook-show-checklist__desc">Liste des choses à ne pas oublier pour la balade</p>
+                                        <p className="roadbook-show__heading-desc">Liste des choses à ne pas oublier pour la balade</p>
 
                                         <ChecklistContainer />
 

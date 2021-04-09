@@ -26,6 +26,10 @@
         text-align: center;
       }
     }
+
+    &-desc {
+      margin-bottom: spacing(3)
+    }
   }
 
   &-gestion {
@@ -143,93 +147,6 @@
     @include down(768) {
       border-left: none;
       padding-left: 0;
-    }
-
-    &__desc {
-      margin-bottom: spacing(3)
-    }
-
-    .checklist {
-
-      &__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: $color-secondary;
-        color: white;
-        font-weight: 500;
-        border-radius: 12px;
-        padding: spacing(4) 0;
-
-        .input-container {
-          height: 50px;
-          width: 80%;
-          border-radius: 12px;
-          background-color : white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: spacing(5);
-
-          @include down(768) {
-            width: 90%;
-          }
-
-          input {
-            background: none;
-            border: none;
-            margin-left: 12px;
-            flex:1;
-
-            &:focus {
-              outline: none;
-            }
-          }
-
-          button {
-            margin-right: 8px;
-            border-radius: 10px;
-          }
-        }
-      }
-
-      &__todo-container {
-        flex: 1;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        .checklist-item {
-          display: flex;
-          align-items: center;
-          width: 80%;
-          margin: 6px 4px;
-          height: 40px;
-          border-radius: 12px;
-
-          &--delete {
-            color: #e2acac;
-            font-size: 0.8rem;
-            margin-top: 2px;
-            cursor: pointer;
-            transition: 0.3s ease-in-out;
-
-            &:hover {
-              transform: scale(1.2);
-            }
-          }
-        }
-
-        .checklist-item > p {
-          flex: 1;
-        }
-
-        .checklist-item--done {
-          text-decoration: line-through;
-        }
-      }
     }
   }
 }
