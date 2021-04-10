@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import {selectAuth, authPending, authSuccess, authFail} from 'features/auth/authSlice';
 import { userLogin } from 'api/userApi';
-import {getUserProfile} from "../auth/userAction";
 
 
 export function UserLogin() {
@@ -29,14 +28,14 @@ export function UserLogin() {
 
         if (!username || !password) toast.warning('Veuillez remplir tout les champs!')
 
-        dispatch(authPending())
         try {
+            dispatch(authPending())
+
             const isAuth = await userLogin(formData)
 
             if (isAuth.status !== 200) dispatch(authFail(isAuth.message))
 
             dispatch(authSuccess())
-            dispatch(getUserProfile())
 
             toast.success('Bienvenue')
             history.push('/dashboard');

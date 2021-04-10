@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { selectAuth, authSuccess } from "features/auth/authSlice";
 import { selectUser } from "features/user/userSlice";
-import { getUserProfile } from "features/auth/userAction";
 
-import { fetchNewAccessJWT } from "api/userApi";
+import { fetchNewAccessJWT, getUserProfile } from "api/userApi";
 
 import { DefaultLayout } from "components/layouts/DefaultLayout";
 
@@ -17,17 +16,23 @@ export const PrivateRoute = ({ children, ...rest }) => {
     const { isAuth } = useSelector(selectAuth);
 
     useEffect(() => {
+
         const updateAccessJWT = async () => {
             const result = await fetchNewAccessJWT();
             result && dispatch(authSuccess());
         };
 
-        !userProfile._id && dispatch(getUserProfile());
+        console.log(userProfile)
 
-        !sessionStorage.getItem("accessJWT") && localStorage.getItem("crmSite") && updateAccessJWT();
+        !userProfile.id && dispatch(getUserProfile());
+
+        !sessionStorage.getItem("accessJWT") && localStorage.getItem("motooSite") && updateAccessJWT();
+
+
+        console.log('isAuth:' + isAuth)
 
         !isAuth && sessionStorage.getItem("accessJWT") && dispatch(authSuccess());
-    }, [dispatch, isAuth, userProfile._id]);
+    }, [dispatch, isAuth, userProfile]);
 
     return (
         <Route

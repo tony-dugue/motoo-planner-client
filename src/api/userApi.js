@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { getLoading, getSuccess, getFailure } from "features/user/userSlice";
 
 const rootUrl = "http://localhost:8000/api";
 const loginUrl = rootUrl + "/login_check";
@@ -60,6 +61,21 @@ export const findUser = () => {
         }
     })
 }
+
+export const getUserProfile = () => async (dispatch) => {
+    try {
+        dispatch(getLoading());
+
+        const result = await findUser();
+
+        if (result && result.id)
+            return dispatch(getSuccess(result.user));
+
+        dispatch(getFailure("l'utilisateur n'a pas été trouvé !"));
+    } catch (error) {
+        dispatch(getFailure(error));
+    }
+};
 
 export const userEdit = (userData) => {
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
-import {selectRoadbook, getSingleRoadbook, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
+import {selectRoadbook, getSingleRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
 import {findSingleRoadbook, roadbookChangeStatus} from 'api/roadbookApi';
 import {ChecklistContainer} from "features/checklist/ChecklistContainer";
 import {InformationContainer} from "features/information/InformationContainer";
@@ -31,9 +31,8 @@ export function RoadbookShow() {
             dispatch(getLoading())
             const result = await findSingleRoadbook(urlPath)
             dispatch(getSingleRoadbook(result))
-            dispatch(getFailure())
+            dispatch(getSuccess())
         }
-
         try {
             fetchData();
         } catch (error) {

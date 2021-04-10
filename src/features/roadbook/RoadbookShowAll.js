@@ -15,12 +15,12 @@ export function RoadbookShowAll() {
             dispatch(getLoading())
             const user = await findUser()
             dispatch(setUserProfile(user))
-            dispatch(getFailure())
         }
 
         try {
             fetchData();
         } catch (error) {
+            dispatch(getFailure(error))
             toast.warning("une erreur s'est produite !")
         }
     }, [dispatch])
