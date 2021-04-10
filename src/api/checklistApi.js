@@ -20,8 +20,19 @@ export const checklistCreate = data => {
     })
 }
 
-export const checklistChecked = () => {
+export const checklistCheck = (id, checkedStatus) => {
+    const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+    const body = JSON.stringify(checkedStatus)
 
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.put(checklistUrl + `/${id}`, body, config)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error);
+            reject(error.message);
+        }
+    })
 }
 
 export const checklistDelete = id => {

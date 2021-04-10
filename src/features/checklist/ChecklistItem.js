@@ -2,28 +2,36 @@ import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox'
 import {useDispatch} from 'react-redux';
 import {setCheck, deleteChecklist, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
-import {checklistDelete} from 'api/checklistApi';
+import {checklistDelete, checklistCheck} from 'api/checklistApi';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {toast} from "react-toastify";
 
 export function ChecklistItem({ task, checked, id }) {
 
     const dispatch = useDispatch();
 
-    const handleCheck = () => dispatch(setCheck(id))
+    const handleCheck = async () => {
+
+        const checkedStatus = checked ? {checked: false} : {checked: true}
+
+        try {
+            dispatch(getLoading())
+            dispatch(setCheck(id))
+            dispatch(checklistCheck(id, checkedStatus))
+            dispatch(getSuccess())
+        } catch (error) {
+            dispatch(getFailure(error))
+        }
+    }
 
     const handleDelete = async () => {
-
         try {
             dispatch(getLoading())
             const registration = await checklistDelete(id);
             dispatch(deleteChecklist(id))
             dispatch(getSuccess())
-            //if (!registration) dispatch(getFailure(registration.message))
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")
         }
     }
 
