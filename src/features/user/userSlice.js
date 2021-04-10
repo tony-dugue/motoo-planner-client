@@ -14,6 +14,9 @@ export const userSlice = createSlice({
             state.userProfile = action.payload
             state.isLoading = false
         },
+        editUserProfile: (state, action) => {
+            return {...state, userProfile: action.payload}
+        },
         setUserLogout: state => {
             state.userProfile = {}
         },
@@ -34,7 +37,7 @@ export const userSlice = createSlice({
 
 const { reducer, actions } = userSlice;
 
-export const { setUserLogin, setUserProfile, setUserLogout, getLoading, getFailure, getSuccess } = actions
+export const { editUserProfile, setUserProfile, setUserLogout, getLoading, getFailure, getSuccess } = actions
 
 export default reducer;
 

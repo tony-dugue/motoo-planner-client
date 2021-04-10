@@ -95,7 +95,7 @@ export const userDelete = () => {
             const res = await axios.delete(userProfilUrl + `/${userId}`, config)
 
             sessionStorage.removeItem("accessJWT")
-            localStorage.removeItem("motooPlannerSite")
+            localStorage.removeItem("motooSite")
             sessionStorage.removeItem('id');
 
             resolve(res.data)
@@ -109,14 +109,14 @@ export const userDelete = () => {
 
 export const userLogout = () => {
     sessionStorage.removeItem("accessJWT")
-    localStorage.removeItem("motooPlannerSite")
+    localStorage.removeItem("motooSite")
     sessionStorage.removeItem('id');
 }
 
 export const fetchNewAccessJWT = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const { refreshJWT } = JSON.parse(localStorage.getItem("motooPlannerSite"));
+            const { refreshJWT } = JSON.parse(localStorage.getItem("motooSite"));
 
             if (!refreshJWT) reject("Token not found!");
 
@@ -129,7 +129,7 @@ export const fetchNewAccessJWT = () => {
             resolve(true);
         } catch (error) {
             if (error.message === "Request failed with status code 403") {
-                localStorage.removeItem("motooPlannerSite");
+                localStorage.removeItem("motooSite");
             }
             reject(false);
         }

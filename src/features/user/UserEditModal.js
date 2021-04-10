@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {selectUser, getLoading, getFailure, getSuccess} from 'features/user/userSlice';
+import {selectUser, editUserProfile, getLoading, getFailure, getSuccess} from 'features/user/userSlice';
 import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
 
@@ -32,7 +32,9 @@ export function UserEditModal() {
             dispatch(getLoading())
             try {
                 const userData = {firstName, lastName, email, avatar};
-                await userEdit({userData});
+                await userEdit(userData);
+                dispatch(editUserProfile(userData))
+                console.log(userData)
                 dispatch(getSuccess())
             } catch (error) {
                 dispatch(getFailure(error))
