@@ -8,6 +8,8 @@
   }
 
   &-hero {
+    margin-bottom: spacing(8);
+
     &__link {
       display: flex;
       flex-direction: column;
@@ -31,6 +33,7 @@
 
   &-presentation {
     width: 70%;
+    margin: spacing(5) auto;
     @include down(768) {
       width: 100%;
     }
@@ -52,9 +55,11 @@
     width: 60%;
     background-color: $color-light-grey;
     padding: spacing(5) 0;
+    margin: spacing(10) auto;
 
     @include down(768) {
       width: 100%;
+      margin: spacing(8) auto;
     }
 
     &__form {

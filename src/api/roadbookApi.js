@@ -72,7 +72,7 @@ export const roadbookChangeStatus = (roadbookStatus, urlPath) => {
         try {
             await axios.put(rootUrl + urlPath, body, config)
 
-            const res = await axios.get(roadbookUrl + urlPath, config)
+            const res = await axios.get(rootUrl + urlPath, config)
             resolve(res.data)
 
         } catch (error) {
