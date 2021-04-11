@@ -4,9 +4,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 export function ItineraryStepItem({ type, title, icon }) {
 
   return (
-      <li>
-          <span className={type + "-icon"}><FontAwesomeIcon icon={icon}/></span>
-          {title}
-      </li>
+      <li><span className={type + "-icon"}><FontAwesomeIcon icon={icon} /></span>{title}</li>
   );
 }

@@ -70,6 +70,7 @@ export const {
 export const selectRoadbook = state => state.roadbook;
 export const selectChecklist = state => state.roadbook.roadbook.checklists;
 export const selectInformations = state => state.roadbook.roadbook.informations;
+export const selectSteps = state => state.roadbook.roadbook.steps;
 
 export default reducer
 

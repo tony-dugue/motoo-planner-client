@@ -25,6 +25,13 @@ import {ArticleSingleScene} from 'scenes/Article/ArticleSingleScene';
 import {RoadbookShowScene} from 'scenes/Roadbook/RoadbookShowScene';
 import {Footer} from 'components/layouts/Footer';
 
+// import global des icones fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faHome, faMapMarkerAlt, faUtensils, faMonument, faBed } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faHome, faMapMarkerAlt, faUtensils, faMonument, faBed)
+
 function App() {
 
     const tokenStorage = sessionStorage.getItem('accessJWT'); // on récupère le token dans le storage
