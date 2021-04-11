@@ -22,14 +22,9 @@ export const PrivateRoute = ({ children, ...rest }) => {
             result && dispatch(authSuccess());
         };
 
-        console.log(userProfile)
-
         !userProfile.id && dispatch(getUserProfile());
 
         !sessionStorage.getItem("accessJWT") && localStorage.getItem("motooSite") && updateAccessJWT();
-
-
-        console.log('isAuth:' + isAuth)
 
         !isAuth && sessionStorage.getItem("accessJWT") && dispatch(authSuccess());
     }, [dispatch, isAuth, userProfile]);

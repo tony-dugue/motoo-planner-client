@@ -1,12 +1,12 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectInformationTodo} from 'features/information/informationSlice';
+import {selectInformations} from 'features/roadbook/roadbookSlice';
 import {InformationItem} from "features/information/InformationItem";
 import {InformationAdd} from "features/information/InformationAdd";
 
 export function InformationContainer() {
 
-    const informationTodo = useSelector(selectInformationTodo)
+    const informationTodo = useSelector(selectInformations)
 
     return (
         <div className="information__todo-container">

@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import {addInformation, getLoading, getFailure, getSuccess} from 'features/information/informationSlice';
+import {addInformation, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
+import {informationCreate} from 'api/informationApi';
 import {toast} from "react-toastify";
+import {useLocation} from "react-router-dom";
 
 export function InformationAddModal() {
 
     const dispatch = useDispatch()
+    const location = useLocation()
 
     const [formData, setFormData] = useState({ name: "", phone: "", email: "", description: "" });
 
@@ -22,9 +25,31 @@ export function InformationAddModal() {
         else {
             dispatch(getLoading())
             try {
-                dispatch(addInformation({ name, phone, email, description, id: Date.now()}))
-                setFormData({ name: "", phone: "", email: "", description: "" })
-                dispatch(getSuccess())
+                const urlPath = location.pathname.replace('roadbook', 'roadbooks')
+
+                const informationData = {
+                    description: description,
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    roadbook: 'api' + urlPath
+                }
+
+                const registration = await informationCreate(informationData);
+
+                const newInformation = {
+                    id: registration.id,
+                    description: registration.description,
+                    name: registration.name,
+                    phone: registration.phone,
+                    email: registration.email
+                }
+
+                await dispatch(addInformation(newInformation))
+
+                //dispatch(addInformation(informationData))
+                //setFormData({ name: "", phone: "", email: "", description: "" })
+
             } catch (error) {
                 dispatch(getFailure(error))
                 toast.warning("une erreur s'est produite !")

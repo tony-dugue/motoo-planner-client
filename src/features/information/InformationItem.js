@@ -1,14 +1,28 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faPhoneAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {deleteInformation} from 'features/information/informationSlice';
+import {deleteInformation, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
+import {informationDelete} from 'api/informationApi';
 import {useDispatch} from "react-redux";
 
 export function InformationItem({ id, name, phone, email, description }) {
 
     const dispatch = useDispatch()
 
-    const handleDelete = () => dispatch(deleteInformation(id))
+    const handleDelete = async () => {
+        try {
+            dispatch(getLoading())
+            await informationDelete(id);
+            dispatch(deleteInformation(id))
+            dispatch(getSuccess())
+
+            // dispatch(deleteInformation(id))
+
+
+        } catch (error) {
+            dispatch(getFailure(error))
+        }
+    }
 
   return (
    <div className="information__item">

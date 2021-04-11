@@ -19,21 +19,13 @@ export function ChecklistAdd() {
         dispatch(getLoading())
 
         try {
-            //récupération du pathname de l'url (ex /roadbooks/xx) et du token
             const urlPath = location.pathname.replace('roadbook', 'roadbooks')
-
             const checklistData = {task: input, checked: false, roadbook: 'api' + urlPath}
 
             const registration = await checklistCreate(checklistData);
 
             const newChecklist = {id: registration.id, task: registration.task, checked: registration.checked}
-
             await dispatch(addChecklist(newChecklist))
-
-
-
-            // if (registration.status !== 200) dispatch(getFailure(registration.message))
-
         } catch (error) {
             dispatch(getFailure(error))
             toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")

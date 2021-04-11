@@ -27,14 +27,13 @@ export function ChecklistItem({ task, checked, id }) {
     const handleDelete = async () => {
         try {
             dispatch(getLoading())
-            const registration = await checklistDelete(id);
+            await checklistDelete(id);
             dispatch(deleteChecklist(id))
             dispatch(getSuccess())
         } catch (error) {
             dispatch(getFailure(error))
         }
     }
-
 
     return (
         <div className="checklist-item">

@@ -32,6 +32,13 @@ export const roadbookSlice = createSlice({
                 }
             })
         },
+        addInformation: (state, action) => {
+            state.roadbook.informations.push(action.payload)
+            state.loading = false
+        },
+        deleteInformation: (state, action) => {
+            return {...state, roadbook: {...state.roadbook, informations: state.roadbook.informations.filter(item => action.payload !== item.id)}}
+        },
         getLoading: state => {
             state.loading = true
         },
@@ -47,10 +54,22 @@ export const roadbookSlice = createSlice({
 
 const { reducer, actions } = roadbookSlice;
 
-export const { getSingleRoadbook, removeRoadbook, addChecklist, deleteChecklist, setCheck, getLoading, getFailure, getSuccess } = actions
+export const {
+    getSingleRoadbook,
+    removeRoadbook,
+    addChecklist,
+    deleteChecklist,
+    setCheck,
+    addInformation,
+    deleteInformation,
+    getLoading,
+    getFailure,
+    getSuccess
+} = actions
 
 export const selectRoadbook = state => state.roadbook;
 export const selectChecklist = state => state.roadbook.roadbook.checklists;
+export const selectInformations = state => state.roadbook.roadbook.informations;
 
 export default reducer
 
