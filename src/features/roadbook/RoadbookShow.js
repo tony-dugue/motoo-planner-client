@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {selectRoadbook, getSingleRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
-import {findSingleRoadbook, roadbookChangeStatus} from 'api/roadbookApi';
+import {findSingleRoadbook} from 'api/roadbookApi';
 import {ChecklistContainer} from "features/checklist/ChecklistContainer";
 import {InformationContainer} from "features/information/InformationContainer";
 import {ItineraryContainer} from "features/itinerary/ItineraryContainer";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
+import {RoadbookStatusModal} from 'features/roadbook/RoadbookStatusModal';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -23,7 +24,7 @@ export function RoadbookShow() {
 
     const {roadbook, loading} = useSelector(selectRoadbook);
 
-    //récupération du pathname de l'url (ex /roadbooks/xx) et du token
+    //récupération du pathname de l'url (ex /roadbooks/xx)
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
 
     useEffect(() => {
@@ -51,11 +52,6 @@ export function RoadbookShow() {
         </div>
     )
 
-    const handleChangeStatus = async () => {
-        const roadbookStatus = roadbook.status === 1 ? {'status': 2} : {'status': 1}
-        await roadbookChangeStatus(roadbookStatus, urlPath)
-    }
-
     return (
 
         <div className="roadbook-show">
@@ -79,13 +75,9 @@ export function RoadbookShow() {
 
                             <div className="roadbook-show-gestion__check">
                                 <p>Roadbook terminé ?</p>
-                                <form>
-                                    <div className="form-check form-switch">
-                                        <input className="form-check-input" type="checkbox" id="roadbookCheck"
-                                               onClick={handleChangeStatus}
-                                               defaultChecked={roadbook.status === 2 ? 'checked' : ''}/>
-                                    </div>
-                                </form>
+
+                                <RoadbookStatusModal roadbook={roadbook}/>
+
                             </div>
 
                         </div>
@@ -176,6 +168,9 @@ export function RoadbookShow() {
                                         balade</p>
 
                                     <ChecklistContainer/>
+
+                                    <p className="roadbook-show__heading-desc--info"> * Cocher la case pour une chose importante</p>
+
 
                                 </div>
                             </div>

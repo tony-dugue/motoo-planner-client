@@ -65,7 +65,7 @@ export function UserRegister() {
                 </div>
 
                 <div className="form-wrapper__bloc">
-                    <label htmlFor="lastnameInput" className="form-label">Votre prénom</label>
+                    <label htmlFor="lastnameInput" className="form-label">Votre nom</label>
                     <input type="text" className="form-control" id="lastnameInput" name="lastName"
                            value={lastName} onChange={handleChange} required />
                 </div>
@@ -93,7 +93,7 @@ export function UserRegister() {
             </form>
 
             <div id="passwordHelpBlock" className="form-text">
-                Le mot de passe doit contenir au moins 8 caractères, contenir au moins 1 majuscule, 1 minuscule et 1 chiffre.
+                Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule et 1 chiffre.
                 Seulement des lettres et chiffres (pas de caractères spéciaux, espaces ou émoji)
             </div>
 

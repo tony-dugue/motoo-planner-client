@@ -28,7 +28,7 @@ export const roadbookSlice = createSlice({
         setCheck: (state, action) => {
             state.roadbook.checklists.forEach(item => {
                 if (action.payload === item.id) {
-                    (item.checked === true) ? item.checked = false : item.checked = true
+                    (item.checked) ? item.checked = false : item.checked = true
                 }
             })
         },

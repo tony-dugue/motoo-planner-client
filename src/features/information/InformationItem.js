@@ -15,10 +15,6 @@ export function InformationItem({ id, name, phone, email, description }) {
             await informationDelete(id);
             dispatch(deleteInformation(id))
             dispatch(getSuccess())
-
-            // dispatch(deleteInformation(id))
-
-
         } catch (error) {
             dispatch(getFailure(error))
         }

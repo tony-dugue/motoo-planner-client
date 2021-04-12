@@ -17,7 +17,7 @@ export function InformationAddModal() {
 
     const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    const handleSubmit = async e => {
+    const handleSubmitInfo = async e => {
         e.preventDefault();
 
         if (!name || !phone)
@@ -46,9 +46,6 @@ export function InformationAddModal() {
                 }
 
                 await dispatch(addInformation(newInformation))
-
-                //dispatch(addInformation(informationData))
-                //setFormData({ name: "", phone: "", email: "", description: "" })
 
             } catch (error) {
                 dispatch(getFailure(error))
@@ -105,7 +102,7 @@ export function InformationAddModal() {
                               <button type="button" className="btn btn-motoo-outline-blue" data-bs-dismiss="modal">Annuler
                               </button>
                               <button type="button" className="btn btn-motoo-outline" data-bs-dismiss="modal"
-                                      onClick={handleSubmit}>Ajouter
+                                      onClick={handleSubmitInfo}>Ajouter
                               </button>
                           </div>
                       </form>

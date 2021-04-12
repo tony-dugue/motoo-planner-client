@@ -28,7 +28,6 @@ export const checklistCheck = (id, checkedStatus) => {
         try {
             await axios.put(checklistUrl + `/${id}`, body, config)
         } catch (error) {
-            console.log(error);
             reject(error.message);
         }
     })
