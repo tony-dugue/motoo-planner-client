@@ -6,7 +6,7 @@ import {ItineraryStepItem} from 'features/itinerary/ItineraryStepItem';
 
 export function ItineraryContainer() {
 
-    const stepsTodo = useSelector(selectSteps)
+    const stepsTodo = useSelector(selectSteps);
 
     const itineraries = stepsTodo.map( (item, index) => (
         <React.Fragment key= {item.id}>

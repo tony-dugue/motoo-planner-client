@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {selectSteps, selectRoadbook} from 'features/roadbook/roadbookSlice';
+import {getTypes, getLoading, getFailure} from 'features/itinerary/itinerarySlice';
+import {findTypes} from 'api/itineraryApi';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 import {ItineraryStepItem} from 'features/itinerary/ItineraryStepItem';
-import {selectSteps} from 'features/roadbook/roadbookSlice';
 import {Map} from 'components/map/Map';
-import {useSelector} from "react-redux";
 
 
 export function ItineraryPlannerScene() {
 
-    const stepsTodo = useSelector(selectSteps)
+    const dispatch = useDispatch()
+    const stepsTodo = useSelector(selectSteps);
+    const roadbook = useSelector(selectRoadbook);
 
     const itineraries = stepsTodo.map((item, index) => (
         <React.Fragment key={item.id}>
@@ -18,11 +22,25 @@ export function ItineraryPlannerScene() {
         </React.Fragment>
     ))
 
+    useEffect(() => {
+        async function fetchData() {
+            dispatch(getLoading())
+            const types = await findTypes()
+            dispatch(getTypes(types))
+        }
+
+        try {
+            fetchData();
+        } catch (error) {
+            dispatch(getFailure(error))
+        }
+    }, [dispatch])
+
     return (
         <>
             <div className="itinerary-top">
                 <Link to='/roadbook/2' className="btn btn-motoo-outline-blue">Revenir au roadbook</Link>
-                <h2 className="itinerary__title">Roadbook : <span>xxx</span></h2>
+                <h2 className="itinerary__title">Roadbook : <span>{roadbook.roadbook.title}</span></h2>
             </div>
 
             <div className="itinerary-planner">

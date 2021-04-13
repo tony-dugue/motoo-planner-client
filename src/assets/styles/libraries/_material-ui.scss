@@ -1,0 +1,64 @@
+/* ==========================================================================
+  Dialogs Modal - material-UI (Ajout étape - création itinéraire)
+  ========================================================================== */
+
+.MuiTypography {
+
+  &-root {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  &-h6 {
+    border-bottom: 1px solid #dee2e6;
+    padding: spacing(1);
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+.MuiDialogActions-root {
+  justify-content: center !important;
+}
+
+.MuiButtonBase-root {
+  margin: spacing(2) !important;
+
+}
+
+.MuiButton {
+  &-textPrimary {
+    color: $color-primary !important;
+    border: 1px solid $color-primary !important;
+    transition: 0.3s ease-in-out !important;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-primary !important;
+      border: 1px solid $color-primary !important;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+
+  }
+  &-textSecondary {
+    color: $color-visite !important;
+    border: 1px solid $color-visite !important;
+    transition: 0.3s ease-in-out !important;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-visite;
+      border: 1px solid $color-visite !important;
+      transform: scale(1.1);
+      box-shadow: $box-shadow-btn-hover;
+    }
+  }
+}
+
+.form-dialog-input {
+  margin-bottom: spacing(2);
+}
+

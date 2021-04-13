@@ -1,8 +1,16 @@
 import React, {useState} from 'react';
 import { useMapEvents } from "react-leaflet";
 import {ItineraryAddModal} from 'features/itinerary/ItineraryAddModal';
+import {stepCreate} from 'api/itineraryApi';
+import {selectRoadbook, addStep, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
+import {toast} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
 
 export function ItineraryAddMarker() {
+
+    const dispatch = useDispatch()
+
+    const roadbook = useSelector(selectRoadbook);
 
     const [position, setPosition] = useState(null);
     const [open, setOpen] = React.useState(false);
@@ -14,15 +22,78 @@ export function ItineraryAddMarker() {
         },
     });
 
-    const handleClose = () => setOpen(false);
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        stepDay: "",
+        stepHour: "",
+        type: 1
+    });
 
-    const handleValid = () => {
-        /* ajout dans base de donnée via api */
-        /* ajout dans le store */
-        setOpen(false);
+    const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
+
+    const handleClose = () => setOpen(false); // fermeture de la modal
+
+    const handleStepSubmit = async e => {
+        e.preventDefault();
+
+        if (!formData.stepDay || !formData.stepDay)
+            toast.warning("une date et une heure est obligatoire")
+        else {
+            dispatch(getLoading())
+            try {
+                /* récupération des données du formulaire */
+                const stepData = {
+                    title: formData.title,
+                    description: formData.description,
+                    type: 'api/types/' + formData.type,
+                    stepDate: formData.stepDay + "T" + formData.stepHour + ":00+00:00",
+                    stepLat: position.lat,
+                    stepLong: position.lng,
+                    roadbook: 'api/roadbooks/' + roadbook.roadbook.id
+                }
+
+                /* on réinitialise la valeur du select */
+                setFormData({...formData, type: 1})
+
+                /* ajout dans base de donnée via api */
+                const registration = await stepCreate(stepData)
+
+                /* on crée un objet formatté pour le state */
+                const newStep = {
+                    id: registration.id,
+                    stepDate: registration.stepDate,
+                    stepLat: registration.stepLat,
+                    stepLong: registration.stepLong,
+                    title: registration.title,
+                    description: registration.description,
+                    type: {slug: "home"}
+                    // TODO récupérer le slug dynamiquement !!! on connait que l'id !!!
+                }
+
+                /* ajout dans le store */
+                await dispatch(addStep(newStep))
+
+                // TODO: ranger les étapes par date du plus récent au plus ancien
+                // TODO: tracer des traits entre les étapes sur la carte
+                // TODO: afficher les icones sur la carte selon le type ???
+
+                setOpen(false);  // fermeture de la modal
+
+            } catch (error) {
+                dispatch(getFailure(error))
+                toast.warning("une erreur s'est produite !")
+            }
+        }
     }
 
     return position === null ? null : (
-        <ItineraryAddModal handleClose={handleClose} handleValid={handleValid} open={open} position={position} />
+        <ItineraryAddModal handleClose={handleClose}
+                           handleChange={handleChange}
+                           handleStepSubmit={handleStepSubmit}
+                           open={open}
+                           formData={formData}
+                           position={position}
+        />
     );
 }

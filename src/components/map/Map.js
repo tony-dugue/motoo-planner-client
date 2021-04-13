@@ -15,8 +15,6 @@ export const Map = () => {
 
     const stepsTodo = useSelector(selectSteps)
 
-    console.log(stepsTodo)
-
     const centerPosition = [48.10938, -1.67608]; // Rennes
 
     return (
