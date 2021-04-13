@@ -83,15 +83,13 @@ export function ItineraryAddMarker() {
                         icon: registration.type.icon,
                         slug: registration.type.slug
                     }
-                    // TODO récupérer le slug dynamiquement !!! on connait que l'id !!!
                 }
 
                 /* ajout dans le store */
                 await dispatch(addStep(newStep))
 
                 // TODO: ranger les étapes par date du plus récent au plus ancien
-                // TODO: tracer des traits entre les étapes sur la carte
-                // TODO: afficher les icones sur la carte selon le type ???
+                // TODO: ouvrir le popup dans la carte lors du clic sur une étape à gauche
 
                 setOpen(false);  // fermeture de la modal
 

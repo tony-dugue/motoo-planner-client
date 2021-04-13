@@ -58,7 +58,22 @@
   }
 }
 
-.form-dialog-input {
-  margin-bottom: spacing(2);
+.form-dialog {
+
+  &-input {
+    margin-bottom: spacing(2);
+  }
+
+  &__address {
+    color: $color-visite;
+    text-align: center;
+    margin-bottom: spacing(3)
+  }
+
+  &__msg {
+    color: red;
+    text-align: center;
+    font-size: 0.9rem;
+  }
 }
 

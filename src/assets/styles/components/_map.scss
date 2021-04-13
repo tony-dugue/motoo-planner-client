@@ -9,4 +9,31 @@
     }
 }
 
+.popup {
+    text-align: center;
+
+    &__type {
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: spacing(2);
+        text-transform: uppercase;
+    }
+
+    &__title {
+        font-weight: 500;
+    }
+
+    &__date {
+        font-size: 0.9rem;
+        color: $color-text;
+    }
+
+    &__desc {
+        color: $color-visite;
+        font-size: 0.9rem;
+    }
+
+}
+
 

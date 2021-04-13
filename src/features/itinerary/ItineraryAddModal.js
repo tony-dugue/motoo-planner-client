@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -22,7 +21,7 @@ export function ItineraryAddModal({open, formData, handleClose, handleChange, ha
 
                 <DialogContent>
 
-                    <p>{address}</p>
+                    <p className="form-dialog__address">{address}</p>
 
                     <div className="form-dialog-input">
                         <TextField
@@ -86,7 +85,7 @@ export function ItineraryAddModal({open, formData, handleClose, handleChange, ha
 
                 </DialogContent>
 
-                <DialogContentText>Les champs type, date et heure sont obligatoires</DialogContentText>
+                <p className="form-dialog__msg">Les champs type, date et heure sont obligatoires</p>
 
                 <DialogActions>
                     <Button onClick={handleClose} color="secondary">Annuler</Button>
