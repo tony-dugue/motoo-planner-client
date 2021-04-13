@@ -69,6 +69,7 @@ export function ItineraryAddMarker() {
                 /* ajout dans base de donnée via api */
                 const registration = await stepCreate(stepData)
 
+                console.log(registration)
                 /* on crée un objet formatté pour le state */
                 const newStep = {
                     id: registration.id,
@@ -77,7 +78,11 @@ export function ItineraryAddMarker() {
                     stepLong: registration.stepLong,
                     title: registration.title,
                     description: registration.description,
-                    type: {slug: "home"}
+                    type: {
+                        name: registration.type.name,
+                        icon: registration.type.icon,
+                        slug: registration.type.slug
+                    }
                     // TODO récupérer le slug dynamiquement !!! on connait que l'id !!!
                 }
 
