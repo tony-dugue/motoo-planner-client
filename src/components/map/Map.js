@@ -35,8 +35,9 @@ export const Map = () => {
                     >
                         <Popup>
                             <div className="popup">
+                                <p className="popup__type">{step.type.slug}</p>
                                 <p className="popup__title">{step.title}</p>
-                                <p className="popup__price">{step.type.slug}</p>
+                                <p className="popup__desc">{step.description}</p>
                             </div>
                         </Popup>
                     </Marker>

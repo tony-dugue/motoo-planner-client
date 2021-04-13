@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export function ItineraryAddModal({open, formData, handleClose, handleChange, handleStepSubmit}) {
+export function ItineraryAddModal({open, formData, handleClose, handleChange, handleStepSubmit, address}) {
 
     const types = useSelector(selectTypes);
 
@@ -22,7 +22,7 @@ export function ItineraryAddModal({open, formData, handleClose, handleChange, ha
 
                 <DialogContent>
 
-                    <DialogContentText>Les champs type, date et heure sont obligatoires</DialogContentText>
+                    <p>{address}</p>
 
                     <div className="form-dialog-input">
                         <TextField
@@ -84,29 +84,13 @@ export function ItineraryAddModal({open, formData, handleClose, handleChange, ha
                         />
                     </div>
 
-                    <div className="form-dialog-input">
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="description"
-                            type="text"
-                            onChange={handleChange}
-                            name="description"
-                            variant="outlined"
-                            helperText="Description de l'étape (facultatif)"
-                            fullWidth
-                        />
-                    </div>
-
                 </DialogContent>
 
+                <DialogContentText>Les champs type, date et heure sont obligatoires</DialogContentText>
+
                 <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Annuler
-                    </Button>
-                    <Button onClick={handleStepSubmit} color="primary">
-                        Créer l'étape
-                    </Button>
+                    <Button onClick={handleClose} color="secondary">Annuler</Button>
+                    <Button onClick={handleStepSubmit} color="primary">Créer l'étape</Button>
                 </DialogActions>
             </Dialog>
         </div>

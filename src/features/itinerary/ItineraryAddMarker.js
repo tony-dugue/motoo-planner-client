@@ -5,6 +5,7 @@ import {stepCreate} from 'api/itineraryApi';
 import {selectRoadbook, addStep, getLoading, getFailure} from 'features/roadbook/roadbookSlice';
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
+import controlGeocoder from "leaflet-control-geocoder";
 
 export function ItineraryAddMarker() {
 
@@ -13,11 +14,20 @@ export function ItineraryAddMarker() {
     const roadbook = useSelector(selectRoadbook);
 
     const [position, setPosition] = useState(null);
+    const [address, setAddress] = useState("")
     const [open, setOpen] = React.useState(false);
+
+    const geocoder = controlGeocoder.nominatim();
 
     useMapEvents({
         click: (e) => {
             setPosition(e.latlng); // ajout de la position dans le state
+
+            // récupération de l'adresse de la position
+            geocoder.reverse(e.latlng, 3, results => {
+                const stepAddress = results[0];
+                setAddress(stepAddress.name)
+            });
             setOpen(true);  // ouverture de la modal
         },
     });
@@ -45,7 +55,7 @@ export function ItineraryAddMarker() {
                 /* récupération des données du formulaire */
                 const stepData = {
                     title: formData.title,
-                    description: formData.description,
+                    description: address,
                     type: 'api/types/' + formData.type,
                     stepDate: formData.stepDay + "T" + formData.stepHour + ":00+00:00",
                     stepLat: position.lat,
@@ -94,6 +104,7 @@ export function ItineraryAddMarker() {
                            open={open}
                            formData={formData}
                            position={position}
+                           address={address}
         />
     );
 }
