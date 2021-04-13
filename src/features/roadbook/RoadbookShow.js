@@ -5,9 +5,10 @@ import {selectRoadbook, getSingleRoadbook, getLoading, getSuccess, getFailure} f
 import {findSingleRoadbook} from 'api/roadbookApi';
 import {ChecklistContainer} from "features/checklist/ChecklistContainer";
 import {InformationContainer} from "features/information/InformationContainer";
-import {ItineraryContainer} from "features/itinerary/ItineraryContainer";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 import {RoadbookStatusModal} from 'features/roadbook/RoadbookStatusModal';
+import {selectSteps} from 'features/roadbook/roadbookSlice';
+import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -23,6 +24,7 @@ export function RoadbookShow() {
     const location = useLocation()
 
     const {roadbook, loading} = useSelector(selectRoadbook);
+    const stepsTodo = useSelector(selectSteps);
 
     //récupération du pathname de l'url (ex /roadbooks/xx)
     const urlPath = location.pathname.replace('roadbook', 'roadbooks')
@@ -51,6 +53,16 @@ export function RoadbookShow() {
             <Link to='/dashboard' className="btn btn-secondary my-2 mx-2">Revenir au tableau de bord</Link>
         </div>
     )
+
+    const itineraries = stepsTodo.map( (item, index) => (
+        <React.Fragment key= {item.id}>
+            {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1} />}
+            <li>
+                <span className={item.type.slug + "-icon"}><FontAwesomeIcon icon={item.type.icon} /></span>
+                {item.title}
+            </li>
+        </React.Fragment>
+    ))
 
     return (
 
@@ -139,7 +151,10 @@ export function RoadbookShow() {
 
                                     {/* étapes de la balade avec icones */}
 
-                                    <ItineraryContainer/>
+                                    <ul className="itinerary__step">
+                                        {itineraries}
+                                    </ul>
+
                                 </div>
                             </div>
 

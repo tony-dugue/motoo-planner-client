@@ -88,9 +88,6 @@ export function ItineraryAddMarker() {
                 /* ajout dans le store */
                 await dispatch(addStep(newStep))
 
-                // TODO: ranger les étapes par date du plus récent au plus ancien
-                // TODO: ouvrir le popup dans la carte lors du clic sur une étape à gauche
-
                 setOpen(false);  // fermeture de la modal
 
             } catch (error) {

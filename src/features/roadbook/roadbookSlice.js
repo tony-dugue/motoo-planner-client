@@ -43,6 +43,9 @@ export const roadbookSlice = createSlice({
             state.roadbook.steps.push(action.payload)
             state.loading = false
         },
+        deleteStep: (state, action) => {
+            return {...state, roadbook: {...state.roadbook, steps: state.roadbook.steps.filter(item => action.payload !== item.id)}}
+        },
         getLoading: state => {
             state.loading = true
         },
@@ -67,6 +70,7 @@ export const {
     addInformation,
     deleteInformation,
     addStep,
+    deleteStep,
     getLoading,
     getFailure,
     getSuccess

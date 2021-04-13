@@ -9,9 +9,9 @@ export function ItineraryContainer() {
     const stepsTodo = useSelector(selectSteps);
 
     const itineraries = stepsTodo.map( (item, index) => (
-        <React.Fragment key= {item.id}>
+        <React.Fragment key={item.id}>
             {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1} />}
-            <ItineraryStepItem type={item.type.slug} title={item.title} icon={item.type.icon}/>
+            <ItineraryStepItem type={item.type.slug} title={item.title} icon={item.type.icon} />
         </React.Fragment>
     ))
 

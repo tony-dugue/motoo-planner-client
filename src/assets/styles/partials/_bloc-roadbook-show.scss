@@ -102,8 +102,13 @@
   }
 
   &-itinerary {
+
     @include down(768) {
       text-align: center;
+    }
+
+    &__link {
+      margin-bottom: spacing(5);
     }
   }
 

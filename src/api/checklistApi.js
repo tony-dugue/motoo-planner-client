@@ -39,7 +39,6 @@ export const checklistDelete = id => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.delete(checklistUrl + `/${id}`, config)
-            console.log(res)
             resolve(res.data)
         } catch (error) {
             console.log(error);

@@ -18,9 +18,12 @@ export function ItineraryPlannerScene() {
     const itineraries = stepsTodo.map((item, index) => (
         <React.Fragment key={item.id}>
             {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1}/>}
-            <ItineraryStepItem type={item.type.slug} title={item.title} icon={item.type.icon}/>
+            <ItineraryStepItem type={item.type.slug} title={item.title} icon={item.type.icon}  stepId={item.id} />
         </React.Fragment>
     ))
+
+    // TODO: ranger les étapes par date du plus récent au plus ancien
+    // TODO: ouvrir le popup dans la carte lors du clic sur une étape à gauche
 
     useEffect(() => {
         async function fetchData() {

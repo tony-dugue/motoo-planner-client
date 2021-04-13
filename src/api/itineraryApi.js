@@ -34,3 +34,17 @@ export const stepCreate = data => {
         }
     })
 }
+
+export const stepDelete = id => {
+    const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.delete(stepUrl + `/${id}`, config)
+            resolve(res.data)
+        } catch (error) {
+            console.log(error);
+            reject(error.message);
+        }
+    })
+}
