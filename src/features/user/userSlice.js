@@ -20,6 +20,10 @@ export const userSlice = createSlice({
         setUserLogout: state => {
             state.userProfile = {}
         },
+        addRoadbook: (state, action) => {
+            state.userProfile.roadbooks.push(action.payload)
+            state.loading = false
+        },
         getLoading: state => {
             state.isLoading = true
         },
@@ -37,7 +41,7 @@ export const userSlice = createSlice({
 
 const { reducer, actions } = userSlice;
 
-export const { editUserProfile, setUserProfile, setUserLogout, getLoading, getFailure, getSuccess } = actions
+export const { editUserProfile, setUserProfile, setUserLogout,addRoadbook,  getLoading, getFailure, getSuccess } = actions
 
 export default reducer;
 

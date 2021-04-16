@@ -27,7 +27,7 @@ export function UserRegister() {
         e.preventDefault();
 
         if (!emailValidator.test(email))
-            toast.warning("Une erreur s'est produite !")
+            toast.warning("Votre email n'est pas au bon format")
         else if (password !== passwordConfirm)
             toast.warning("Les mots de passe ne sont pas identique !")
         else if (!passwordValidator.test(password))

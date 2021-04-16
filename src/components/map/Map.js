@@ -9,6 +9,7 @@ import {ItineraryAddMarker} from "features/itinerary/ItineraryAddMarker";
 import moment from 'moment';
 import localization from 'moment/locale/fr';
 
+// sélection de l'icône du marker affiché sur la map
 export const icon = new Icon({
     iconUrl: "/icons/icon5.svg",
     iconSize: [45, 45]
@@ -16,9 +17,14 @@ export const icon = new Icon({
 
 export const Map = () => {
 
+    // récupération des étapes dans le store
     const stepsTodo = useSelector(selectSteps)
 
-    const centerPosition = [48.10938, -1.67608]; // Rennes
+    // position du centre de la carte lors de son affichage initial
+    // on récupère ici la position de l'étape de départ
+    const centerPosition = stepsTodo[0]
+        ? [stepsTodo[0].stepLat, stepsTodo[0].stepLong]
+        : [48.86877537077828, 2.3367584614300783];  // position de Paris par défaut
 
     // TODO: tracer des traits entre les étapes sur la carte
     // TODO: afficher les icones sur la carte selon le type ???
@@ -42,13 +48,10 @@ export const Map = () => {
                         <Popup>
                             <div className="popup">
                                 <p className="popup__type">{step.type.slug}</p>
-
                                 <p className="popup__title">{step.title}</p>
-
                                 <p className="popup__date">
-                                    Le {moment(step.stepDate).locale('fr', localization).format("L à h:mm")}
+                                    Le {moment(step.stepDate).locale('fr', localization).format("L à H:mm")}
                                 </p>
-
                                 <p className="popup__desc">{step.description}</p>
                             </div>
                         </Popup>

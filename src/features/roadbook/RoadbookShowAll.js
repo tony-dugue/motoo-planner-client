@@ -2,13 +2,15 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { selectUser, setUserProfile, getLoading, getFailure } from 'features/user/userSlice';
 import { findUser } from 'api/userApi';
-import {RoadbookCard} from "../../components/cards/RoadbookCard";
+import {RoadbookCard} from "components/cards/RoadbookCard";
 import {toast} from "react-toastify";
 
 export function RoadbookShowAll() {
 
     const dispatch = useDispatch()
-    const { userProfile, loading } = useSelector(selectUser); // on récupère le state
+
+    // récupération des données de l'utilisateur et de ses roadbooks dans le store
+    const { userProfile, loading } = useSelector(selectUser);
 
     useEffect(() => {
         async function fetchData() {
@@ -27,7 +29,7 @@ export function RoadbookShowAll() {
 
     if (loading) return <div className="container">Chargement en cours ...</div>
 
-    // TODO : voir pour ajouter une logique si le token est périmé (chargement en cours à l'infini)
+    // TODO : voir pour ajouter une logique si le token est périmé (chargement loading en cours à l'infini)
 
     const roadbookEnCoursItems = (userProfile.roadbooks)
         ? userProfile.roadbooks.map(roadbook => {

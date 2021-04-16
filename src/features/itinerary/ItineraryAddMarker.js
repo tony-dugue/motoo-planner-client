@@ -11,15 +11,21 @@ export function ItineraryAddMarker() {
 
     const dispatch = useDispatch()
 
+    // récupération des données du roadbook en cours dans le store
     const roadbook = useSelector(selectRoadbook);
 
+    // création de 2 états local permettant de récupérer les données (position et adresse)
     const [position, setPosition] = useState(null);
     const [address, setAddress] = useState("")
+    // création d'un état pour gérer l'affichage de la fenêtre modale
     const [open, setOpen] = React.useState(false);
 
+    // initialisation de la librairie nominatim pour la récupération de l'adresse
     const geocoder = controlGeocoder.nominatim();
 
+    // Hook de react-Leflet avec rôle d'écouteur d'évènement
     useMapEvents({
+        // sélection du type d'évènement (déclenchement ici lors d'un clic sur la carte)
         click: (e) => {
             setPosition(e.latlng); // ajout de la position dans le state
 
@@ -32,27 +38,25 @@ export function ItineraryAddMarker() {
         },
     });
 
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        stepDay: "",
-        stepHour: "",
-        type: 1
-    });
+    const [formData, setFormData] = useState(
+        { title: "", description: "", stepDay: "", stepHour: "", type: 1}
+    );
 
     const handleChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const handleClose = () => setOpen(false); // fermeture de la modal
 
+    // exécuté lors de la soumission du formulaire
     const handleStepSubmit = async e => {
         e.preventDefault();
 
-        if (!formData.stepDay || !formData.stepDay)
+        // vérification si l'heure et la date sont présente
+        if (!formData.stepDay || !formData.stepHour)
             toast.warning("une date et une heure est obligatoire")
         else {
             dispatch(getLoading())
             try {
-                /* récupération des données du formulaire */
+                /* récupération des données du formulaire dans les états locales */
                 const stepData = {
                     title: formData.title,
                     description: address,
@@ -66,11 +70,10 @@ export function ItineraryAddMarker() {
                 /* on réinitialise la valeur du select */
                 setFormData({...formData, type: 1})
 
-                /* ajout dans base de donnée via api */
+                /* envoi des données avec requête à l'API et ajout dans base de donnée */
                 const registration = await stepCreate(stepData)
 
-                console.log(registration)
-                /* on crée un objet formatté pour le state */
+                /* on crée un objet formatté pour l'insertion dans le state */
                 const newStep = {
                     id: registration.id,
                     stepDate: registration.stepDate,
@@ -84,12 +87,9 @@ export function ItineraryAddMarker() {
                         slug: registration.type.slug
                     }
                 }
-
                 /* ajout dans le store */
                 await dispatch(addStep(newStep))
-
                 setOpen(false);  // fermeture de la modal
-
             } catch (error) {
                 dispatch(getFailure(error))
                 toast.warning("une erreur s'est produite !")

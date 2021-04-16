@@ -10,6 +10,9 @@ import {RoadbookStatusModal} from 'features/roadbook/RoadbookStatusModal';
 import {selectSteps} from 'features/roadbook/roadbookSlice';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 
+import moment from 'moment';
+import localization from 'moment/locale/fr';
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle
@@ -23,6 +26,7 @@ export function RoadbookShow() {
     const dispatch = useDispatch()
     const location = useLocation()
 
+    // récupération des données dans le store
     const {roadbook, loading} = useSelector(selectRoadbook);
     const stepsTodo = useSelector(selectSteps);
 
@@ -32,8 +36,8 @@ export function RoadbookShow() {
     useEffect(() => {
         async function fetchData() {
             dispatch(getLoading())
-            const result = await findSingleRoadbook(urlPath)
-            dispatch(getSingleRoadbook(result))
+            const result = await findSingleRoadbook(urlPath)  // récupération depuis bdd avec requête API
+            dispatch(getSingleRoadbook(result))        // récupération depuis le store
             dispatch(getSuccess())
         }
         try {
@@ -79,7 +83,6 @@ export function RoadbookShow() {
                                 <button className="btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteRoadbook">
                                     <span><FontAwesomeIcon icon={faTrashAlt}/></span>Supprimer le roadbook
-                                    {/* TODO : voir pour rafraichissement des roadbooks du dashboard après redirection lors suppression */}
                                 </button>
 
                                 <RoadbookDeleteModal roadbookId={roadbook.id}/>
@@ -100,37 +103,40 @@ export function RoadbookShow() {
 
                 <section>
                     <div className="container">
-                        <div className="row roadbook-show-map">
-                            <div className="col-md-8">
-                                <div className="roadbook-show-map__visualization">
-                                    {/* map */}
-                                    <img src={map} alt="placeholder" className="card-article__img"/>
-                                    <p>{roadbook.description}</p>
+                        {roadbook.steps[0] && (
+                            <div className="row roadbook-show-map">
+                                <div className="col-md-8">
+                                    <div className="roadbook-show-map__visualization">
+                                        {/* map */}
+                                        <img src={map} alt="placeholder" className="card-article__img"/>
+                                        <p>{roadbook.description}</p>
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="roadbook-show-map__resume">
+
+                                        <p>
+                                            <span><FontAwesomeIcon icon={faMotorcycle}/></span>
+                                            Distance estimée: 230 km
+                                        </p>
+
+                                        <p className="roadbook-show-map__resume-item">
+                                            <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
+                                            Départ de la balade:
+                                        </p>
+
+                                        <p className="address">{roadbook.steps[0].description}</p>
+
+
+                                        <p className="roadbook-show-map__resume-item">
+                                            <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
+                                            Le {moment(roadbook.steps[0]?.stepDate).locale('fr', localization).format("L à H:mm")}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-md-4">
-                                <div className="roadbook-show-map__resume">
+                        )}
 
-                                    <p>
-                                        <span><FontAwesomeIcon icon={faMotorcycle}/></span>
-                                        Distance totale: 230 km
-                                    </p>
-
-                                    <p className="roadbook-show-map__resume-item">
-                                        <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
-                                        Départ de la balade:
-                                    </p>
-
-                                    <p className="address">rue de la gare</p>
-                                    <p className="address">35000 - Rennes</p>
-
-                                    <p className="roadbook-show-map__resume-item">
-                                        <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
-                                        Le 21 aout 2020 à 09h00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </section>
 

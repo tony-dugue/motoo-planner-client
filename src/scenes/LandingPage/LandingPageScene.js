@@ -39,13 +39,15 @@ export function LandingPageScene() {
 
                 <div className="container">
                     <div className="row">
-                        <p className="home-presentation__text">Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Alias animi dicta dolorem ea, est eveniet impedit ipsam iusto minima minus
-                            molestias nesciunt nostrum porro quam quas quis similique sunt ut!</p>
 
-                        <p className="home-presentation__text">Alias animi dicta dolorem ea, est eveniet impedit
-                            ipsam iusto minima minus molestias nesciunt nostrum porro quam quas quis similique
-                            sunt ut!</p>
+                        <p className="home-presentation__text">Motoo Planner est une application pour vous faciliter
+                            la planification de road trip en moto en groupe en apportant une expérience collaborative.</p>
+
+                        <p className="home-presentation__text">A l'aide d'une interface intuitive et simple d'utilisation,
+                            vous pourrez concevoir facilement votre prochaine balade en moto et avoir à disposition
+                            avant et pendant la sortie d'un roadbook regroupant les différentes étapes mais aussi
+                            des informations pratiques pour tous le groupe.</p>
+
                     </div>
                 </div>
             </section>

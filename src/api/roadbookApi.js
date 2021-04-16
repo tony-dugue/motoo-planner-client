@@ -3,23 +3,20 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const roadbookUrl = rootUrl + "/roadbooks";
 
-export const roadbookCreate = (pictureUrlFile, title, description, tripStart) => {
+export const roadbookCreate = (roadbookData) => {
 
-    const id = sessionStorage.getItem('id');
     const token = sessionStorage.getItem('accessJWT');
 
+    /*
     let formData = new FormData();
-    formData.append('pictureUrlFile', pictureUrlFile);
-    formData.append('user', `api/users/${id}`);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('tripStart', tripStart);
+    formData.append('pictureUrl', pictureUrl);
+    */
 
-    const config = { headers: { 'content-type': 'multipart/form-data', "Authorization" : `Bearer ${token}` } };
+    const config = { headers: {"Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(roadbookUrl, formData, config);
+            const res = await axios.post(roadbookUrl, roadbookData, config);
             resolve(res.data)
         } catch (err) {
             reject(err);
