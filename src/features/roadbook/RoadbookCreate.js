@@ -73,7 +73,7 @@ export function RoadbookCreate() {
 
                             <div className="form-wrapper__bloc">
                                 <label htmlFor="dateInput" className="form-label">Date de départ</label>
-                                <input type="date" name="tripStart" className="form-control" id="dateInput"
+                                <input type="datetime-local" name="tripStart" className="form-control" id="dateInput"
                                        value={tripStart} onChange={e => setTripStart(e.target.value)} required />
                             </div>
 
