@@ -115,10 +115,12 @@ export function RoadbookShow() {
                                 <div className="col-md-4">
                                     <div className="roadbook-show-map__resume">
 
-                                        <p>
+                                        {roadbook.steps[1] && (
+                                            <p>
                                             <span><FontAwesomeIcon icon={faMotorcycle}/></span>
-                                            Distance estimée: 230 km
-                                        </p>
+                                            Distance estimée:
+                                        </p>)
+                                        }
 
                                         <p className="roadbook-show-map__resume-item">
                                             <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>

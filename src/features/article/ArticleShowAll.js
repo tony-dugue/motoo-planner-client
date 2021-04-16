@@ -16,9 +16,9 @@ export function ArticleShowAll() {
             const articles = await findAllArticles()
             dispatch(getAllArticles(articles))
         }
-
         try {
             fetchData();
+            console.log(articles)
         } catch (error) {
             dispatch(getFailure(error))
             toast.warning("une erreur s'est produite !")
