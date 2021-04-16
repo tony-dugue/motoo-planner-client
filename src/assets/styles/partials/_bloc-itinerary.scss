@@ -31,23 +31,33 @@
   &__step {
     text-align: left;
 
-    li {
+    &-item {
       display: flex;
+      align-items: center;
       margin-bottom: 6px;
-    }
 
-    span {
-      width: 50px;
-      display: inline-block;
-      text-align: center;
-    }
+      &-icon {
+        width: 40px;
+        display: inline-block;
+        text-align: center;
+        flex-shrink: 0;
 
-    .distance {
-      color: $color-primary;
-      font-size: 0.8rem;
+        .distance-icon {
+          color: #b1b1b1;
+        }
+      }
 
-      .distance-icon {
-        color: #b1b1b1;
+      &-content {
+
+        &-date {
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+
+        &-distance {
+          color: $color-primary;
+          font-size: 0.8rem;
+        }
       }
     }
 

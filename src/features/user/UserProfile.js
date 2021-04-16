@@ -49,11 +49,13 @@ export function UserProfile() {
 
                     <p className="profile-content__date">Inscrit {moment(userProfile.createdAt).locale('fr', localization).fromNow()}</p>
 
+                    {/*
                     <button className="btn btn-motoo-outline-dark" data-bs-toggle="modal" data-bs-target="#editInfoProfile">
                         <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier les informations
                     </button>
 
                     <UserEditModal />
+                    */}
 
                     <button className="btn btn-motoo-outline-dark" data-bs-toggle="modal" data-bs-target="#editPasswordProfile">
                         <span><FontAwesomeIcon icon={faPencilAlt} /></span>Modifier le mot de passe

@@ -15,6 +15,9 @@ export function ItineraryPlannerScene() {
     const stepsTodo = useSelector(selectSteps);
     const roadbook = useSelector(selectRoadbook);
 
+    // url pour voir le roadbook en cours complet lors du retour en arrière
+    const roadbookActiveUrl = "/roadbook/" + roadbook.roadbook.id;
+
     const itineraries = stepsTodo.map((item, index) => (
         <React.Fragment key={item.id}>
             {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1}/>}
@@ -42,7 +45,7 @@ export function ItineraryPlannerScene() {
     return (
         <>
             <div className="itinerary-top">
-                <Link to='/roadbook/2' className="btn btn-motoo-outline-blue">Revenir au roadbook</Link>
+                <Link to={roadbookActiveUrl} className="btn btn-motoo-outline-blue">Revenir au roadbook</Link>
                 <h2 className="itinerary__title">Roadbook : <span>{roadbook.roadbook.title}</span></h2>
             </div>
 

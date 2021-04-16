@@ -17,7 +17,7 @@
     }
 
     &__name {
-      margin: spacing(1) 0;
+      margin: spacing(2) 0;
 
       span {
         color: $color-text-dark;
@@ -35,7 +35,8 @@
     }
 
     &__date {
-      margin: spacing(1) 0;
+      margin: spacing(3) 0;
+      font-size: 0.8rem;
     }
 
     .btn {

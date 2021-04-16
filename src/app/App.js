@@ -23,6 +23,7 @@ import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
 import {ArticleSingleScene} from 'scenes/Article/ArticleSingleScene';
 import {RoadbookShowScene} from 'scenes/Roadbook/RoadbookShowScene';
+import {PrivacyScene} from 'scenes/Privacy/PrivacyScene';
 import {Footer} from 'components/layouts/Footer';
 
 // import global des icones fontawesome
@@ -60,6 +61,8 @@ function App() {
                     <Route path="/presentation" component={PresentationScene}/>
 
                     <Route path="/register" component={RegisterScene} />
+
+                    <Route path="/mentions-legales" component={PrivacyScene} />
 
                     {/* ======= ROUTES SECURISEES ========== */}
 

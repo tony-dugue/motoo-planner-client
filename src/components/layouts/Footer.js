@@ -32,7 +32,7 @@ export function Footer() {
                         <p className="footer-link__menu-heading">A propos</p>
                         <ul>
                             <li className="footer-link__menu-item"><NavLink to='/contact'>Nous contacter</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/other'>Mentions légales</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/mentions-legales'>Mentions légales</NavLink></li>
                         </ul>
                     </div>
 

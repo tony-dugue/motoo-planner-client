@@ -61,9 +61,15 @@ export function RoadbookShow() {
     const itineraries = stepsTodo.map( (item, index) => (
         <React.Fragment key= {item.id}>
             {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1} />}
-            <li>
-                <span className={item.type.slug + "-icon"}><FontAwesomeIcon icon={item.type.icon} /></span>
-                {item.title}
+
+            <li className="itinerary__step-item">
+                <div className="itinerary__step-item-icon">
+                    <span className={item.type.slug + "-icon"}><FontAwesomeIcon icon={item.type.icon} /></span>
+                </div>
+
+                <div className="itinerary__step-item-content">
+                    {item.title}
+                </div>
             </li>
         </React.Fragment>
     ))

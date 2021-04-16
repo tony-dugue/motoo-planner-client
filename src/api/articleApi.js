@@ -4,9 +4,12 @@ const rootUrl = "http://localhost:8000/api";
 const articleUrl = rootUrl + "/articles";
 
 export const findAllArticles = () => {
+
+    const config = { headers: {"Content-Type": "multipart/form-data"} };
+
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.get(articleUrl)
+            const res = await axios.get(articleUrl, config)
             resolve(res.data["hydra:member"])
         } catch (error) {
             console.log(error);
@@ -16,6 +19,7 @@ export const findAllArticles = () => {
 }
 
 export const findSingleArticle = (urlPath) => {
+
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.get(rootUrl + urlPath)

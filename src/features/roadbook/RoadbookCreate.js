@@ -31,10 +31,10 @@ export function RoadbookCreate() {
         dispatch(getLoading())
         try {
             const id = sessionStorage.getItem('id');
-            const roadbookData = {'title': title, 'description': description, 'tripStart': tripStart, 'user': `api/users/${id}`}
+            //const roadbookData = {'title': title, 'description': description, 'tripStart': tripStart, 'user': `api/users/${id}`}
 
             /* envoi des données avec requête à l'API et ajout dans base de donnée */
-            const res = await roadbookCreate(roadbookData);
+            const res = await roadbookCreate(title, description, tripStart, pictureUrl);
             if (res.status !== 200) dispatch(getFailure(res.message))
 
             /* on crée un objet formatté pour l'insertion dans le state */
