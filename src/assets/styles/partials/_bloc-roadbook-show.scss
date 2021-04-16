@@ -31,7 +31,8 @@
       margin-bottom: spacing(3);
 
       &--info {
-        color: red;
+        color: $color-visite;
+        text-align: center;
         margin-top: spacing(2);
       }
     }

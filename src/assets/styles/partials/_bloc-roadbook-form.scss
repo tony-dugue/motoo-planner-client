@@ -1,5 +1,11 @@
 .roadbook-form {
   text-align: center;
+
+  &__wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+
   &__col {
     padding: spacing(5);
 
@@ -10,10 +16,8 @@
 
   &__img {
     width: auto;
-    max-height: 180px;
+    max-height: 250px;
     object-fit: cover;
-    margin-top: spacing(2);
-    margin-bottom: spacing(4);
     box-shadow: $box-shadow-img;
 
     @include down(768) {

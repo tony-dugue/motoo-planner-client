@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {roadbookCreate} from 'api/roadbookApi';
 import {addRoadbook, getLoading, getFailure} from 'features/user/userSlice';
 
-import placeholder from "../../assets/images/placeholder.png";
+import illustration from "../../assets/images/illustration1.jpg";
 
 
 export function RoadbookCreate() {
@@ -16,25 +16,16 @@ export function RoadbookCreate() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [tripStart, setTripStart] = useState("")
-    const [pictureUrl, setPictureUrl] = useState(null)
-
-    const handleFileInput = e => {
-        // handle validations
-        //const file = e.target.files[0];
-        //if (file.size > 1024) toast.warning('la taille du fichier ne doit pas dépasser 1MB')
-        //else
-        setPictureUrl(e.target.files[0])
-    };
 
     const handleSubmit = async e => {
         e.preventDefault();
         dispatch(getLoading())
         try {
             const id = sessionStorage.getItem('id');
-            //const roadbookData = {'title': title, 'description': description, 'tripStart': tripStart, 'user': `api/users/${id}`}
+            const roadbookData = {title: title, description: description, tripStart: tripStart, user: `api/users/${id}`}
 
             /* envoi des données avec requête à l'API et ajout dans base de donnée */
-            const res = await roadbookCreate(title, description, tripStart, pictureUrl);
+            const res = await roadbookCreate(roadbookData);
             if (res.status !== 200) dispatch(getFailure(res.message))
 
             /* on crée un objet formatté pour l'insertion dans le state */
@@ -62,7 +53,7 @@ export function RoadbookCreate() {
 
             <form onSubmit={handleSubmit} className="roadbook-form form-wrapper">
 
-                <div className="row">
+                <div className="row roadbook-form__wrapper">
                     <div className="col-md-6 roadbook-form__col">
 
                             <div className="form-wrapper__bloc">
@@ -72,7 +63,7 @@ export function RoadbookCreate() {
                             </div>
 
                             <div className="form-wrapper__bloc">
-                                <label htmlFor="dateInput" className="form-label">Date de départ</label>
+                                <label htmlFor="dateInput" className="form-label">Date et heure de départ</label>
                                 <input type="datetime-local" name="tripStart" className="form-control" id="dateInput"
                                        value={tripStart} onChange={e => setTripStart(e.target.value)} required />
                             </div>
@@ -86,14 +77,19 @@ export function RoadbookCreate() {
                         </div>
                     </div>
 
-                    <div className="col-md-6 roadbook-form__col">
 
+                    <div className="col-md-6 roadbook-form__col">
+                        {/*
                         <div className="form-wrapper__bloc">
                             <label htmlFor="pictureInput" className="form-label">Ajouter une image d'illustration</label>
                             <img src={placeholder} alt="placeholder" className="roadbook-form__img" />
                             <input type="file" name="pictureUrlFile" className="form-control" id="pictureInput"
                                    onChange={handleFileInput} />
                         </div>
+                        */}
+
+                        <img src={illustration} alt="placeholder" className="roadbook-form__img" />
+
 
                     </div>
 

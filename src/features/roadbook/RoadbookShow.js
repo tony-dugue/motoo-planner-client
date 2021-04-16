@@ -198,7 +198,7 @@ export function RoadbookShow() {
 
                                     <ChecklistContainer/>
 
-                                    <p className="roadbook-show__heading-desc--info"> * Cocher la case pour une chose importante</p>
+                                    <p className="roadbook-show__heading-desc--info"> Cocher la case pour signaler une chose importante</p>
 
 
                                 </div>
