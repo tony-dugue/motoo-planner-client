@@ -13,7 +13,7 @@ export function Presentation() {
           <div className="row presentation__row">
               <div className="col-md-7  order-md-2">
                   <h3 className="presentation__heading">Etape 1 :</h3>
-                  <p>Je crée un compte.</p>
+                  <p>Je crée mon compte.</p>
               </div>
               <div className="col-md-5  order-md-1">
                   <img src={presentationRegister} alt="placeholder" className="presentation__img"/>
@@ -34,7 +34,7 @@ export function Presentation() {
           <div className="row presentation__row">
               <div className="col-md-7  order-md-2">
                   <h3 className="presentation__heading">Etape 3 :</h3>
-                  <p>A l'aide d'un formulaire, j'ajoute un nouveau roadbook contenant les informations de la balade.</p>
+                  <p>A l'aide d'un formulaire, j'ajoute un nouveau roadbook contenant la description de la balade.</p>
               </div>
               <div className="col-md-5  order-md-1">
                   <img src={presentationNewRoadbook} alt="placeholder" className="presentation__img"/>
@@ -44,8 +44,8 @@ export function Presentation() {
           <div className="row presentation__row">
               <div className="col-md-7">
                   <h3 className="presentation__heading">Etape 4 :</h3>
-                  <p>Sur la page de visualisation d'un roadbook, j'ajoute des informations pratiques afin de
-                  pouvoir joindre facilement les responsable de la balade en cas de problème.</p><br />
+                  <p>Sur la page de visualisation d'un roadbook, j'ajoute des informations pratiques afin que les
+                  participants puissent joindre facilement les responsable de la balade en cas de problème.</p><br />
                   <p>J'ajoute une liste de consignes importantes et de choses à ne pas oublier au cours de la balade.</p>
               </div>
               <div className="col-md-5">
@@ -67,7 +67,7 @@ export function Presentation() {
           <div className="row presentation__row">
               <div className="col-md-7">
                   <h3 className="presentation__heading">Etape 6 :</h3>
-                  <p>J'ajoute de nouvelles étapes à la balade facilement par un simple clic sur la carte.</p>
+                  <p>Besoin d'une nouvelle étape ? J'en ajoute une à la balade facilement par un simple clic sur la carte.</p>
               </div>
               <div className="col-md-5">
                   <img src={presentationAddStep} alt="placeholder" className="presentation__img"/>
