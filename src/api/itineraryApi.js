@@ -4,10 +4,9 @@ const rootUrl = "http://localhost:8000/api";
 const itineraryUrl = rootUrl + "/types";
 const stepUrl = rootUrl + "/steps";
 
-const token = sessionStorage.getItem('accessJWT');
-
 export const findTypes = () => {
 
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {
@@ -21,6 +20,8 @@ export const findTypes = () => {
 }
 
 export const stepCreate = data => {
+
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
     const body = JSON.stringify(data);
 
@@ -36,6 +37,8 @@ export const stepCreate = data => {
 }
 
 export const stepDelete = id => {
+
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {

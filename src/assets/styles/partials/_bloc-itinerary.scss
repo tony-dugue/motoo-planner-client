@@ -30,6 +30,11 @@
 
   &__step {
     text-align: left;
+    margin-right: spacing(3);
+
+    @include down(768) {
+      margin-right: 0;
+    }
 
     &-item {
       display: flex;
@@ -57,6 +62,12 @@
         &-distance {
           color: $color-primary;
           font-size: 0.8rem;
+        }
+
+        &-desc {
+          color: $color-visite;
+          font-size: 0.8rem;
+          margin-top: spacing(1);
         }
       }
     }

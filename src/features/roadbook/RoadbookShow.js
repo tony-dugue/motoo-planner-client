@@ -68,6 +68,9 @@ export function RoadbookShow() {
                 </div>
 
                 <div className="itinerary__step-item-content">
+                    <p className="itinerary__step-item-content-date">
+                        Le {moment.utc(item.stepDate).locale('fr', localization).format("L à H:mm")}
+                    </p>
                     {item.title}
                 </div>
             </li>

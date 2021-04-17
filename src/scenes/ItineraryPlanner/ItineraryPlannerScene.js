@@ -21,7 +21,12 @@ export function ItineraryPlannerScene() {
     const itineraries = stepsTodo.map((item, index) => (
         <React.Fragment key={item.id}>
             {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1}/>}
-            <ItineraryStepItem type={item.type.slug} title={item.title} icon={item.type.icon}  stepId={item.id} />
+            <ItineraryStepItem type={item.type.slug}
+                               title={item.title}
+                               stepDate={item.stepDate}
+                               icon={item.type.icon}
+                               description={item.description}
+            />
         </React.Fragment>
     ))
 

@@ -3,9 +3,9 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const checklistUrl = rootUrl + "/checklists";
 
-const token = sessionStorage.getItem('accessJWT');
-
 export const checklistCreate = data => {
+
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
     const body = JSON.stringify(data);
 
@@ -21,6 +21,8 @@ export const checklistCreate = data => {
 }
 
 export const checklistCheck = (id, checkedStatus) => {
+
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
     const body = JSON.stringify(checkedStatus)
 
@@ -34,6 +36,8 @@ export const checklistCheck = (id, checkedStatus) => {
 }
 
 export const checklistDelete = id => {
+
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {

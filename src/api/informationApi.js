@@ -3,9 +3,8 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const informationUrl = rootUrl + "/information";
 
-const token = sessionStorage.getItem('accessJWT');
-
 export const informationCreate = data => {
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
     const body = JSON.stringify(data);
 
@@ -21,6 +20,7 @@ export const informationCreate = data => {
 }
 
 export const informationDelete = id => {
+    const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {

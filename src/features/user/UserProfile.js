@@ -5,7 +5,6 @@ import { findUser } from 'api/userApi';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { UserEditModal } from 'features/user/UserEditModal';
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
 

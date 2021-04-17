@@ -7,8 +7,6 @@ export const roadbookCreate = (roadbookData) => {
 
     const token = sessionStorage.getItem('accessJWT');
 
-    const id = sessionStorage.getItem('id');
-
     const config = { headers: {"Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
 
     return new Promise(async (resolve, reject) => {

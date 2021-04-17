@@ -37,8 +37,9 @@ export function UserRegister() {
             dispatch(getLoading())
 
             try {
-                const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`
-                const newUser = { firstName, lastName, email, password, avatar };
+                const avatar = `https://eu.ui-avatars.com/api/?name=${firstName}+${lastName}`;
+                const roles = ["ROLE_USER"];
+                const newUser = { firstName, lastName, email, password, avatar, roles };
 
                 const registration = await userRegistration(newUser);
 

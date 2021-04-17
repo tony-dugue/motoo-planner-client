@@ -23,6 +23,8 @@ export function ItineraryStepItem({stepId, type, title, icon, stepDate, descript
         }
     }
 
+    console.log(stepDate)
+
     return (
         <li className="itinerary__step-item">
             <div className="itinerary__step-item-icon">
@@ -31,13 +33,13 @@ export function ItineraryStepItem({stepId, type, title, icon, stepDate, descript
 
             <div className="itinerary__step-item-content">
                 <p className="itinerary__step-item-content-date">
-                    Le {moment(stepDate).locale('fr', localization).format("L à H:mm")}
+                    Le {moment.utc(stepDate).locale('fr', localization).format("L à H:mm")}
                 </p>
                 {title}
                 <button className="itinerary__step--delete" onClick={handleDelete}>
                     <FontAwesomeIcon icon={faTimes}/>
                 </button>
-                {description}
+                <p className="itinerary__step-item-content-desc">{description}</p>
 
             </div>
         </li>
