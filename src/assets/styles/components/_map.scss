@@ -9,6 +9,25 @@
     }
 }
 
+.map__container-mini {
+    width: 90%;
+    margin-bottom: spacing(3);
+
+    @include down(768) {
+        width: 100%;
+    }
+}
+
+.map__container-mini,
+.map__container-mini .leaflet-container {
+    height: 300px;
+    box-shadow: $box-shadow-btn-hover;
+
+    @include down(992) {
+        height: 30vh;
+    }
+}
+
 .popup {
     text-align: center;
 

@@ -9,16 +9,14 @@ import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 import {RoadbookStatusModal} from 'features/roadbook/RoadbookStatusModal';
 import {selectSteps} from 'features/roadbook/roadbookSlice';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
+import {MapMini} from 'components/map/MapMini';
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle
-} from "@fortawesome/free-solid-svg-icons";
+import {faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle} from "@fortawesome/free-solid-svg-icons";
 
-import map from '../../assets/images/map.jpeg';
 import {toast} from "react-toastify";
 
 export function RoadbookShow() {
@@ -60,7 +58,10 @@ export function RoadbookShow() {
 
     const itineraries = stepsTodo.map( (item, index) => (
         <React.Fragment key= {item.id}>
-            {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1} />}
+            {(index !== 0) && <ItinerarySeparatorItem diffTime={
+                // calcul durée entre étape précédente et l'étape suivante
+                moment(item.stepDate).diff(moment(stepsTodo[index - 1].stepDate), "hours")
+            } />}
 
             <li className="itinerary__step-item">
                 <div className="itinerary__step-item-icon">
@@ -116,33 +117,40 @@ export function RoadbookShow() {
                             <div className="row roadbook-show-map">
                                 <div className="col-md-8">
                                     <div className="roadbook-show-map__visualization">
-                                        {/* map */}
-                                        <img src={map} alt="placeholder" className="card-article__img"/>
+
+                                        <MapMini />
+
+                                        {/* <img src={map} alt="placeholder" className="card-article__img"/> */}
+
                                         <p>{roadbook.description}</p>
                                     </div>
                                 </div>
                                 <div className="col-md-4">
                                     <div className="roadbook-show-map__resume">
 
-                                        {roadbook.steps[1] && (
-                                            <p>
-                                            <span><FontAwesomeIcon icon={faMotorcycle}/></span>
-                                            Distance estimée:
-                                        </p>)
-                                        }
-
                                         <p className="roadbook-show-map__resume-item">
-                                            <span><FontAwesomeIcon icon={faMapMarkedAlt}/></span>
-                                            Départ de la balade:
+                                            <span className="icon"><FontAwesomeIcon icon={faMapMarkedAlt}/></span>Départ de la balade:
                                         </p>
 
                                         <p className="address">{roadbook.steps[0].description}</p>
 
 
                                         <p className="roadbook-show-map__resume-item">
-                                            <span><FontAwesomeIcon icon={faCalendarAlt}/></span>
+                                            <span className="icon"><FontAwesomeIcon icon={faCalendarAlt}/></span>
                                             Le {moment(roadbook.steps[0]?.stepDate).locale('fr', localization).format("L à H:mm")}
                                         </p>
+
+                                        {roadbook.steps[1] && (
+                                            <p  className="roadbook-show-map__resume-item">
+                                                <span className="icon"><FontAwesomeIcon icon={faMotorcycle}/></span>
+                                                Durée estimée:
+                                                <span className="time">{
+                                                // calcul durée entre étape précédente et l'étape suivante
+                                                moment(stepsTodo[stepsTodo.length -1].stepDate).diff(moment(stepsTodo[0].stepDate), "hours")
+                                            } heures</span>
+                                            </p>)
+                                        }
+
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ItinerarySeparatorItem({ distance }) {
+export function ItinerarySeparatorItem({ diffTime}) {
   return (
       <li className="itinerary__step-item">
         <div className="itinerary__step-item-icon">
@@ -8,7 +8,7 @@ export function ItinerarySeparatorItem({ distance }) {
         </div>
 
         <div className="itinerary__step-item-content-distance">
-          {distance} km
+          {diffTime} heures
         </div>
       </li>
   );

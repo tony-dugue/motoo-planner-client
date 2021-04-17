@@ -1,10 +1,9 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import { Icon } from "leaflet";
 import {useSelector} from "react-redux";
 import {selectSteps} from 'features/roadbook/roadbookSlice';
-import {ItineraryAddMarker} from "features/itinerary/ItineraryAddMarker";
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
@@ -15,7 +14,7 @@ export const icon = new Icon({
     iconSize: [45, 45]
 });
 
-export const Map = () => {
+export const MapMini = () => {
 
     // récupération des étapes dans le store
     const stepsTodo = useSelector(selectSteps)
@@ -26,11 +25,8 @@ export const Map = () => {
         ? [stepsTodo[0].stepLat, stepsTodo[0].stepLong]
         : [48.86877537077828, 2.3367584614300783];  // position de Paris par défaut
 
-    // TODO: tracer des traits entre les étapes sur la carte
-    // TODO: afficher les icones sur la carte selon le type ???
-
     return (
-        <div className="map__container">
+        <div className="map__container-mini">
 
             <MapContainer center={centerPosition} zoom={8}>
 
@@ -40,26 +36,19 @@ export const Map = () => {
                 />
 
                 {stepsTodo.map(step => (
-                    <Marker
-                        key={step.id}
-                        position={[step.stepLat, step.stepLong]}
-                        icon={icon}
-                    >
-                        <Popup>
-                            <div className="popup">
-                                <p className="popup__type">{step.type.slug}</p>
-                                <p className="popup__title">{step.title}</p>
-                                <p className="popup__date">
-                                    Le {moment(step.stepDate).locale('fr', localization).format("L à H:mm")}
-                                </p>
-                                <p className="popup__desc">{step.description}</p>
-                            </div>
-                        </Popup>
+                    <Marker key={step.id} position={[step.stepLat, step.stepLong]} icon={icon}>
+                    <Popup>
+                    <div className="popup">
+                    <p className="popup__type">{step.type.slug}</p>
+                    <p className="popup__title">{step.title}</p>
+                    <p className="popup__date">
+                    Le {moment(step.stepDate).locale('fr', localization).format("L à H:mm")}
+                    </p>
+                    <p className="popup__desc">{step.description}</p>
+                    </div>
+                    </Popup>
                     </Marker>
                 ))}
-
-                <ItineraryAddMarker />
-
             </MapContainer>
         </div>
     );

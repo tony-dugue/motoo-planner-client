@@ -90,14 +90,20 @@
         margin-top: spacing(2);
       }
 
-      span {
+      .icon {
         color: $color-primary-hover;
         margin-right: spacing(1);
         font-size: 1.2rem;
       }
 
       .address {
-        margin-left: spacing(4)
+        margin-left: spacing(4);
+        font-weight: 500;
+      }
+
+      .time {
+        margin-left: spacing(1);
+        font-weight: 500;
       }
     }
   }
