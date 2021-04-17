@@ -16,7 +16,7 @@ export function Presentation() {
                   <p>Je crée mon compte.</p>
               </div>
               <div className="col-md-5  order-md-1">
-                  <img src={presentationRegister} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationRegister} alt="connexion au site" className="presentation__img"/>
               </div>
           </div>
 
@@ -27,7 +27,7 @@ export function Presentation() {
                       de mes roadbooks en cours et terminés.</p>
               </div>
               <div className="col-md-5">
-                  <img src={presentationRoadbooks} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationRoadbooks} alt="visualisation du tableau de bord" className="presentation__img"/>
               </div>
           </div>
 
@@ -37,7 +37,7 @@ export function Presentation() {
                   <p>A l'aide d'un formulaire, j'ajoute un nouveau roadbook contenant la description de la balade.</p>
               </div>
               <div className="col-md-5  order-md-1">
-                  <img src={presentationNewRoadbook} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationNewRoadbook} alt="ajout d'un nouveau roadbook" className="presentation__img"/>
               </div>
           </div>
 
@@ -49,7 +49,7 @@ export function Presentation() {
                   <p>J'ajoute une liste de consignes importantes et de choses à ne pas oublier au cours de la balade.</p>
               </div>
               <div className="col-md-5">
-                  <img src={presentationAddInfo} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationAddInfo} alt="ajout d'informations" className="presentation__img"/>
               </div>
           </div>
 
@@ -60,7 +60,7 @@ export function Presentation() {
                       de la balade.</p>
               </div>
               <div className="col-md-5  order-md-1">
-                  <img src={presentationMap} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationMap} alt="visualisation des étapes" className="presentation__img"/>
               </div>
           </div>
 
@@ -70,7 +70,7 @@ export function Presentation() {
                   <p>Besoin d'une nouvelle étape ? J'en ajoute une à la balade facilement par un simple clic sur la carte.</p>
               </div>
               <div className="col-md-5">
-                  <img src={presentationAddStep} alt="placeholder" className="presentation__img"/>
+                  <img src={presentationAddStep} alt="ajout d'une étape" className="presentation__img"/>
               </div>
           </div>
 
