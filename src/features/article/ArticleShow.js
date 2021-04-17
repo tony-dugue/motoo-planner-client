@@ -53,6 +53,8 @@ export function ArticleShow() {
             <p className="article__date">Publié
                 le {moment(article.createdAt).locale('fr', localization).format("Do MMM YY")}</p>
 
+            <p className="article__date">{article.excerpt}</p>
+
             <p className="article__content">{article.content}</p>
         </div>
     );

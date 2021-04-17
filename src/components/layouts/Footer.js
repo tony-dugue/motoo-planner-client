@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import moment from 'moment';
 
 export function Footer() {
+
     return (
         <footer className="footer">
             <div className="footer__wrapper">
@@ -12,11 +13,11 @@ export function Footer() {
                 <div className="footer-link">
 
                     <div className="footer-link__menu">
-                        <p className="footer-link__menu-heading">Articles</p>
+                        <p className="footer-link__menu-heading">Les derniers articles</p>
                         <ul>
-                            <li className="footer-link__menu-item"><NavLink to='/article/1'>article 1</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/article/2'>article 2</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/article/3'>article 3</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/1'>Comment planifier le meilleur itinéraire ?</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/2'>Les meilleurs applications météo</NavLink></li>
+                            <li className="footer-link__menu-item"><NavLink to='/article/3'>Top 10 des points remarquables autour de Saint Malo</NavLink></li>
                         </ul>
                     </div>
 
