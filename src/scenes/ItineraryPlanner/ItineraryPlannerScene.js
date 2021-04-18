@@ -7,6 +7,7 @@ import {findTypes} from 'api/itineraryApi';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 import {ItineraryStepItem} from 'features/itinerary/ItineraryStepItem';
 import {Map} from 'components/map/Map';
+import moment from "moment";
 
 
 export function ItineraryPlannerScene() {
@@ -21,13 +22,17 @@ export function ItineraryPlannerScene() {
     const itineraries = stepsTodo.map((item, index) => (
         <React.Fragment key={item.id}>
 
-            {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1}/>}
+            {(index !== 0) && <ItinerarySeparatorItem diffTime={
+                // calcul durée entre étape précédente et l'étape suivante
+                moment(item.stepDate).diff(moment(stepsTodo[index - 1].stepDate), "hours")
+            } />}
 
             <ItineraryStepItem type={item.type.slug}
                                title={item.title}
                                stepDate={item.stepDate}
                                icon={item.type.icon}
                                description={item.description}
+                               stepId={item.id}
             />
         </React.Fragment>
     ))

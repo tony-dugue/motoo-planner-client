@@ -1,14 +1,27 @@
 import React, {useEffect} from 'react';
-import {useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
-import {getShareRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
+import {getShareRoadbook, selectRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
 import {findShareRoadbook} from 'api/roadbookApi';
-import {useDispatch} from "react-redux";
+import {MapMini} from 'components/map/MapMini';
+import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
+import {InformationShareContainer} from 'components/share/InformationShareContainer';
+import {ChecklistShareContainer} from 'components/share/ChecklistShareContainer';
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt, faMapMarkedAlt, faMotorcycle} from "@fortawesome/free-solid-svg-icons";
+
+import moment from 'moment';
+import localization from 'moment/locale/fr';
+
 
 export function ShareScene() {
 
     const location = useLocation()
     const dispatch = useDispatch()
+
+    const { roadbook } = useSelector(selectRoadbook);
 
     // récupère slug
     const slug = location.pathname.replace('/share/', '');
@@ -29,9 +42,139 @@ export function ShareScene() {
         }
     }, [dispatch])
 
+    if (!roadbook) return (
+        <div className="content">
+            <h2>désolé, le roadbook n'existe pas !!</h2>
+            <p>Veuillez saisir un code valide.</p>
+            <Link to='/' className="btn btn-motoo-outline my-2 mx-2">Revenir à l'accueil</Link>
+        </div>
+    )
+
   return (
-   <div>
-        <h1>Je suis la page share</h1>
-   </div>
+      <div className="share">
+
+          <div className="container">
+              <h2 className="roadbook-show__heading">Roadbook : <span>{roadbook.title}</span></h2>
+          </div>
+
+          <section>
+              <div className="container">
+                  {roadbook?.steps && (
+                      <div className="row roadbook-show-map">
+                          <div className="col-md-8">
+                              <div className="roadbook-show-map__visualization">
+
+                                  <MapMini />
+
+                                  <p>{roadbook.description}</p>
+                              </div>
+                          </div>
+                          <div className="col-md-4">
+                              <div className="roadbook-show-map__resume">
+
+                                  <p className="roadbook-show-map__resume-item">
+                                      <span className="icon"><FontAwesomeIcon icon={faMapMarkedAlt}/></span>Départ de la balade:
+                                  </p>
+
+                                  <p className="address">{roadbook.steps[0].description}</p>
+
+
+                                  <p className="roadbook-show-map__resume-item">
+                                      <span className="icon"><FontAwesomeIcon icon={faCalendarAlt}/></span>
+                                      Le {moment(roadbook.steps[0]?.stepDate).locale('fr', localization).format("L à H:mm")}
+                                  </p>
+
+                                  {roadbook.steps[1] && (
+                                      <p  className="roadbook-show-map__resume-item">
+                                          <span className="icon"><FontAwesomeIcon icon={faMotorcycle}/></span>
+                                          Durée estimée:
+                                          <span className="time">{
+                                              // calcul durée entre étape précédente et l'étape suivante
+                                              moment( roadbook.steps[roadbook.steps.length -1].stepDate).diff(moment(roadbook.steps[0].stepDate), "hours")
+                                          } heures</span>
+                                      </p>)
+                                  }
+
+                              </div>
+                          </div>
+                      </div>
+                  )}
+
+              </div>
+          </section>
+
+          <section>
+              <div className="container">
+                  <div className="row">
+
+                      {/* ========== résumé de l'itinéraire ============ */}
+
+                      <div className="col-md-6">
+                          <div className="roadbook-show-itinerary">
+
+                              <h3 className="roadbook-show__heading-sub">Itinéraire</h3>
+
+                              {/* étapes de la balade avec icones */}
+
+                              <ul className="itinerary__step">
+                                  {roadbook?.steps && roadbook.steps.map((item, index) => (
+                                      <React.Fragment key={item.id}>
+                                          {(index !== 0) && <ItinerarySeparatorItem diffTime={
+                                              // calcul durée entre étape précédente et l'étape suivante
+                                              moment(item.stepDate).diff(moment(roadbook.steps[index - 1].stepDate), "hours")
+                                          }/>}
+
+                                          <li className="itinerary__step-item">
+                                              <div className="itinerary__step-item-icon">
+                                                  <span className={item.type.slug + "-icon"}><FontAwesomeIcon icon={item.type.icon}/></span>
+                                              </div>
+
+                                              <div className="itinerary__step-item-content">
+                                                  <p className="itinerary__step-item-content-date">
+                                                      Le {moment.utc(item.stepDate).locale('fr', localization).format("L à H:mm")}
+                                                  </p>
+                                                  {item.title}
+                                              </div>
+                                          </li>
+                                      </React.Fragment>
+                                  ))}
+                              </ul>
+
+                          </div>
+                      </div>
+
+                      <div className="col-md-6">
+
+                          {/* ========== informations pratiques ============ */}
+
+                          <div className="roadbook-show-informations">
+
+                              <h3 className="roadbook-show__heading-sub">Informations pratiques</h3>
+
+                              <p className="roadbook-show__heading-desc">Personnes à contacter et quelques informations
+                                  pratiques</p>
+
+                              <InformationShareContainer informationsShare={roadbook.informations} />
+
+                          </div>
+
+                          {/* ========== checklist ============ */}
+
+                          <div className="roadbook-show-checklist">
+
+                              <h3 className="roadbook-show__heading-sub">CHECKLIST</h3>
+
+                              <p className="roadbook-show__heading-desc">Liste des choses à ne pas oublier pour la
+                                  balade</p>
+
+                              <ChecklistShareContainer checklistsShare={roadbook.checklists} />
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+      </div>
   );
 }

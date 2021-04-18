@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {selectSteps} from 'features/roadbook/roadbookSlice';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 import {ItineraryStepItem} from 'features/itinerary/ItineraryStepItem';
+import moment from "moment";
 
 export function ItineraryContainer() {
 
@@ -10,8 +11,12 @@ export function ItineraryContainer() {
 
     const itineraries = stepsTodo.map( (item, index) => (
         <React.Fragment key={item.id}>
-            {(index !== 0) && <ItinerarySeparatorItem distance={Math.floor(Math.random() * 200) + 1} />}
-            {console.log(item)}
+
+            {(index !== 0) && <ItinerarySeparatorItem diffTime={
+                // calcul durée entre étape précédente et l'étape suivante
+                moment(item.stepDate).diff(moment(stepsTodo[index - 1].stepDate), "hours")
+            } />}
+
             <ItineraryStepItem type={item.type.slug}
                                title={item.title}
                                stepDate={item.stepDate}

@@ -114,8 +114,6 @@ export function RoadbookShow() {
 
                                         <MapMini />
 
-                                        {/* <img src={map} alt="placeholder" className="card-article__img"/> */}
-
                                         <p>{roadbook.description}</p>
                                     </div>
                                 </div>
