@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const rootUrl = "http://localhost:8000/api";
+const rootShareUrl = "http://localhost:8000/share/";
 const roadbookUrl = rootUrl + "/roadbooks";
 
 export const roadbookCreate = (roadbookData) => {
@@ -28,6 +29,21 @@ export const findSingleRoadbook = (urlPath) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.get(rootUrl + urlPath, config)
+            resolve(res.data)
+        } catch (error) {
+            console.log(error);
+            reject(error.message);
+        }
+    })
+}
+
+export const findShareRoadbook = (slug) => {
+
+    const config = { headers: { "Content-Type": "application/json"} };
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.get(rootShareUrl + slug, config)
             resolve(res.data)
         } catch (error) {
             console.log(error);

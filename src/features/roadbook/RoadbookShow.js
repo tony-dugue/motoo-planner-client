@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
-import {selectRoadbook, getSingleRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
+import {selectRoadbook, selectSteps, getSingleRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
 import {findSingleRoadbook} from 'api/roadbookApi';
 import {ChecklistContainer} from "features/checklist/ChecklistContainer";
 import {InformationContainer} from "features/information/InformationContainer";
 import {RoadbookDeleteModal} from 'features/roadbook/RoadbookDeleteModal';
 import {RoadbookStatusModal} from 'features/roadbook/RoadbookStatusModal';
-import {selectSteps} from 'features/roadbook/roadbookSlice';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
 import {MapMini} from 'components/map/MapMini';
 

@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import hero from "../../assets/images/hero2.jpg";
 import {Presentation} from 'components/sections/Presentation';
 
 export function LandingPageScene() {
+
+    const history = useHistory();
 
     const [sharelink, setSharelink] = useState("");
 
@@ -11,7 +13,7 @@ export function LandingPageScene() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log('ok')
+        history.push('/share/' + sharelink);
     }
 
     return (
@@ -63,7 +65,7 @@ export function LandingPageScene() {
                     <div className="row">
                         <form onSubmit={handleSubmit} className="home-share__form">
                             <div className="home-share__form-link">
-                                <input type="password" className="form-control" name="sharelink"
+                                <input type="text" className="form-control" name="sharelink"
                                        value={sharelink} onChange={handleChange}
                                        placeholder="Votre lien de partage" required />
                                 <button type="submit" className="btn btn-motoo-outline">Voir le roadbook</button>

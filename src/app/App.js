@@ -18,6 +18,7 @@ import {ItineraryPlannerScene} from 'scenes/ItineraryPlanner/ItineraryPlannerSce
 import {PresentationScene} from 'scenes/Presentation/PresentationScene';
 import {ProfileScene} from 'scenes/Profile/ProfileScene';
 import {NotFoundScene} from 'scenes/NotFound/NotFoundScene';
+import {ShareScene} from 'scenes/Share/ShareScene';
 
 import {NavigationPublic} from 'components/layouts/NavigationPublic';
 import {NavigationPrivate} from 'components/layouts/NavigationPrivate';
@@ -63,6 +64,8 @@ function App() {
                     <Route path="/register" component={RegisterScene} />
 
                     <Route path="/mentions-legales" component={PrivacyScene} />
+
+                    <Route path="/share/:slug" component={ShareScene} />
 
                     {/* ======= ROUTES SECURISEES ========== */}
 
