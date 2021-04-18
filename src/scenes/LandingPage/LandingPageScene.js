@@ -28,7 +28,7 @@ export function LandingPageScene() {
                         </div>
 
                         <div className="col-md-6 home-hero__img">
-                            <img src={hero} alt="image de présentation" className="card-article__img"/>
+                            <img src={hero} alt="motard qui regarde une carte" className="card-article__img"/>
                         </div>
 
                     </div>

@@ -22,12 +22,15 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.error = payload;
         },
+        authFailure: (state) => {
+            state.isAuth = false;
+        }
     },
 });
 
 const { reducer, actions } = authSlice;
 
-export const { authPending, authSuccess, authFail } = actions;
+export const { authPending, authSuccess, authFail, authFailure } = actions;
 
 export default reducer;
 

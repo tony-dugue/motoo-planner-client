@@ -56,7 +56,6 @@ export const findUser = () => {
             const res = await axios.get(userProfilUrl + `/${id}`, config)
             resolve(res.data)
         } catch (error) {
-            console.log(error);
             reject(error.message);
         }
     })
@@ -93,7 +92,6 @@ export const userEdit = (userData) => {
             resolve(res.data)
 
         } catch (error) {
-            console.log(error);
             reject(error.message);
         }
     })
@@ -117,7 +115,6 @@ export const userDelete = () => {
             resolve(res.data)
 
         } catch (error) {
-            console.log(error);
             reject(error.message);
         }
     })

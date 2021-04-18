@@ -76,8 +76,6 @@ function App() {
 
                     <PrivateRoute path="/itinerary/:slug"><ItineraryPlannerScene /></PrivateRoute>
 
-                    {/* TODO: bloquer les roadbook/:slug si c'est pas la personne */}
-
                     {/* ======= PAGE 404 ========== */}
 
                     <Route component={NotFoundScene}/>

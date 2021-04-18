@@ -23,8 +23,6 @@ export function ItineraryStepItem({stepId, type, title, icon, stepDate, descript
         }
     }
 
-    console.log(stepDate)
-
     return (
         <li className="itinerary__step-item">
             <div className="itinerary__step-item-icon">

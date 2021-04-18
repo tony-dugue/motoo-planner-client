@@ -98,12 +98,7 @@ export function RoadbookShow() {
                                 <RoadbookDeleteModal roadbookId={roadbook.id}/>
                             </div>
 
-                            <div className="roadbook-show-gestion__check">
-                                <p>Roadbook terminé ?</p>
-
-                                <RoadbookStatusModal roadbook={roadbook}/>
-
-                            </div>
+                            <RoadbookStatusModal roadbook={roadbook} />
 
                         </div>
                     </div>

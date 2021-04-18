@@ -62,11 +62,25 @@
         flex-direction: column;
       }
 
+      &-wrapper {
+
+        .share {
+          color: $color-visite;
+
+          @include down(768) {
+            display: block;
+            margin-top: spacing(1)
+          }
+        }
+      }
+
       .form-check {
         margin-left: spacing(2);
+        margin-bottom: spacing(1);
 
         @include down(768) {
           margin-top: spacing(1);
+          margin-bottom: spacing(2);
         }
       }
     }
