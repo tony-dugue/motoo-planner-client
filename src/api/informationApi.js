@@ -3,6 +3,7 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const informationUrl = rootUrl + "/information";
 
+/* création d'un bloc information */
 export const informationCreate = data => {
     const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };
@@ -19,6 +20,7 @@ export const informationCreate = data => {
     })
 }
 
+/* suppression d'un bloc information */
 export const informationDelete = id => {
     const token = sessionStorage.getItem('accessJWT');
     const config = { headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` } };

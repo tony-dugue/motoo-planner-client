@@ -3,6 +3,7 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const articleUrl = rootUrl + "/articles";
 
+/* récupération de tous les articles */
 export const findAllArticles = () => {
 
     const config = { headers: {"Content-Type": "multipart/form-data"} };
@@ -18,6 +19,7 @@ export const findAllArticles = () => {
     })
 }
 
+/* récupération d'un article */
 export const findSingleArticle = (urlPath) => {
 
     return new Promise(async (resolve, reject) => {

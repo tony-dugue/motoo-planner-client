@@ -4,6 +4,7 @@ const rootUrl = "http://localhost:8000/api";
 const itineraryUrl = rootUrl + "/types";
 const stepUrl = rootUrl + "/steps";
 
+/* récupération des types pour affichage dans menu déroulant modal lors création d'une étape */
 export const findTypes = () => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -19,6 +20,7 @@ export const findTypes = () => {
     })
 }
 
+/* création d'une étape */
 export const stepCreate = data => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -36,6 +38,7 @@ export const stepCreate = data => {
     })
 }
 
+/* suppression d'une étape */
 export const stepDelete = id => {
 
     const token = sessionStorage.getItem('accessJWT');

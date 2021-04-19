@@ -7,6 +7,7 @@ const loginUrl = rootUrl + "/login_check";
 const userProfilUrl = rootUrl + "/users";
 const newAccessJWT = rootUrl + "/token/refresh";
 
+/* création d'un utilisateur */
 export const userRegistration = data => {
 
     const config = { headers: { "Content-Type": "application/json"} };
@@ -22,6 +23,7 @@ export const userRegistration = data => {
     })
 }
 
+/* authentification d'un utilisateur (login) */
 export const userLogin = credentials => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -41,6 +43,7 @@ export const userLogin = credentials => {
     })
 }
 
+/* vérification d'un utilisateur */
 export const findUser = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -61,6 +64,7 @@ export const findUser = () => {
     })
 }
 
+/* récupération des roadbooks d'un utilisateurs */
 export const getUserProfile = () => async (dispatch) => {
     try {
         dispatch(getLoading());
@@ -76,6 +80,7 @@ export const getUserProfile = () => async (dispatch) => {
     }
 };
 
+/* modification des données d'un utilisateur */
 export const userEdit = (userData) => {
 
     const userId = sessionStorage.getItem('id');
@@ -97,6 +102,7 @@ export const userEdit = (userData) => {
     })
 }
 
+/* suppression d'un utilisateur */
 export const userDelete = () => {
 
     const userId = sessionStorage.getItem('id');
@@ -120,12 +126,14 @@ export const userDelete = () => {
     })
 }
 
+/* déconnexion d'un utilisateur (logout) */
 export const userLogout = () => {
     sessionStorage.removeItem("accessJWT")
     localStorage.removeItem("motooSite")
     sessionStorage.removeItem('id');
 }
 
+/* vérification du token et récupération du refresh_token */
 export const fetchNewAccessJWT = () => {
     return new Promise(async (resolve, reject) => {
         try {

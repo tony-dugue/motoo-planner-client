@@ -3,6 +3,7 @@ import axios from "axios";
 const rootUrl = "http://localhost:8000/api";
 const checklistUrl = rootUrl + "/checklists";
 
+/* création d'un élément checklist */
 export const checklistCreate = data => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -20,6 +21,7 @@ export const checklistCreate = data => {
     })
 }
 
+/* changement du statut de la checkbox */
 export const checklistCheck = (id, checkedStatus) => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -35,6 +37,7 @@ export const checklistCheck = (id, checkedStatus) => {
     })
 }
 
+/* suppression d'un élément checklist */
 export const checklistDelete = id => {
 
     const token = sessionStorage.getItem('accessJWT');

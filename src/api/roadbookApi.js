@@ -4,6 +4,7 @@ const rootUrl = "http://localhost:8000/api";
 const rootShareUrl = "http://localhost:8000/share/";
 const roadbookUrl = rootUrl + "/roadbooks";
 
+/* Création d'un nouveau uroadbook */
 export const roadbookCreate = (roadbookData) => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -20,6 +21,7 @@ export const roadbookCreate = (roadbookData) => {
     })
 }
 
+/* récupération d'un roadbook particulier */
 export const findSingleRoadbook = (urlPath) => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -37,6 +39,7 @@ export const findSingleRoadbook = (urlPath) => {
     })
 }
 
+/* récupération d'un roadbook partagé */
 export const findShareRoadbook = (slug) => {
 
     const config = { headers: { "Content-Type": "application/json"} };
@@ -52,6 +55,7 @@ export const findShareRoadbook = (slug) => {
     })
 }
 
+/* suppression d'un roadbook */
 export const roadbookDelete = (roadbookId) => {
 
     const token = sessionStorage.getItem('accessJWT');
@@ -70,6 +74,7 @@ export const roadbookDelete = (roadbookId) => {
     })
 }
 
+/* changement du status du roadbook (en cours ou partagé */
 export const roadbookChangeStatus = (roadbookStatus, urlPath) => {
 
     const token = sessionStorage.getItem('accessJWT');
