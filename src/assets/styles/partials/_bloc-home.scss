@@ -31,6 +31,30 @@
     }
   }
 
+  &-tutorial {
+    background-color: $color-secondary;
+    padding: spacing(5);
+    color: $color-white;
+    width: 100vw;
+
+    @include down(768) {
+      width: 100%;
+    }
+
+    .home__heading {
+      color: $color-visite;
+    }
+
+    .presentation__heading {
+      color: $color-primary;
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 600;
+    }
+  }
+
   &-presentation {
     width: 70%;
     margin: spacing(5) auto;
