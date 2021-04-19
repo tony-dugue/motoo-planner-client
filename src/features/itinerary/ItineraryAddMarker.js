@@ -89,6 +89,10 @@ export function ItineraryAddMarker() {
                 }
                 /* ajout dans le store */
                 await dispatch(addStep(newStep))
+
+                /* on réinitialise les valeurs du select */
+                setFormData({title: "", description: "", stepDay: "", stepHour: "", type: 1})
+
                 setOpen(false);  // fermeture de la modal
             } catch (error) {
                 dispatch(getFailure(error))
