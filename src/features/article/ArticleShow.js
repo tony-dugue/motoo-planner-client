@@ -42,13 +42,14 @@ export function ArticleShow() {
         </div>
     )
 
+    const articleImg = article.picture ? process.env.REACT_APP_PICTURES_URL + article.picture : placeholder;
+
     return (
         <div className="container">
 
             <h2 className="article__title">{article.title}</h2>
 
-            <img src={placeholder} alt="placeholder" className="article__img"/>
-            {/*<img src={article.picture} alt=""/>*/}
+            <img src={articleImg} alt="placeholder" className="article__img"/>
 
             <p className="article__date">Publié
                 le {moment(article.createdAt).locale('fr', localization).format("Do MMM YY")}</p>

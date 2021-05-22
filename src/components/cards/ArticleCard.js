@@ -9,6 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export function ArticleCard({articleItem}) {
 
+    const articleImg = articleItem.picture ? process.env.REACT_APP_PICTURES_URL + articleItem.picture : placeholder;
+
     return (
         <article className="card-article">
             <div className="row">
@@ -18,7 +20,7 @@ export function ArticleCard({articleItem}) {
                         <Link to={'/article/' + articleItem.id}>{articleItem.title}</Link>
                     </h3>
 
-                    <img src={placeholder} alt="placeholder" className="card-article__img" />
+                    <img src={articleImg} alt="placeholder" className="card-article__img" />
 
                     <p className="card-article__desc">{articleItem.excerpt}</p>
 
