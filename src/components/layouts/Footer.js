@@ -1,10 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebook, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {NavLink} from "react-router-dom";
 import moment from 'moment';
+import {toast} from "react-toastify";
+import {useDispatch, useSelector} from 'react-redux';
+import {selectArticle, getAllArticles, getLoading, getFailure} from 'features/article/articleSlice';
+import {findAllArticles} from 'api/articleApi';
 
 export function Footer() {
+
+    const dispatch = useDispatch()
+
+    const {articles} = useSelector(selectArticle);
+
+    useEffect(() => {
+        async function fetchData() {
+            dispatch(getLoading())
+            const articles = await findAllArticles()
+            dispatch(getAllArticles(articles))
+        }
+        try {
+            fetchData();
+        } catch (error) {
+            dispatch(getFailure(error))
+            toast.warning("une erreur s'est produite !")
+        }
+    }, [dispatch])
+
+    let showArticles = articles.map( (article, index) => {
+        if (index < 3) {
+            return <li className="footer-link__menu-item" key={article.id}>
+                <NavLink to={"/article/" + article.id}>{article.title}</NavLink>
+            </li>
+        }
+        return null;
+    })
 
     return (
         <footer className="footer">
@@ -15,9 +46,7 @@ export function Footer() {
                     <div className="footer-link__menu">
                         <p className="footer-link__menu-heading">Les derniers articles</p>
                         <ul>
-                            <li className="footer-link__menu-item"><NavLink to='/article/1'>Comment planifier le meilleur itinéraire ?</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/article/2'>Les meilleurs applications météo</NavLink></li>
-                            <li className="footer-link__menu-item"><NavLink to='/article/3'>Top 10 des points remarquables autour de Saint Malo</NavLink></li>
+                            { showArticles }
                         </ul>
                     </div>
 

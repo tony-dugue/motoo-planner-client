@@ -40,7 +40,7 @@ export function ShareScene() {
             dispatch(getFailure(error))
             toast.warning("une erreur s'est produite !")
         }
-    }, [dispatch])
+    }, [dispatch, slug])
 
     if (!roadbook) return (
         <div className="content">
