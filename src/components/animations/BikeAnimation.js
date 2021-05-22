@@ -1,8 +1,8 @@
 import React from 'react';
 
-export function BikeAnimation() {
+export function BikeAnimation({status}) {
   return (
-      <div className="bike">
+      <div className={"bike " + status}>
           <div className="bike-container">
               <div className="bike-body">
                   <div className="seat"></div>

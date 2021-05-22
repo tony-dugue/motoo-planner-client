@@ -35,7 +35,7 @@ export function RoadbookShowAll() {
         ? userProfile.roadbooks.map(roadbook => {
             if (roadbook.status === 1) return (
                 <div className="col-md-6 col-lg-4" key={roadbook.id}>
-                    <RoadbookCard roadbookItem={roadbook}/>
+                    <RoadbookCard roadbookItem={roadbook} status="inprogress" />
                 </div>
             )
             else return null
@@ -45,7 +45,7 @@ export function RoadbookShowAll() {
         ? userProfile.roadbooks.map(roadbook => {
             if (roadbook.status === 2) return (
                 <div className="col-md-6 col-lg-4" key={roadbook.id}>
-                    <RoadbookCard roadbookItem={roadbook}/>
+                    <RoadbookCard roadbookItem={roadbook} status="finish"/>
                 </div>
             )
              else return null

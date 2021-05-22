@@ -61,7 +61,7 @@
     .cover {
       width: 75px;
       height: 30px;
-      background: $bodywork;
+      background: $bodywork-progress;
       position: absolute;
       top: 55px;
       left: 105px;
@@ -101,7 +101,7 @@
         .part-1-top {
           width: 40px;
           height: 20px;
-          background: linear-gradient(135deg, transparent 10px, $bodywork 0);
+          background: linear-gradient(135deg, transparent 10px, $bodywork-progress 0);
           border-radius: 0px 5px 5px 5px;
           box-shadow: inset -2px -2px 0px 1px rgba(0, 0, 0, 0.2);
         }
@@ -281,7 +281,7 @@
     width: 55px;
     height: 55px;
     border: 10px solid transparent;
-    border-top-color: $bodywork;
+    border-top-color: $bodywork-progress;
     border-radius: 50%;
     background: transparent;
     position: relative;
@@ -336,6 +336,32 @@
     position: relative;
     right: -12px;
     top: 5px;
+  }
+}
+
+.bike.finish {
+  .bike-body .cover {
+    background: $bodywork-finish;
+  }
+
+  .motor {
+    .part-1-top {
+      background: linear-gradient(135deg, transparent 10px, $bodywork-finish 0);
+    }
+  }
+
+  .tire {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ccc;
+    border: 15px solid white;
+    box-shadow: 0px 0px 0px 10px #454D5B;
+
+    &:before {
+      border-top-color: $bodywork-finish;
+    }
   }
 }
 

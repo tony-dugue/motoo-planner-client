@@ -7,12 +7,12 @@ import localization from 'moment/locale/fr';
 
 moment.locale('fr')
 
-export function RoadbookCard({roadbookItem}) {
+export function RoadbookCard({roadbookItem, status}) {
 
     return (
         <article className="card-roadbook">
 
-            <BikeAnimation />
+            <BikeAnimation status={status} />
 
             <h5 className="card-roadbook__title">{roadbookItem.title}</h5>
             <p className="card-roadbook__date">Balade du {moment(roadbookItem.tripStart).locale('fr', localization).format('LL')}</p>
