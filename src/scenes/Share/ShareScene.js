@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
-import {getShareRoadbook, selectRoadbook, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
+import {getShareRoadbook, selectRoadbook, selectSteps, getLoading, getSuccess, getFailure} from 'features/roadbook/roadbookSlice';
 import {findShareRoadbook} from 'api/roadbookApi';
 import {MapMini} from 'components/map/MapMini';
 import {ItinerarySeparatorItem} from 'features/itinerary/ItinerarySeparatorItem';
@@ -21,6 +21,7 @@ export function ShareScene() {
     const location = useLocation()
     const dispatch = useDispatch()
 
+    const stepsTodo = useSelector(selectSteps);
     const { roadbook } = useSelector(selectRoadbook);
 
     // récupère slug
@@ -49,6 +50,13 @@ export function ShareScene() {
             <Link to='/' className="btn btn-motoo-outline my-2 mx-2">Revenir à l'accueil</Link>
         </div>
     )
+
+    // tri du tableau des étapes par date
+    function custom_sort(a, b) {
+        return new Date(a.stepDate).getTime() - new Date(b.stepDate).getTime()
+    }
+    // on récupère ici une copie d'un tableau [...stepsTodo] avant de faire le tri
+    const stepsTodoSort = stepsTodo && [...stepsTodo].sort(custom_sort);
 
   return (
       <div className="share">
@@ -90,7 +98,7 @@ export function ShareScene() {
                                           Durée estimée:
                                           <span className="time">{
                                               // calcul durée entre étape précédente et l'étape suivante
-                                              moment( roadbook.steps[roadbook.steps.length -1].stepDate).diff(moment(roadbook.steps[0].stepDate), "hours")
+                                              moment( stepsTodoSort[stepsTodoSort.length -1].stepDate).diff(moment(stepsTodoSort[0].stepDate), "hours")
                                           } heures</span>
                                       </p>)
                                   }
@@ -117,11 +125,11 @@ export function ShareScene() {
                               {/* étapes de la balade avec icones */}
 
                               <ul className="itinerary__step">
-                                  {roadbook?.steps && roadbook.steps.map((item, index) => (
+                                  {stepsTodoSort?.map((item, index) => (
                                       <React.Fragment key={item.id}>
                                           {(index !== 0) && <ItinerarySeparatorItem diffTime={
                                               // calcul durée entre étape précédente et l'étape suivante
-                                              moment(item.stepDate).diff(moment(roadbook.steps[index - 1].stepDate), "hours")
+                                              moment(item.stepDate).diff(moment(stepsTodoSort[index - 1].stepDate), "hours")
                                           }/>}
 
                                           <li className="itinerary__step-item">

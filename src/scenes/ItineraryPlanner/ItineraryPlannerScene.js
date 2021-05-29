@@ -19,12 +19,19 @@ export function ItineraryPlannerScene() {
     // url pour voir le roadbook en cours complet lors du retour en arrière
     const roadbookActiveUrl = "/roadbook/" + roadbook.roadbook.id;
 
-    const itineraries = stepsTodo.map((item, index) => (
+    // tri du tableau des étapes par date
+    function custom_sort(a, b) {
+        return new Date(a.stepDate).getTime() - new Date(b.stepDate).getTime()
+    }
+    // on récupère ici une copie d'un tableau [...stepsTodo] avant de faire le tri
+    const stepsTodoSort = [...stepsTodo].sort(custom_sort);
+
+    const itineraries = stepsTodoSort.map((item, index) => (
         <React.Fragment key={item.id}>
 
             {(index !== 0) && <ItinerarySeparatorItem diffTime={
                 // calcul durée entre étape précédente et l'étape suivante
-                moment(item.stepDate).diff(moment(stepsTodo[index - 1].stepDate), "hours")
+                moment(item.stepDate).diff(moment(stepsTodoSort[index - 1].stepDate), "hours")
             } />}
 
             <ItineraryStepItem type={item.type.slug}

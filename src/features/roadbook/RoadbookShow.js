@@ -55,11 +55,18 @@ export function RoadbookShow() {
         </div>
     )
 
-    const itineraries = stepsTodo.map( (item, index) => (
+    // tri du tableau des étapes par date
+    function custom_sort(a, b) {
+        return new Date(a.stepDate).getTime() - new Date(b.stepDate).getTime()
+    }
+    // on récupère ici une copie d'un tableau [...stepsTodo] avant de faire le tri
+    const stepsTodoSort = [...stepsTodo].sort(custom_sort);
+
+    const itineraries = stepsTodoSort.map( (item, index) => (
         <React.Fragment key= {item.id}>
             {(index !== 0) && <ItinerarySeparatorItem diffTime={
                 // calcul durée entre étape précédente et l'étape suivante
-                moment(item.stepDate).diff(moment(stepsTodo[index - 1].stepDate), "hours")
+                moment(item.stepDate).diff(moment(stepsTodoSort[index - 1].stepDate), "hours")
             } />}
 
             <li className="itinerary__step-item">
@@ -124,12 +131,12 @@ export function RoadbookShow() {
                                             <span className="icon"><FontAwesomeIcon icon={faMapMarkedAlt}/></span>Départ de la balade:
                                         </p>
 
-                                        <p className="address">{roadbook.steps[0].description}</p>
+                                        <p className="address">{stepsTodoSort[0].description}</p>
 
 
                                         <p className="roadbook-show-map__resume-item">
                                             <span className="icon"><FontAwesomeIcon icon={faCalendarAlt}/></span>
-                                            Le {moment(roadbook.steps[0]?.stepDate).locale('fr', localization).format("L à H:mm")}
+                                            Le {moment(stepsTodoSort[0]?.stepDate).locale('fr', localization).format("L à H:mm")}
                                         </p>
 
                                         {roadbook.steps[1] && (
@@ -138,7 +145,7 @@ export function RoadbookShow() {
                                                 Durée estimée:
                                                 <span className="time">{
                                                 // calcul durée entre étape précédente et l'étape suivante
-                                                moment(stepsTodo[stepsTodo.length -1].stepDate).diff(moment(stepsTodo[0].stepDate), "hours")
+                                                moment(stepsTodoSort[stepsTodoSort.length -1].stepDate).diff(moment(stepsTodoSort[0].stepDate), "hours")
                                             } heures</span>
                                             </p>)
                                         }
