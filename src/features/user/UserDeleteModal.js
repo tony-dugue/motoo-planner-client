@@ -5,6 +5,9 @@ import { setUserLogout, getLoading, getFailure, getSuccess } from 'features/user
 import { userDelete } from 'api/userApi';
 import {toast} from "react-toastify";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function UserDeleteModal() {
 
     const dispatch = useDispatch()
@@ -19,11 +22,11 @@ export function UserDeleteModal() {
             await userDelete()
             dispatch(setUserLogout())
             dispatch(getSuccess())
-            toast.success('Compte supprimé')
+            toast.success(<span><span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>Votre compte a bien été supprimé</span>)
             history.push('/');
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
         }
     }
 

@@ -14,7 +14,7 @@ import moment from 'moment';
 import localization from 'moment/locale/fr';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle} from "@fortawesome/free-solid-svg-icons";
+import {faTrashAlt, faMapMarkedAlt, faCalendarAlt, faMotorcycle, faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 
 import {toast} from "react-toastify";
 
@@ -41,7 +41,7 @@ export function RoadbookShow() {
             fetchData();
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
         }
     }, [dispatch, urlPath])
 

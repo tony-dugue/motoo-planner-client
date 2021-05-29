@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { selectUser } from 'features/user/userSlice';
 import { findUser } from 'api/userApi';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { UserEditPasswordModal } from 'features/user/UserEditPasswordModal';
 import { UserDeleteModal } from 'features/user/UserDeleteModal';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrashAlt, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 import moment from 'moment';
 import localization from 'moment/locale/fr';
@@ -24,7 +25,7 @@ export function UserProfile() {
         try {
             fetchData();
         } catch (error) {
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>une erreur s'est produite !</span>)
         }
     }, [dispatch])
 

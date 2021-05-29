@@ -5,6 +5,9 @@ import { findUser } from 'api/userApi';
 import {RoadbookCard} from "components/cards/RoadbookCard";
 import {toast} from "react-toastify";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function RoadbookShowAll() {
 
     const dispatch = useDispatch()
@@ -23,7 +26,7 @@ export function RoadbookShowAll() {
             fetchData();
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
         }
     }, [dispatch])
 

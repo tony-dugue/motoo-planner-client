@@ -5,6 +5,9 @@ import {toast} from "react-toastify";
 import {roadbookDelete} from 'api/roadbookApi';
 import {getLoading, getFailure, getSuccess} from 'features/roadbook/roadbookSlice';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function RoadbookDeleteModal({ roadbookId }) {
 
     const dispatch = useDispatch()
@@ -17,11 +20,11 @@ export function RoadbookDeleteModal({ roadbookId }) {
         try {
             await roadbookDelete(roadbookId)
             dispatch(getSuccess())
-            toast.success('Roadbook supprimé')
+            toast.success(<span><span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>'Roadbook supprimé'</span>)
             history.push('/dashboard');
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
         }
     }
 

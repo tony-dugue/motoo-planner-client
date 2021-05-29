@@ -5,6 +5,9 @@ import {informationCreate} from 'api/informationApi';
 import {toast} from "react-toastify";
 import {useLocation} from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function InformationAddModal() {
 
     const dispatch = useDispatch()
@@ -21,7 +24,7 @@ export function InformationAddModal() {
         e.preventDefault();
 
         if (!name || !phone)
-            toast.warning("Le nom et le téléphone est obligatoire")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Le nom et le téléphone est obligatoire</span>)
         else {
             dispatch(getLoading())
             try {
@@ -49,7 +52,7 @@ export function InformationAddModal() {
 
             } catch (error) {
                 dispatch(getFailure(error))
-                toast.warning("une erreur s'est produite !")
+                toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
             }
         }
     }

@@ -5,6 +5,9 @@ import {findAllArticles} from 'api/articleApi';
 import {ArticleCard} from 'components/cards/ArticleCard';
 import {toast} from "react-toastify";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function ArticleShowAll() {
 
     const dispatch = useDispatch()
@@ -20,7 +23,7 @@ export function ArticleShowAll() {
             fetchData();
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
         }
     }, [dispatch])
 

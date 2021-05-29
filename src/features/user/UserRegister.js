@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import { getLoading, getFailure} from 'features/user/userSlice';
 import { userRegistration } from 'api/userApi';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
@@ -27,12 +30,11 @@ export function UserRegister() {
         e.preventDefault();
 
         if (!emailValidator.test(email))
-            toast.warning("Votre email n'est pas au bon format")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Votre email n'est pas au bon format</span>)
         else if (password !== passwordConfirm)
-            toast.warning("Les mots de passe ne sont pas identique !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Les mots de passe ne sont pas identique !</span>)
         else if (!passwordValidator.test(password))
-            toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
-            " moins 1 chiffre, 1 lettre majuscule et 1 lettre minuscule")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au moins 1 chiffre, 1 lettre majuscule et 1 lettre minuscule</span>)
         else {
             dispatch(getLoading())
 
@@ -45,12 +47,12 @@ export function UserRegister() {
 
                 if (registration.status !== 200) dispatch(getFailure(registration.message))
 
-                toast.success("Votre compte a été crée")
+                toast.success(<span><span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>Votre compte a été crée</span>)
                 history.push('/presentation');
 
             } catch (error) {
                 dispatch(getFailure(error))
-                toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")
+                toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>une erreur s'est produite! Veuillez vérifier les champs</span>)
             }
         }
     }

@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import {selectAuth, authPending, authSuccess, authFail} from 'features/auth/authSlice';
 import { userLogin } from 'api/userApi';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 export function UserLogin() {
 
@@ -26,7 +28,9 @@ export function UserLogin() {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        if (!username || !password) toast.warning('Veuillez remplir tout les champs!')
+        if (!username || !password) {
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Veuillez remplir tout les champs!</span>)
+        }
 
         try {
             dispatch(authPending())
@@ -37,13 +41,12 @@ export function UserLogin() {
 
             dispatch(authSuccess())
 
-            toast.success('Bienvenue')
+            toast.success(<span><span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>Bienvenue</span>)
             history.push('/dashboard');
 
         } catch (error) {
             dispatch(authFail(error.message))
-            toast.warning("une erreur s'est produite ! Veuillez vérifier votre email et ressaisir votre mot de" +
-                " passe")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>une erreur s'est produite ! Veuillez vérifier votre email et ressaisir votre mot de passe</span>)
         }
     }
 

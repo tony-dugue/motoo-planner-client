@@ -4,6 +4,9 @@ import {selectUser, editUserProfile, getLoading, getFailure, getSuccess} from 'f
 import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 export function UserEditModal() {
@@ -27,7 +30,7 @@ export function UserEditModal() {
         e.preventDefault();
 
         if (!emailValidator.test(email))
-            toast.warning("Votre email n'est pas au bon format")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Votre email n'est pas au bon format</span>)
         else {
             dispatch(getLoading())
             try {
@@ -38,9 +41,8 @@ export function UserEditModal() {
                 dispatch(getSuccess())
             } catch (error) {
                 dispatch(getFailure(error))
-                toast.warning("une erreur s'est produite !")
+                toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
             }
-            // TODO : lors d'une modification des données, regénérer un password sinon le hash n'est plus lisible lors du login
         }
     }
 

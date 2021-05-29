@@ -5,6 +5,9 @@ import {selectArticle, getSingleArticle, getLoading, getFailure} from 'features/
 import {findSingleArticle} from 'api/articleApi';
 import placeholder from "../../assets/images/placeholder.png";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 import moment from 'moment';
 import localization from 'moment/locale/fr';
 import {toast} from "react-toastify";
@@ -29,7 +32,8 @@ export function ArticleShow() {
             fetchData();
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite !")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
+
         }
     }, [dispatch, urlPath])
 

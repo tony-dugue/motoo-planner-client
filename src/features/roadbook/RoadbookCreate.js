@@ -7,6 +7,8 @@ import {addRoadbook, getLoading, getFailure} from 'features/user/userSlice';
 
 import illustration from "../../assets/images/illustration1.jpg";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 export function RoadbookCreate() {
 
@@ -40,11 +42,11 @@ export function RoadbookCreate() {
             /* ajout dans le store */
             await dispatch(addRoadbook(newRoadbook))
 
-            toast.success("Votre roadbook a bien été crée")
+            toast.success(<span><span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>Votre roadbook a bien été crée</span>)
             history.push('/dashboard');
         } catch (error) {
             dispatch(getFailure(error))
-            toast.warning("une erreur s'est produite ! Veuillez vérifier les champs")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite ! Veuillez vérifier les champs</span>)
         }
     }
 

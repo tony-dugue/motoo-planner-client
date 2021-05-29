@@ -7,6 +7,9 @@ import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
 import controlGeocoder from "leaflet-control-geocoder";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 export function ItineraryAddMarker() {
 
     const dispatch = useDispatch()
@@ -52,7 +55,7 @@ export function ItineraryAddMarker() {
 
         // vérification si l'heure et la date sont présente
         if (!formData.stepDay || !formData.stepHour)
-            toast.warning("une date et une heure est obligatoire")
+            toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une date et une heure est obligatoire</span>)
         else {
             dispatch(getLoading())
             try {
@@ -96,7 +99,7 @@ export function ItineraryAddMarker() {
                 setOpen(false);  // fermeture de la modal
             } catch (error) {
                 dispatch(getFailure(error))
-                toast.warning("une erreur s'est produite !")
+                toast.warning(<span><span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !</span>)
             }
         }
     }

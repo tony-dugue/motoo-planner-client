@@ -4,6 +4,9 @@ import {userEdit} from 'api/userApi';
 import {toast} from "react-toastify";
 import { getLoading, getFailure, getSuccess} from 'features/user/userSlice';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 const passwordValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
 // mot de passe: minimum de 8 caractères, contient au moins 1 un chiffre, 1 lettre minuscule, 1 lettre majuscule
@@ -26,18 +29,34 @@ export function UserEditPasswordModal() {
         e.preventDefault();
 
         if (!passwordValidator.test(password))
-            toast.warning("Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au" +
-                " moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule")
+            toast.warning(
+            <span>
+                        <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Le mot de passe ne respecte pas les règles (doit contenir un minimum de 8 caractères et contenir au moins 1 chiffre, 1 lettre minusculet et 1 lettre minuscule
+                    </span>
+            )
         else if (password !== passwordConfirm)
-            toast.warning("Les mots de passe ne sont pas identique !")
+            toast.warning(
+                <span>
+                        <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Les mots de passe ne sont pas identique !
+                    </span>
+            )
         else {
             dispatch(getLoading())
+            toast.success(
+                <span>
+                    <span class="toast-icon success"><FontAwesomeIcon icon={faCheck} /></span>Votre mot de passe a bien été modifié
+                </span>
+            )
             try {
                 await userEdit({password});
                 dispatch(getSuccess())
             } catch (error) {
                 dispatch(getFailure(error))
-                toast.warning("une erreur s'est produite !")
+                toast.warning(
+                    <span>
+                    <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>une erreur s'est produite !
+                </span>
+                )
             }
         }
     }
