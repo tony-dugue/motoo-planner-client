@@ -43,6 +43,19 @@ export const userLogin = credentials => {
     })
 }
 
+/* vérification du mot de passe */
+export const userVerifyPassword = credentials => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(loginUrl, credentials)
+            resolve(res)
+
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 /* vérification d'un utilisateur */
 export const findUser = () => {
     return new Promise(async (resolve, reject) => {

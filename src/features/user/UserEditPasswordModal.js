@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {userEdit} from 'api/userApi';
+import {useDispatch, useSelector} from "react-redux";
+import {userEdit, userVerifyPassword} from 'api/userApi';
 import {toast} from "react-toastify";
-import { getLoading, getFailure, getSuccess} from 'features/user/userSlice';
+import { selectUser, getLoading, getFailure, getSuccess} from 'features/user/userSlice';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -16,17 +16,32 @@ export function UserEditPasswordModal() {
 
     const dispatch = useDispatch()
 
+    const { userProfile } = useSelector(selectUser);
+
     const [formPwd, setFormPwd] = useState({
         password: '',
-        passwordConfirm: ''
+        passwordConfirm: '',
+        passwordActual: ''
     })
 
-    const {password, passwordConfirm} = formPwd;
+    const {password, passwordConfirm, passwordActual} = formPwd;
 
     const handleChange = e => setFormPwd({...formPwd, [e.target.name]: e.target.value});
 
     const handleSubmit = async e => {
         e.preventDefault();
+
+        //vérification du password actuelle
+        try {
+            await userVerifyPassword({username: userProfile.email, password: passwordActual})
+        } catch (error) {
+            toast.warning(
+                <span>
+                        <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Votre mot de passe actuel n'est pas correct
+                    </span>
+            )
+            return ''
+        }
 
         if (!passwordValidator.test(password))
             toast.warning(
@@ -54,7 +69,7 @@ export function UserEditPasswordModal() {
                 dispatch(getFailure(error))
                 toast.warning(
                     <span>
-                    <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>une erreur s'est produite !
+                    <span class="toast-icon warning"><FontAwesomeIcon icon={faExclamationTriangle} /></span>Une erreur s'est produite !
                 </span>
                 )
             }
@@ -76,13 +91,19 @@ export function UserEditPasswordModal() {
                             <div className="modal-body">
 
                                 <div className="form-wrapper__bloc">
+                                    <label htmlFor="actualPasswordInput" className="form-label">Votre mot de passe actuel</label>
+                                    <input type="password" className="form-control" id="actualPasswordInput" name="passwordActual"
+                                           value={passwordActual} onChange={handleChange} minLength="8" required />
+                                </div>
+
+                                <div className="form-wrapper__bloc">
                                     <label htmlFor="passwordInput" className="form-label">Votre nouveau mot de passe</label>
                                     <input type="password" className="form-control" id="passwordInput" name="password"
                                            value={password} onChange={handleChange} minLength="8" required />
                                 </div>
 
                                 <div className="form-wrapper__bloc">
-                                    <label htmlFor="passwordVerifyInput" className="form-label">Répéter le mot de passe</label>
+                                    <label htmlFor="passwordVerifyInput" className="form-label">Répéter le nouveau mot de passe</label>
                                     <input type="password" className="form-control" id="passwordVerifyInput" name="passwordConfirm"
                                            value={passwordConfirm} onChange={handleChange} minLength="8" required />
                                 </div>
